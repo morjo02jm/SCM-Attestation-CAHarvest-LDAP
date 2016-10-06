@@ -471,8 +471,8 @@ public class scmldap implements IJCaLogStreamListener
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr1307;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;password=V724TF@y3Adawt$;",
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr1308;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;password=V724TF@y3Adawt$;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr1309;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;password=V724TF@y3Adawt$;",
-			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr1400;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;password=V724TF@y3Adawt$;",
-			"jdbc:sqlserver://usildb206:1433;databaseName=cscrarchive;user=harvest;password=Qu3$t4$aF3;"
+			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr1400;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;password=V724TF@y3Adawt$;"
+			//"jdbc:sqlserver://usildb206:1433;databaseName=cscrarchive;user=harvest;password=Qu3$t4$aF3;"
 		};
 
 		//Read user containers for CA.COM
