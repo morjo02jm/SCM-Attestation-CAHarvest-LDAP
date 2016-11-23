@@ -15,7 +15,7 @@ public class HarvestLdap {
 	private static boolean bAttest = false;
 	private static boolean deleteDisabledUsers = false;
 	
-	void HarvestLdap()
+	HarvestLdap()
 	{
 		// Leave blank for now
 	}
@@ -169,49 +169,13 @@ public class HarvestLdap {
 
 	public static void main(String[] args) {
 		int iParms = args.length;
-		int iReturnCode = 0;
-		String sOutputFile = "";
+		//int iReturnCode = 0;
+		//String sOutputFile = "";
 		String sBCC = "";
 		String sLogPath = "scmldap.log";
 		String sImagDBPassword  = "";
 		String sHarvestDBPassword = "";
 		String sProblems = "";
-		
-		// check parameters
-		for (int i = 0; i < iParms; i++)
-		{
-			if (args[i].compareToIgnoreCase("-h") == 0 || 
-				args[i].compareToIgnoreCase("-?") == 0)
-			{
-				System.out.println("Usage: scmldap [-attest] [-del] [-log pathname] [-h]");
-				System.out.println(" -attest option will display all users");
-				System.out.println(" -del  option will delete all external, disabled users");
-				System.out.println(" -log  option specifies location of log file");
-				System.exit(iReturnCode);
-			}
-
-			if (args[i].compareToIgnoreCase("-attest") == 0 )
-			{
-				bAttest = true;
-			}			
-			
-			if (args[i].compareToIgnoreCase("-del") == 0 )
-			{
-				deleteDisabledUsers = true;
-			}			
-			
-			if (args[i].compareToIgnoreCase("-log") == 0 )
-			{
-				sLogPath = args[++i];
-			}			
-		} // end for
-
-		// execution from here
-		JCaContainer cLDAP = new JCaContainer();
-		frame = new CommonLdap("scmldap",
-                               sLogPath,
-                               sBCC,
-                               cLDAP);
 		
 		String cscrBrokers[] = /* 191, 229, 231, 232, 233, 234 */
 		{			
@@ -320,6 +284,42 @@ public class HarvestLdap {
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr1309;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr1400;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;"
 		};
+		
+		// check parameters
+		for (int i = 0; i < iParms; i++)
+		{
+			if (args[i].compareToIgnoreCase("-h") == 0 || 
+				args[i].compareToIgnoreCase("-?") == 0)
+			{
+				System.out.println("Usage: scmldap [-attest] [-del] [-log pathname] [-h]");
+				System.out.println(" -attest option will display all users");
+				System.out.println(" -del  option will delete all external, disabled users");
+				System.out.println(" -log  option specifies location of log file");
+				System.exit(iReturnCode);
+			}
+
+			if (args[i].compareToIgnoreCase("-attest") == 0 )
+			{
+				bAttest = true;
+			}			
+			
+			if (args[i].compareToIgnoreCase("-del") == 0 )
+			{
+				deleteDisabledUsers = true;
+			}			
+			
+			if (args[i].compareToIgnoreCase("-log") == 0 )
+			{
+				sLogPath = args[++i];
+			}			
+		} // end for
+
+		// execution from here
+		JCaContainer cLDAP = new JCaContainer();
+		frame = new CommonLdap("scmldap",
+                               sLogPath,
+                               sBCC,
+                               cLDAP);
 
 
 		try {
