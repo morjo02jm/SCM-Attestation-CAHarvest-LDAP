@@ -342,7 +342,7 @@ public class HarvestLdap {
 					processHarvestDatabase( cscrBrokers[i], 
 					           				cLDAP,
 					           				sHarvestDBPassword);
-			};
+			}
 		
 		} catch (Exception e) {
 			iReturnCode = 1;
