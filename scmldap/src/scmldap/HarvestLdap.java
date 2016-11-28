@@ -173,15 +173,13 @@ public class HarvestLdap {
 
 	public static void main(String[] args) {
 		int iParms = args.length;
-		//int iReturnCode = 0;
-		//String sOutputFile = "";
 		String sBCC = "";
 		String sLogPath = "scmldap.log";
 		String sImagDBPassword  = "";
 		String sHarvestDBPassword = "";
 		String sProblems = "";
 		
-		String cscrBrokers[] = /* 191, 229, 231, 232, 233, 234 */
+		String[] cscrBrokers = /* 191, 229, 231, 232, 233, 234 */
 		{			
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr001;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr003;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
@@ -349,8 +347,7 @@ public class HarvestLdap {
 		} catch (Exception e) {
 			iReturnCode = 1;
 		    frame.printErr(e.getLocalizedMessage());			
-			//e.printStackTrace();
-		};
+		}
 		
 		System.exit(iReturnCode);	
 
