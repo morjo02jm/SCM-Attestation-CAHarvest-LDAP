@@ -15,12 +15,18 @@ public class HarvestLdap {
 	private static boolean bAttest = false;
 	private static boolean deleteDisabledUsers = false;
 	
+	private static String sTagUsername = "USERNAME";
+	private static String sTagRealname = "REALNAME";
+	private static String sTagAcctExternal = "ACCOUNTEXTERNAL";
+	private static String sTagAcctDisabled = "ACCOUNTDISABLED";
+	private static String sTagPmfkey       = "sAMAccountName";
+	
 	HarvestLdap()
 	{
 		// Leave blank for now
 	}
     
-	private static void ProcessHarvestDatabase(String dburl, 
+	private static void processHarvestDatabase(String dburl, 
 			                               	   JCaContainer cLDAP,
 			                               	   String sHarvestDBPassword) 
 	{
@@ -59,10 +65,10 @@ public class HarvestLdap {
 					sqlError = "DB. Error processing return record";
 					while(rset.next())   
 					{   
-						cUsers.setString("USERNAME",        rset.getString("USERNAME"), iIndex);
-						cUsers.setString("REALNAME",        rset.getString("REALNAME"), iIndex);
-						cUsers.setString("ACCOUNTEXTERNAL", rset.getString("ACCOUNTEXTERNAL"), iIndex);
-						cUsers.setString("ACCOUNTDISABLED", rset.getString("ACCOUNTDISABLED"), iIndex);
+						cUsers.setString(sTagUsername,     rset.getString(sTagUsername), iIndex);
+						cUsers.setString(sTagRealname,     rset.getString(sTagRealname), iIndex);
+						cUsers.setString(sTagAcctExternal, rset.getString(sTagAcctExternal), iIndex);
+						cUsers.setString(sTagAcctDisabled, rset.getString(sTagAcctDisabled), iIndex);
 						iIndex++;
 					}
 				}
@@ -76,33 +82,33 @@ public class HarvestLdap {
 					else
 						sBroker = sBroker1.substring(0,sBroker1.indexOf(";"));
 					
-					for (int i=0; i<cUsers.getKeyElementCount("USERNAME"); i++ )
+					for (int i=0; i<cUsers.getKeyElementCount(sTagUsername); i++ )
 					{
 						frame.printLog(sBroker+"\t"+
-								 	   cUsers.getString("REALNAME", i)+"\t"+
-								       cUsers.getString("USERNAME", i)+"\t"+
-								       cUsers.getString("ACCOUNTEXTERNAL", i)+"\t"+
-								       cUsers.getString("ACCOUNTDISABLED", i));
+								 	   cUsers.getString(sTagRealname, i)+"\t"+
+								       cUsers.getString(sTagUsername, i)+"\t"+
+								       cUsers.getString(sTagAcctExternal, i)+"\t"+
+								       cUsers.getString(sTagAcctDisabled, i));
 					}
 				}
 				else
 				{
 					String sList = "";
 	
-					for (int i=0; i<cUsers.getKeyElementCount("USERNAME"); i++ )
+					for (int i=0; i<cUsers.getKeyElementCount(sTagUsername); i++ )
 					{
-						String sID = cUsers.getString("USERNAME", i);
+						String sID = cUsers.getString(sTagUsername, i);
 						
-						int iLDAP[] = cLDAP.find("sAMAccountName", sID);
+						int iLDAP[] = cLDAP.find(sTagPmfkey, sID);
 						
 						if (iLDAP.length == 0)
-							iLDAP = cLDAP.find("sAMAccountName", sID.toLowerCase());
+							iLDAP = cLDAP.find(sTagPmfkey, sID.toLowerCase());
 						
 						if (iLDAP.length == 0 &&
-							cUsers.getString("ACCOUNTEXTERNAL", i).equalsIgnoreCase("Y") )
+							cUsers.getString(sTagAcctExternal, i).equalsIgnoreCase("Y") )
 						{
 							// Account not found in CA.COM
-							frame.printLog(">>>User (disabled): "+cUsers.getString("REALNAME",i)+ "("+ sID+") ");
+							frame.printLog(">>>User (disabled): "+cUsers.getString(sTagRealname,i)+ "("+ sID+") ");
 							if (sList.length() > 0)
 								sList += ",";
 							sList +="'"+sID+"'";
@@ -131,8 +137,8 @@ public class HarvestLdap {
 							sqlError = "DB. Error processing return record";
 							while(rset.next())   
 							{   
-								String sID   = rset.getString("USERNAME");
-								String sUser = rset.getString("REALNAME");
+								String sID   = rset.getString(sTagUsername);
+								String sUser = rset.getString(sTagRealname);
 								frame.printLog(">>>User (deleting): "+sUser+ "("+ sID +") ");
 							}
 						}
@@ -155,13 +161,11 @@ public class HarvestLdap {
 			}			  
 		} catch (ClassNotFoundException e) {
 			iReturnCode = 101;
-		    System.err.println(e);
-			//e.printStackTrace();
+		    frame.printErr(e.getLocalizedMessage());
 		    System.exit(iReturnCode);
 		} catch (SQLException e) {     
 			iReturnCode = 102;
-		    System.err.println(sqlError);
-			//e.printStackTrace(); 
+		    frame.printErr(sqlError);
 		    System.exit(iReturnCode);
 		}
 	} // end ProcessHarvestDatabase
@@ -169,15 +173,13 @@ public class HarvestLdap {
 
 	public static void main(String[] args) {
 		int iParms = args.length;
-		//int iReturnCode = 0;
-		//String sOutputFile = "";
 		String sBCC = "";
 		String sLogPath = "scmldap.log";
 		String sImagDBPassword  = "";
 		String sHarvestDBPassword = "";
 		String sProblems = "";
 		
-		String cscrBrokers[] = /* 191, 229, 231, 232, 233, 234 */
+		String[] cscrBrokers = /* 191, 229, 231, 232, 233, 234 */
 		{			
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr001;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr003;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
@@ -291,10 +293,10 @@ public class HarvestLdap {
 			if (args[i].compareToIgnoreCase("-h") == 0 || 
 				args[i].compareToIgnoreCase("-?") == 0)
 			{
-				System.out.println("Usage: scmldap [-attest] [-del] [-log pathname] [-h]");
-				System.out.println(" -attest option will display all users");
-				System.out.println(" -del  option will delete all external, disabled users");
-				System.out.println(" -log  option specifies location of log file");
+				frame.printLog("Usage: scmldap [-attest] [-del] [-log pathname] [-h]");
+				frame.printLog(" -attest option will display all users");
+				frame.printLog(" -del  option will delete all external, disabled users");
+				frame.printLog(" -log  option specifies location of log file");
 				System.exit(iReturnCode);
 			}
 
@@ -337,16 +339,15 @@ public class HarvestLdap {
 			
 			for (int i=0; i<cscrBrokers.length; i++)
 			{
-					ProcessHarvestDatabase( cscrBrokers[i], 
+					processHarvestDatabase( cscrBrokers[i], 
 					           				cLDAP,
 					           				sHarvestDBPassword);
-			};
+			}
 		
 		} catch (Exception e) {
 			iReturnCode = 1;
-		    System.err.println(e);			
-			//e.printStackTrace();
-		};
+		    frame.printErr(e.getLocalizedMessage());			
+		}
 		
 		System.exit(iReturnCode);	
 
