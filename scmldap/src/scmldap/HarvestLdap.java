@@ -25,7 +25,124 @@ public class HarvestLdap {
 	{
 		// Leave blank for now
 	}
-    
+	
+	private static String combineAttributes(String sLastAccess, String sAccess) {
+		// Combine the access levels
+		String sToken = sAccess;
+		sAccess = sLastAccess;
+		String sNext = "";
+		
+		while (!sToken.isEmpty()) {
+			int mIndex = sToken.indexOf(';');
+			if (mIndex > 0) {
+				sNext = sToken.substring(0, mIndex);
+				sToken = sToken.substring(mIndex+1);
+			}
+			else {
+				sNext = sToken;
+				sToken = "";							
+			}
+			
+			if (!sAccess.contains(sNext)) {
+				if (!sAccess.isEmpty())
+					sAccess += ";";
+				sAccess += sNext;
+			}
+		} // loop parsing out individual access tokens	
+		
+		return sAccess;
+	}
+	
+	private static int readDBToRepoContainer(JCaContainer cRepoInfo,
+			                                  String sJDBC,
+            								  String sHarvestDBPassword,
+            								  String sProjectFilter) {
+		PreparedStatement pstmt = null; 
+		String sqlStmt;
+		int iIndex = 0;
+		ResultSet rSet;
+		boolean byState = false;
+		
+		String sqlError = "DB2. Unable to execute query.";
+		
+		try {			
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			String sURL = sJDBC + "password=" + sHarvestDBPassword+";";
+			int nIndex = sJDBC.indexOf("databaseName=")+13;
+			int lIndex = sJDBC.indexOf(";integratedSecurity");
+			String sBroker = sJDBC.substring(nIndex, lIndex);
+			Connection conn = DriverManager.getConnection(sURL);
+			
+			sqlError = "SQLServer. Error reading Harvest records from broker, "+ sBroker + ".";
+			sqlStmt = frame.readTextResource("Harvest_Attestation_DB_Query.txt", 
+					                         sBroker, 
+					                         !byState? "" : "S.statename,", 
+					                         !byState? "order by 1,2,3,6,8,7" : "order by 1,2,3,4,7,9,8",
+					                         sProjectFilter
+					                        );
+			pstmt=conn.prepareStatement(sqlStmt); 
+			rSet = pstmt.executeQuery();
+			String sLastRecord = "", sLastAccess = "", sLastUserGroup = "";
+			
+			while (rSet.next()) {		
+				String sApp         = rSet.getString("APP").trim();
+				String sAppInstance = rSet.getString("APP INSTANCE").trim();
+				String sProject     = rSet.getString("ENVIRONMENTNAME").trim();
+				String sState       = byState? rSet.getString("STATENAME").trim() : "***All***";
+				String sUserID      = rSet.getString("USERNAME").trim();
+				String sAcctExt     = rSet.getString("ACCOUNTEXTERNAL").trim();
+				String sRealname    = rSet.getString("REALNAME");
+				sRealname           = sRealname==null? "" : sRealname.trim().replace(',', '|');
+				String sUserGroup   = rSet.getString("USERGROUPNAME").trim().replace(',', ';');
+				String sAccess      = rSet.getString("ACCESSLEVEL").trim().replace(',', ';');
+				
+				String sRecord      = sAppInstance+";"+sProject+";"+sState+";"+sUserID;
+				
+				if (sRecord.equalsIgnoreCase(sLastRecord)) {
+					sAccess    = combineAttributes(sLastAccess, sAccess);
+					sUserGroup = combineAttributes(sLastUserGroup, sUserGroup);
+				}
+				else {
+					if (!sLastRecord.isEmpty())
+						iIndex++;
+				}
+				cRepoInfo.setString("APP",             sApp,         iIndex);
+				cRepoInfo.setString("APP_INSTANCE",    sAppInstance, iIndex);
+				cRepoInfo.setString("PROJECT",         sProject,     iIndex);
+				cRepoInfo.setString("STATE",           sState,       iIndex);
+				cRepoInfo.setString("CONTACT",         "",           iIndex);
+				cRepoInfo.setString("USERNAME",        sUserID,      iIndex);
+				cRepoInfo.setString("ACCOUNTEXTERNAL", sAcctExt,     iIndex);
+				cRepoInfo.setString("REALNAME",        sRealname,    iIndex);
+				cRepoInfo.setString("ACCESSLEVEL",     sAccess,      iIndex);
+				cRepoInfo.setString("USERGROUP",       sUserGroup,   iIndex);
+				
+				sLastRecord = sRecord;
+				sLastAccess = sAccess;
+				sLastUserGroup = sUserGroup;
+			} // loop over record sets
+			
+			if (!sLastRecord.isEmpty())
+				iIndex++;
+			
+			if (iIndex>0)
+				frame.printLog(">>>:"+iIndex+" Records Read From Harvest Broker, " +sBroker+ "(filter="+ sProjectFilter+").");
+			
+		} catch (ClassNotFoundException e) {
+			iReturnCode = 101;
+			frame.printErr(sqlError);
+			frame.printErr(e.getLocalizedMessage());			
+			System.exit(iReturnCode);
+		} catch (SQLException e) {     
+			iReturnCode = 102;
+			frame.printErr(sqlError);
+			frame.printErr(e.getLocalizedMessage());			
+			System.exit(iReturnCode);
+		}	
+
+		return iIndex;
+	}  
+	
 	private static void processHarvestDatabase(String dburl, 
 			                               	   JCaContainer cLDAP,
 			                               	   String sHarvestDBPassword) 
@@ -175,12 +292,15 @@ public class HarvestLdap {
 		int iParms = args.length;
 		String sBCC = "";
 		String sLogPath = "scmldap.log";
+		String sOutputFile = "";
 		String sImagDBPassword  = "";
 		String sHarvestDBPassword = "";
 		String sProblems = "";
+		boolean bReport = false;
 		
-		String[] cscrBrokers = /* 191, 229, 231, 232, 233, 234 */
+		String[] cscrBrokers = 
 		{			
+
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr001;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr003;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr004;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
@@ -290,30 +410,37 @@ public class HarvestLdap {
 		// check parameters
 		for (int i = 0; i < iParms; i++)
 		{
-			if (args[i].compareToIgnoreCase("-h") == 0 || 
-				args[i].compareToIgnoreCase("-?") == 0)
-			{
-				frame.printLog("Usage: scmldap [-attest] [-del] [-log pathname] [-h]");
-				frame.printLog(" -attest option will display all users");
-				frame.printLog(" -del  option will delete all external, disabled users");
-				frame.printLog(" -log  option specifies location of log file");
-				System.exit(iReturnCode);
-			}
 
 			if (args[i].compareToIgnoreCase("-attest") == 0 )
 			{
 				bAttest = true;
+			}
+			else if (args[i].compareToIgnoreCase("-report") == 0 )
+			{
+				bReport = true;
 			}			
-			
-			if (args[i].compareToIgnoreCase("-del") == 0 )
+			else if (args[i].compareToIgnoreCase("-del") == 0 )
 			{
 				deleteDisabledUsers = true;
-			}			
-			
-			if (args[i].compareToIgnoreCase("-log") == 0 )
+			}						
+			else if (args[i].compareToIgnoreCase("-log") == 0 )
 			{
 				sLogPath = args[++i];
 			}			
+			else if (args[i].compareToIgnoreCase("-outputfile") == 0 )
+			{
+				sOutputFile = args[++i];
+			}			
+			else {
+					frame.printLog("Usage: scmldap [-attest] [-del] [-log pathname] [-h]");
+					frame.printLog(" -attest option will display all users");
+					frame.printLog(" -report option will generate an IMAG feed");
+					frame.printLog(" -del  option will delete all external, disabled users");
+					frame.printLog(" -report option will generate an IMAG feed");
+					frame.printLog(" -outputfile option will write the report data to a designated file");
+					frame.printLog(" -log  option specifies location of log file");
+					System.exit(iReturnCode);
+				}
 		} // end for
 
 		// execution from here
@@ -336,12 +463,44 @@ public class HarvestLdap {
 			// Show cLDAP statistics
 			if (bAttest)
 				frame.printLog("Broker\tDisplay Name\tPMFKEY\tDomain Account\tDisabled Account");
+
+			JCaContainer cRepoInfo = new JCaContainer();
 			
 			for (int i=0; i<cscrBrokers.length; i++)
-			{
+				if (!bReport) {
 					processHarvestDatabase( cscrBrokers[i], 
 					           				cLDAP,
 					           				sHarvestDBPassword);
+				}
+				else {		
+					String sJDBC = cscrBrokers[i];
+					int nIndex = sJDBC.indexOf("databaseName=")+13;
+					int lIndex = sJDBC.indexOf(";integratedSecurity");
+					String sBroker = sJDBC.substring(nIndex, lIndex);
+					String[] sProjectFilter = {"%", "A%", "B%", "C%", "D%", "E%", "F%", "G%", "H%", "I%", "J%", "K%","L%", "M%", "N%", "O%", "P%", "Q%", "R%", "S%", "T%", "U%", "V%", "W%", "X%", "Y%", "Z%"};
+					frame.setFileAppend(false);
+					for (int j=0; j<sProjectFilter.length; j++) {
+						if (sBroker.equalsIgnoreCase("cscr1001")) {
+							if (j==0) continue;
+						}
+						else {
+							if (j>0) continue;
+						}
+							
+						if (readDBToRepoContainer(cRepoInfo,
+	                  			  cscrBrokers[i],
+	                  			  sHarvestDBPassword,
+	                  			  sProjectFilter[j]) > 0) {
+							
+							if (!sOutputFile.isEmpty()) {
+								String sFile = sOutputFile.replace("broker", sBroker);
+								frame.writeCSVFileFromListGeneric(cRepoInfo, sFile, ',');	
+								frame.setFileAppend(true);
+							}
+							cRepoInfo.clear();
+						}
+					}
+					frame.setFileAppend(false);
 			}
 		
 		} catch (Exception e) {
