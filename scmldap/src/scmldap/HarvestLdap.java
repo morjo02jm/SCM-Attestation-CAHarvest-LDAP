@@ -66,11 +66,16 @@ public class HarvestLdap {
 		String sqlError = "DB2. Unable to execute query.";
 		
 		try {			
+			int nIndex, lIndex;
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			String sURL = sJDBC + "password=" + sHarvestDBPassword+";";
-			int nIndex = sJDBC.indexOf("databaseName=")+13;
-			int lIndex = sJDBC.indexOf(";integratedSecurity");
+			nIndex = sJDBC.indexOf("jdbc:sqlserver://")+17;
+			lIndex = sJDBC.indexOf(";databaseName=");
+			String sAppInstance = sJDBC.substring(nIndex, lIndex);
+			nIndex = lIndex+14;
+			lIndex = sJDBC.indexOf(";integratedSecurity");
 			String sBroker = sJDBC.substring(nIndex, lIndex);
+			
 			Connection conn = DriverManager.getConnection(sURL);
 			
 			sqlError = "SQLServer. Error reading Harvest records from broker, "+ sBroker + ".";
@@ -86,7 +91,7 @@ public class HarvestLdap {
 			
 			while (rSet.next()) {		
 				String sApp         = rSet.getString("APP").trim();
-				String sAppInstance = rSet.getString("APP INSTANCE").trim();
+				sBroker             = rSet.getString("BROKER").trim();
 				String sProject     = rSet.getString("ENVIRONMENTNAME").trim();
 				String sState       = byState? rSet.getString("STATENAME").trim() : "***All***";
 				String sUserID      = rSet.getString("USERNAME").trim();
@@ -96,7 +101,7 @@ public class HarvestLdap {
 				String sUserGroup   = rSet.getString("USERGROUPNAME").trim().replace(',', ';');
 				String sAccess      = rSet.getString("ACCESSLEVEL").trim().replace(',', ';');
 				
-				String sRecord      = sAppInstance+";"+sProject+";"+sState+";"+sUserID;
+				String sRecord      = sBroker+";"+sProject+";"+sState+";"+sUserID;
 				
 				if (sRecord.equalsIgnoreCase(sLastRecord)) {
 					sAccess    = combineAttributes(sLastAccess, sAccess);
@@ -108,10 +113,11 @@ public class HarvestLdap {
 				}
 				cRepoInfo.setString("APP",             sApp,         iIndex);
 				cRepoInfo.setString("APP_INSTANCE",    sAppInstance, iIndex);
+				cRepoInfo.setString("BROKER",          sBroker,      iIndex);
 				cRepoInfo.setString("PROJECT",         sProject,     iIndex);
 				cRepoInfo.setString("STATE",           sState,       iIndex);
-				cRepoInfo.setString("CONTACT",         "",           iIndex);
-				cRepoInfo.setString("USERNAME",        sUserID,      iIndex);
+				cRepoInfo.setString("CONTACT",         "", iIndex);
+				cRepoInfo.setString("USERID",          sUserID,      iIndex);
 				cRepoInfo.setString("ACCOUNTEXTERNAL", sAcctExt,     iIndex);
 				cRepoInfo.setString("REALNAME",        sRealname,    iIndex);
 				cRepoInfo.setString("ACCESSLEVEL",     sAccess,      iIndex);
@@ -142,6 +148,105 @@ public class HarvestLdap {
 
 		return iIndex;
 	}  
+
+	private static void writeDBFromRepoContainer(JCaContainer cRepoInfo, String sImagDBPassword, String sBroker, String sFilter) {
+		PreparedStatement pstmt = null; 
+		String sqlStmt;
+		int iResult;
+		
+		String sqlError = "";
+		String sJDBC = "jdbc:sqlserver://AWS-UQAPA6ZZ:1433;databaseName=GMQARITCGISTOOLS;user=gm_tools_user;password="+sImagDBPassword+";";
+		String sqlStmt0 = "insert into GITHUB_REVIEW "+
+	              "( Application, ApplicationLocation, EntitlementOwner1, EntitlementOwner2, EntitlementName, EntitlementAttributes, ContactEmail, User_ID, UserAttributes) values ";
+		
+		String sEntitlementAttrs = "";
+		String sUserAttrs = "";
+		String sContact = "";
+		String sValues = "";
+		
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Connection conn = DriverManager.getConnection(sJDBC);
+	
+			String sApp = "CA Harvest SCM";
+
+			sqlError = "DB. Error deleting previous records.";
+			sqlStmt = "delete from GITHUB_REVIEW where Application in ('"+ sApp + "')"+
+			          " and EntitlementOwner1 in ('"+sBroker+"')"+
+					  " and EntitlementOwner2 like ('"+sFilter+"')";
+			pstmt=conn.prepareStatement(sqlStmt);  
+			iResult = pstmt.executeUpdate();
+			if (iResult > 0) 
+				frame.printLog(">>>:"+iResult+" Previous IMAG Feed Records Deleted.");
+			
+			sqlError = "DB. Error inserting record.";
+			int nRecordsWritten = 0;
+			int nBlock = 100;
+			
+			for (int iIndex=0,nRecords=0; iIndex<cRepoInfo.getKeyElementCount("APP"); iIndex++) {
+				if (!cRepoInfo.getString("APP", iIndex).isEmpty()) { 
+					if (nRecords%nBlock == 0)
+						sqlStmt = sqlStmt0;
+					else 
+						sqlStmt += " , ";
+					
+					sEntitlementAttrs = "";
+					sUserAttrs = "external=" + cRepoInfo.getString("ACCOUNTEXTERNAL", iIndex) + ";" +
+					             "access="   + cRepoInfo.getString("ACCESSLEVEL", iIndex) + ";" +
+							     "group="    + cRepoInfo.getString("USERGROUP", iIndex) ;
+					
+					if (sUserAttrs.length()>255)
+						sUserAttrs = "external=" + cRepoInfo.getString("ACCOUNTEXTERNAL", iIndex) + ";" +
+					                 "access="   + cRepoInfo.getString("ACCESSLEVEL", iIndex);
+					
+					sContact = cRepoInfo.getString("CONTACT",iIndex);
+					if (!sContact.isEmpty())
+						sContact += "@ca.com";
+					
+					sValues = "('"  + sApp + "',"+
+							  "'"   + cRepoInfo.getString("APP_INSTANCE", iIndex) + "',"+
+							  "'"   + cRepoInfo.getString("BROKER", iIndex) + "',"+
+							  "'"   + cRepoInfo.getString("PROJECT", iIndex) + "',"+
+							  "'"   + cRepoInfo.getString("STATE", iIndex) + "',"+
+							  "'"   + sEntitlementAttrs + "',"+
+							  "'"   + sContact + "',"+
+							  "'"   + cRepoInfo.getString("USERID", iIndex) + "',"+
+							  "'"   + sUserAttrs + "')";
+					
+				    sqlStmt += sValues;
+				    
+				    if (nRecords%nBlock == (nBlock-1)) {
+						pstmt=conn.prepareStatement(sqlStmt);  
+						iResult = pstmt.executeUpdate();
+						if (iResult > 0) 
+							nRecordsWritten += iResult;	
+						sqlStmt = "";
+				    }
+					nRecords++;	
+				}
+			} // loop over records
+			
+			if (!sqlStmt.isEmpty()) {
+				pstmt=conn.prepareStatement(sqlStmt);  
+				iResult = pstmt.executeUpdate();
+				if (iResult > 0) 
+					nRecordsWritten += iResult;					
+			}
+			frame.printLog(">>>:"+nRecordsWritten+" Inserted Records Made to DB.");
+		
+		} catch (ClassNotFoundException e) {
+			iReturnCode = 301;
+		    frame.printErr(sqlError);
+		    frame.printErr(e.getLocalizedMessage());			
+		    System.exit(iReturnCode);
+		} catch (SQLException e) {     
+			iReturnCode = 302;
+		    frame.printErr(sqlError);
+		    frame.printErr(e.getLocalizedMessage());			
+		    System.exit(iReturnCode);
+		}
+	} // writeDBFromRepoContainer		
+	
 	
 	private static void processHarvestDatabase(String dburl, 
 			                               	   JCaContainer cLDAP,
@@ -300,7 +405,6 @@ public class HarvestLdap {
 		
 		String[] cscrBrokers = 
 		{			
-
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr001;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr003;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr004;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
@@ -466,7 +570,7 @@ public class HarvestLdap {
 
 			JCaContainer cRepoInfo = new JCaContainer();
 			
-			for (int i=0; i<cscrBrokers.length; i++)
+			for (int i=0; i<cscrBrokers.length; i++) {
 				if (!bReport) {
 					processHarvestDatabase( cscrBrokers[i], 
 					           				cLDAP,
@@ -497,11 +601,29 @@ public class HarvestLdap {
 								frame.writeCSVFileFromListGeneric(cRepoInfo, sFile, ',');	
 								frame.setFileAppend(true);
 							}
+							
+							// Write out processed records to database
+							writeDBFromRepoContainer(cRepoInfo, sImagDBPassword, sBroker, sProjectFilter[j]);
+							
 							cRepoInfo.clear();
 						}
 					}
 					frame.setFileAppend(false);
-			}
+										
+				} // loop over filters
+			} // loop over brokers
+			
+			if (!sProblems.isEmpty()) {
+				sProblems+="</ul>\n";
+				String email = "faudo01@ca.com";
+				String sSubject, sScope;
+				
+				sSubject = "Notification of Problematic CA Harvest SCM Contacts";
+				sScope = "Harvest SQLServer Database";
+				
+		        String bodyText = frame.readTextResource("Notification_of_Noncompliant_Harvest_Contacts.txt", sScope, sProblems, "", "");								        								          
+		        frame.sendEmailNotification(email, sSubject, bodyText, true);
+			} // had some notifications
 		
 		} catch (Exception e) {
 			iReturnCode = 1;
