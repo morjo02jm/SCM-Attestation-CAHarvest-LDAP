@@ -206,12 +206,12 @@ public class HarvestLdap {
 					sValues = "('"  + sApp + "',"+
 							  "'"   + cRepoInfo.getString("APP_INSTANCE", iIndex) + "',"+
 							  "'"   + cRepoInfo.getString("BROKER", iIndex) + "',"+
-							  "'"   + cRepoInfo.getString("PROJECT", iIndex) + "',"+
+							  "'"   + cRepoInfo.getString("PROJECT", iIndex).replace("'", "''") + "',"+
 							  "'"   + cRepoInfo.getString("STATE", iIndex) + "',"+
 							  "'"   + sEntitlementAttrs + "',"+
 							  "'"   + sContact + "',"+
 							  "'"   + cRepoInfo.getString("USERID", iIndex) + "',"+
-							  "'"   + sUserAttrs + "')";
+							  "'"   + sUserAttrs.replace("'", "''") + "')";
 					
 				    sqlStmt += sValues;
 				    
