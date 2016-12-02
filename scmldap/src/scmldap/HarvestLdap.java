@@ -582,7 +582,7 @@ public class HarvestLdap {
 					int lIndex = sJDBC.indexOf(";integratedSecurity");
 					String sBroker = sJDBC.substring(nIndex, lIndex);
 					String[] sProjectFilter = {"%", "A%", "B%", "C%", "D%", "E%", "F%", "G%", "H%", "I%", "J%", "K%","L%", "M%", "N%", "O%", "P%", "Q%", "R%", "S%", "T%", "U%", "V%", "W%", "X%", "Y%", "Z%"};
-					frame.setFileAppend(false);
+					
 					for (int j=0; j<sProjectFilter.length; j++) {
 						if (sBroker.equalsIgnoreCase("cscr1001")) {
 							if (j==0) continue;
@@ -598,8 +598,9 @@ public class HarvestLdap {
 							
 							if (!sOutputFile.isEmpty()) {
 								String sFile = sOutputFile.replace("broker", sBroker);
+								frame.setFileAppend(i>0);
 								frame.writeCSVFileFromListGeneric(cRepoInfo, sFile, ',');	
-								frame.setFileAppend(true);
+								frame.setFileAppend(false);
 							}
 							
 							// Write out processed records to database
@@ -608,7 +609,7 @@ public class HarvestLdap {
 							cRepoInfo.clear();
 						}
 					}
-					frame.setFileAppend(false);
+					
 										
 				} // loop over filters
 			} // loop over brokers
