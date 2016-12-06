@@ -6,6 +6,8 @@ import commonldap.JCaContainer;
 import java.sql.*;
 import java.util.*;
 
+import gvjava.org.json.*;
+
 
 // Main Class
 public class HarvestLdap {
@@ -392,6 +394,83 @@ public class HarvestLdap {
 		}
 	} // end ProcessHarvestDatabase
 	
+	static String[] readAssignedApprovers(String sApprovers) {
+		List<String> lObj = new ArrayList<String>();
+		
+		String sToken = sApprovers;
+		
+		while (!sToken.isEmpty()) {
+			int nIndex = sToken.indexOf(';');
+			String sApprover = sToken;
+			if (nIndex >= 0) {
+				sApprover = sToken.substring(0, nIndex);
+				sToken = sToken.substring(nIndex+1);
+			}
+			else 
+				sToken = "";
+			
+			lObj.add(sApprover);
+		}
+		
+		String[] lStrings = new String[lObj.size()];
+		ListIterator<String> lIter = lObj.listIterator();
+		int i=0;
+		
+		while (lIter.hasNext()) {
+			lStrings[i++] = (String)lIter.next();
+		}
+		return lStrings;
+	}
+	
+	static String[] readAssignedBrokerProjects(String sLocation, String sBroker) {
+		List<String> lObj = new ArrayList<String>();
+		
+		boolean bFound = false;		
+		String sToken = sLocation;
+		while (!bFound && !sToken.isEmpty()) {
+			int nIndex = sToken.indexOf(';');
+			String sNextBroker = sToken;
+			if (nIndex >= 0) {
+				sNextBroker = sToken.substring(0, nIndex);
+				sToken = sToken.substring(nIndex+1);
+			}
+			else 
+				sToken = "";
+			
+			if (sNextBroker.startsWith(sBroker)) {
+				bFound = true;
+				int mIndex = sNextBroker.indexOf('/');
+				if (mIndex == -1) 
+					lObj.add("");
+				else {
+					String sNextProject = sNextBroker.substring(mIndex+1);
+					while (!sNextProject.isEmpty()) {
+						int lIndex = sNextProject.indexOf(',');
+						String sProject = sNextProject;
+						if (lIndex>=0) {
+							sProject = sNextProject.substring(0, lIndex);
+							sNextProject = sNextProject.substring(lIndex+1);
+						}
+						else 
+							sNextProject = "";
+						
+						lObj.add(sProject);
+					}
+				} // parse out leading project names					
+			} // current broker found
+			
+		} // loop over broker specifications
+		
+		String[] lStrings = new String[lObj.size()];
+		ListIterator<String> lIter = lObj.listIterator();
+		int i=0;
+		
+		while (lIter.hasNext()) {
+			lStrings[i++] = (String)lIter.next();
+		}
+		return lStrings;
+	}
+	
 
 	public static void main(String[] args) {
 		int iParms = args.length;
@@ -567,6 +646,46 @@ public class HarvestLdap {
 			// Show cLDAP statistics
 			if (bAttest)
 				frame.printLog("Broker\tDisplay Name\tPMFKEY\tDomain Account\tDisabled Account");
+			
+			JCaContainer cHarvestContacts = new JCaContainer();
+			if (bReport) {
+				JCaContainer cContacts = new JCaContainer();
+				
+				frame.readInputListGeneric(cContacts, "SourceMinder_Product_Contacts.tsv", '\t');
+				
+				int nIndex = 0;
+				
+				for (int iIndex=0; iIndex<cContacts.getKeyElementCount("PROD_NAME"); iIndex++) {
+					if (cContacts.getString("SRC_MNGMT_TOOL", iIndex).contains("Harvest")) {
+						switch(cContacts.getString("PROD_STAT", iIndex).toLowerCase()) {
+						case "active":
+						case "stabilized":
+						case "internal":
+							if (cContacts.getString("NON_MAINFRAME_SRC_PHYS_LOC", iIndex).toLowerCase().contains("cscr")) {
+								cHarvestContacts.setString("Product", cContacts.getString("PROD_NAME", iIndex), nIndex);
+								cHarvestContacts.setString("Release", cContacts.getString("RELEASE", iIndex), nIndex);
+								cHarvestContacts.setString("Location", cContacts.getString("NON_MAINFRAME_SRC_PHYS_LOC", iIndex), nIndex);
+								
+								String sApprovers = cContacts.getString("APPROVERS_PMFKEY", iIndex);
+								sApprovers = sApprovers.replace("\"[", "[");
+								sApprovers = sApprovers.replace("]\"", "]");
+								sApprovers = sApprovers.replace("\"\"", "\"");
+								JSONArray ja = new JSONArray(sApprovers);
+								sApprovers = "";
+								for (int j=0; j<ja.length(); j++) {
+									if (!sApprovers.isEmpty()) sApprovers += ";";
+									sApprovers += ja.getJSONObject(j).getString("PMFKEY");
+								}
+								cHarvestContacts.setString("Approver", sApprovers, nIndex++);								
+							}
+							break;
+							
+						default:
+							break;
+						}
+					} // Harvest Contact
+				} // loop over SourceMinder contact list
+			} // GovernanceMinder report
 
 			JCaContainer cRepoInfo = new JCaContainer();
 			
@@ -596,6 +715,18 @@ public class HarvestLdap {
 	                  			  sHarvestDBPassword,
 	                  			  sProjectFilter[j]) > 0) {
 							
+							// Apply contact information for records
+							// a. from SourceMinder Contacts
+							for (int iIndex=0; iIndex<cHarvestContacts.getKeyElementCount("Approvers"); iIndex++) {
+								String sLocation = cHarvestContacts.getString("Location", iIndex).toLowerCase();
+								String[] sProjects = readAssignedBrokerProjects(sLocation, sBroker);
+								String[] sApprovers = readAssignedApprovers(cHarvestContacts.getString("Approvers", iIndex));
+								
+								if (sProjects.length > 0) {
+									
+								}
+							}
+							
 							if (!sOutputFile.isEmpty()) {
 								String sFile = sOutputFile.replace("broker", sBroker);
 								frame.setFileAppend(i>0);
@@ -608,10 +739,9 @@ public class HarvestLdap {
 							
 							cRepoInfo.clear();
 						}
-					}
+					}	//loop over filters				
 					
-										
-				} // loop over filters
+				} //else
 			} // loop over brokers
 			
 			if (!sProblems.isEmpty()) {
