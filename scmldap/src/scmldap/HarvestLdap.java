@@ -17,11 +17,17 @@ public class HarvestLdap {
 	private static boolean bAttest = false;
 	private static boolean deleteDisabledUsers = false;
 	
+	// Repository columns
 	private static String sTagUsername = "USERNAME";
 	private static String sTagRealname = "REALNAME";
 	private static String sTagAcctExternal = "ACCOUNTEXTERNAL";
 	private static String sTagAcctDisabled = "ACCOUNTDISABLED";
+	
+	// LDAP columns
 	private static String sTagPmfkey       = "sAMAccountName";
+	
+	// Notification
+	static String tagUL = "<ul> ";
 	
 	HarvestLdap()
 	{
@@ -118,7 +124,7 @@ public class HarvestLdap {
 				cRepoInfo.setString("BROKER",          sBroker,      iIndex);
 				cRepoInfo.setString("PROJECT",         sProject,     iIndex);
 				cRepoInfo.setString("STATE",           sState,       iIndex);
-				cRepoInfo.setString("CONTACT",         "", iIndex);
+				cRepoInfo.setString("CONTACT",         "",           iIndex);
 				cRepoInfo.setString("USERID",          sUserID,      iIndex);
 				cRepoInfo.setString("ACCOUNTEXTERNAL", sAcctExt,     iIndex);
 				cRepoInfo.setString("REALNAME",        sRealname,    iIndex);
@@ -483,7 +489,7 @@ public class HarvestLdap {
 		boolean bReport = false;
 		
 		String[] cscrBrokers = 
-		{			
+		{						
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr001;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr003;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr004;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
@@ -537,8 +543,8 @@ public class HarvestLdap {
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr704;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr706;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr707;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
-			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr708;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
-			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr709;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
+			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr708;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",			
+			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr709;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",			
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr801;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr802;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr803;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
@@ -586,7 +592,7 @@ public class HarvestLdap {
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr1306;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr1307;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr1308;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
-			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr1309;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
+			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr1309;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",			
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr1400;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;"
 		};
 		
@@ -630,7 +636,7 @@ public class HarvestLdap {
 		JCaContainer cLDAP = new JCaContainer();
 		frame = new CommonLdap("scmldap",
                                sLogPath,
-                               sBCC,
+                               "faudo01@ca.com", //sBCC,
                                cLDAP);
 
 
@@ -656,15 +662,18 @@ public class HarvestLdap {
 				int nIndex = 0;
 				
 				for (int iIndex=0; iIndex<cContacts.getKeyElementCount("PROD_NAME"); iIndex++) {
+					boolean bActive = true;
 					if (cContacts.getString("SRC_MNGMT_TOOL", iIndex).contains("Harvest")) {
 						switch(cContacts.getString("PROD_STAT", iIndex).toLowerCase()) {
+						case "end of life":
+							bActive = false;
 						case "active":
 						case "stabilized":
 						case "internal":
 							if (cContacts.getString("NON_MAINFRAME_SRC_PHYS_LOC", iIndex).toLowerCase().contains("cscr")) {
-								cHarvestContacts.setString("Product", cContacts.getString("PROD_NAME", iIndex), nIndex);
-								cHarvestContacts.setString("Release", cContacts.getString("RELEASE", iIndex), nIndex);
-								cHarvestContacts.setString("Location", cContacts.getString("NON_MAINFRAME_SRC_PHYS_LOC", iIndex), nIndex);
+								String sProduct  = cContacts.getString("PROD_NAME", iIndex).replace("\"", "");
+								String sRelease  = cContacts.getString("RELEASE", iIndex).replace("\"", "");
+								String sLocation = cContacts.getString("NON_MAINFRAME_SRC_PHYS_LOC", iIndex).replace("\"", "");
 								
 								String sApprovers = cContacts.getString("APPROVERS_PMFKEY", iIndex);
 								sApprovers = sApprovers.replace("\"[", "[");
@@ -676,6 +685,11 @@ public class HarvestLdap {
 									if (!sApprovers.isEmpty()) sApprovers += ";";
 									sApprovers += ja.getJSONObject(j).getString("PMFKEY");
 								}
+
+								cHarvestContacts.setString("Product",  sProduct, nIndex);
+								cHarvestContacts.setString("Release",  sRelease, nIndex);
+								cHarvestContacts.setString("Location", sLocation, nIndex);
+								cHarvestContacts.setString("Active", bActive? "Y":"N", nIndex);
 								cHarvestContacts.setString("Approver", sApprovers, nIndex++);								
 							}
 							break;
@@ -700,6 +714,10 @@ public class HarvestLdap {
 					int nIndex = sJDBC.indexOf("databaseName=")+13;
 					int lIndex = sJDBC.indexOf(";integratedSecurity");
 					String sBroker = sJDBC.substring(nIndex, lIndex);
+					int mIndex = sBroker.indexOf('_');
+					if (mIndex >= 0)
+						sBroker = sBroker.substring(0, mIndex);
+					
 					String[] sProjectFilter = {"%", "A%", "B%", "C%", "D%", "E%", "F%", "G%", "H%", "I%", "J%", "K%","L%", "M%", "N%", "O%", "P%", "Q%", "R%", "S%", "T%", "U%", "V%", "W%", "X%", "Y%", "Z%"};
 					
 					for (int j=0; j<sProjectFilter.length; j++) {
@@ -714,17 +732,54 @@ public class HarvestLdap {
 	                  			  cscrBrokers[i],
 	                  			  sHarvestDBPassword,
 	                  			  sProjectFilter[j]) > 0) {
+							boolean bFound = false;
 							
 							// Apply contact information for records
 							// a. from SourceMinder Contacts
-							for (int iIndex=0; iIndex<cHarvestContacts.getKeyElementCount("Approvers"); iIndex++) {
+							for (int iIndex=0; iIndex<cHarvestContacts.getKeyElementCount("Approver"); iIndex++) {
 								String sLocation = cHarvestContacts.getString("Location", iIndex).toLowerCase();
 								String[] sProjects = readAssignedBrokerProjects(sLocation, sBroker);
-								String[] sApprovers = readAssignedApprovers(cHarvestContacts.getString("Approvers", iIndex));
+								String[] sApprovers = readAssignedApprovers(cHarvestContacts.getString("Approver", iIndex));
+								boolean bActive = cHarvestContacts.getString("Active", iIndex).contentEquals("Y");
 								
 								if (sProjects.length > 0) {
+									String sApprover = "";
+									for (int jIndex=0; jIndex<sApprovers.length; jIndex++) {
+										if (!sApprover.isEmpty()) sApprover += ";";
+										sApprover += sApprovers[jIndex]+"ca.com";
+									}
 									
-								}
+									for (int k=0; k<sProjects.length; k++) {
+										if (sProjects[k].isEmpty()) {
+											// process all the unassigned approvers in the project
+											for (int kIndex=0; kIndex<cRepoInfo.getKeyElementCount("PROJECT"); kIndex++) {
+												if (cRepoInfo.getString("CONTACT", kIndex).isEmpty()) {
+													cRepoInfo.setString("CONTACT", bActive? sApprover : "Toolsadmin@ca.com", kIndex);
+													bFound = true;
+													
+													//TODO process release list
+												}
+											}
+										}
+										else { // process each project prefix 
+											String sPrefix = sProjects[k].replace("*", "").toLowerCase();
+											
+											for (int kIndex=0; kIndex<cRepoInfo.getKeyElementCount("PROJECT"); kIndex++) {
+												if (cRepoInfo.getString("PROJECT", kIndex).toLowerCase().startsWith(sPrefix)) {
+													cRepoInfo.setString("CONTACT", bActive? sApprover : "Toolsadmin@ca.com", kIndex);
+													bFound = true;
+													//TODO process release list
+												}
+											}											
+										}  // list of prefixes present
+									} // loop over project prefixes
+								} 	// broker record exists in contact info					
+							} // loop over contact records
+							
+							if (!bFound && j==0) {
+								// Didn't find any contact entry for this broker
+					    		if (sProblems.isEmpty()) sProblems = tagUL;
+					    		sProblems+= "<li>The broker, <b>"+sBroker+"</b>, currently has no contact information from SourceMinder</li>\n";			    					    		
 							}
 							
 							if (!sOutputFile.isEmpty()) {
@@ -741,7 +796,7 @@ public class HarvestLdap {
 						}
 					}	//loop over filters				
 					
-				} //else
+				} // -report flag set
 			} // loop over brokers
 			
 			if (!sProblems.isEmpty()) {
