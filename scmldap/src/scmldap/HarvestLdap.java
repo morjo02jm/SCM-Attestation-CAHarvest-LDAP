@@ -157,6 +157,48 @@ public class HarvestLdap {
 		return iIndex;
 	}  
 
+	private static boolean deactivateEndOfLifeProject(String sJDBC, String sProject, String sHarvestDBPassword) {
+		boolean bSuccess = false;
+		String sqlError = "DB2. Unable to execute query.";
+		
+		try {			
+			PreparedStatement pstmt = null; 
+			String sqlStmt;
+
+			int nIndex, lIndex;
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			String sURL = sJDBC + "password=" + sHarvestDBPassword+";";
+			nIndex = sJDBC.indexOf("jdbc:sqlserver://")+17;
+			lIndex = sJDBC.indexOf(";databaseName=");
+			String sAppInstance = sJDBC.substring(nIndex, lIndex);
+			nIndex = lIndex+14;
+			lIndex = sJDBC.indexOf(";integratedSecurity");
+			String sBroker = sJDBC.substring(nIndex, lIndex);
+			
+			Connection conn = DriverManager.getConnection(sURL);
+			
+			sqlError = "SQLServer. Error updating active status for project, "+sProject+", in broker, "+ sBroker + ".";
+			sqlStmt = "update harenvironment set ENVISACTIVE=\'N\' where ENVIRONMENTNAME=\'"+sProject+"\' and ENVISACTIVE=\'Y\'";			
+
+			pstmt=conn.prepareStatement(sqlStmt);  
+			int iResult = pstmt.executeUpdate();
+			if (iResult > 0) 
+				bSuccess = true;
+			
+		} catch (ClassNotFoundException e) {
+			iReturnCode = 101;
+			frame.printErr(sqlError);
+			frame.printErr(e.getLocalizedMessage());			
+			System.exit(iReturnCode);
+		} catch (SQLException e) {     
+			iReturnCode = 102;
+			frame.printErr(sqlError);
+			frame.printErr(e.getLocalizedMessage());			
+			System.exit(iReturnCode);
+		}			
+		return bSuccess;
+	}
+	
 	private static void writeDBFromRepoContainer(JCaContainer cRepoInfo, String sImagDBPassword, String sBroker, String sFilter) {
 		PreparedStatement pstmt = null; 
 		String sqlStmt;
@@ -636,7 +678,7 @@ public class HarvestLdap {
 		JCaContainer cLDAP = new JCaContainer();
 		frame = new CommonLdap("scmldap",
                                sLogPath,
-                               "faudo01@ca.com", //sBCC,
+                               sBCC,
                                cLDAP);
 
 
@@ -782,9 +824,27 @@ public class HarvestLdap {
 					    		sProblems+= "<li>The broker, <b>"+sBroker+"</b>, currently has no contact information from SourceMinder</li>\n";			    					    		
 							}
 							
+							// Process all end of life projects (make them inactive projects in Harvest)
+							for (int k=0; k<cRepoInfo.getKeyElementCount("PROJECT"); k++) {
+								String sProject = cRepoInfo.getString("PROJECT", k);
+								if (cRepoInfo.getString("CONTACT", k).equalsIgnoreCase("Toolsadmin@ca.com") &&
+									!cRepoInfo.getString("APP", k).isEmpty()) {
+									if (deactivateEndOfLifeProject(cscrBrokers[i], sProject, sHarvestDBPassword)) {
+							    		if (sProblems.isEmpty()) sProblems = tagUL;
+							    		sProblems+= "<li>The project, <b>"+sProject+"</b>, in broker, <b>"+sBroker+"</b>, has been deactived because it is at End of Life.</li>\n";
+							    		
+										int[] iProjects = cRepoInfo.find("PROJECT", sProject);
+										for (int iIndex=0; iIndex<iProjects.length; iIndex++) {
+											cRepoInfo.setString("APP", "", iProjects[iIndex]);
+										}
+									}
+								} // end of life entry					
+							} //loop over broker entries
+							
+							// Append records to output file, if any
 							if (!sOutputFile.isEmpty()) {
 								String sFile = sOutputFile.replace("broker", sBroker);
-								frame.setFileAppend(i>0);
+								frame.setFileAppend(i>0); 
 								frame.writeCSVFileFromListGeneric(cRepoInfo, sFile, ',');	
 								frame.setFileAppend(false);
 							}
