@@ -18,10 +18,11 @@ public class HarvestLdap {
 	private static boolean deleteDisabledUsers = false;
 	
 	// Repository columns
-	private static String sTagUsername = "USERNAME";
-	private static String sTagRealname = "REALNAME";
+	private static String sTagUsername     = "USERNAME";
+	private static String sTagRealname     = "REALNAME";
 	private static String sTagAcctExternal = "ACCOUNTEXTERNAL";
 	private static String sTagAcctDisabled = "ACCOUNTDISABLED";
+	private static String sTagUserID       = "USERID";
 	
 	// LDAP columns
 	private static String sTagPmfkey       = "sAMAccountName";
@@ -260,7 +261,7 @@ public class HarvestLdap {
 							  "'"   + cRepoInfo.getString("STATE", iIndex) + "',"+
 							  "'"   + sEntitlementAttrs + "',"+
 							  "'"   + sContact + "',"+
-							  "'"   + cRepoInfo.getString("USERID", iIndex) + "',"+
+							  "'"   + cRepoInfo.getString(sTagUserID, iIndex) + "',"+
 							  "'"   + sUserAttrs.replace("'", "''") + "')";
 					
 				    sqlStmt += sValues;
@@ -840,6 +841,22 @@ public class HarvestLdap {
 									}
 								} // end of life entry					
 							} //loop over broker entries
+							
+							// Check for internal user accounts and marked them as unmapped
+							for (int k=0; k<cRepoInfo.getKeyElementCount("PROJECT"); k++) {
+								if (!cRepoInfo.getString("APP", k).isEmpty()) {
+									String sID = cRepoInfo.getString(sTagUserID,k);
+									if (!sID.endsWith("?")) {
+										int[] iLDAP = cLDAP.find(sTagPmfkey, sID);
+										if (iLDAP.length == 0) {
+											int[] iUsers = cLDAP.find(sTagUserID, sID);
+											for (int kIndex=0; kIndex<iUsers.length; kIndex++) {
+												cRepoInfo.setString(sTagUserID, sID+"?", iUsers[kIndex]);
+											}
+										}
+									}
+								}
+							}
 							
 							// Append records to output file, if any
 							if (!sOutputFile.isEmpty()) {
