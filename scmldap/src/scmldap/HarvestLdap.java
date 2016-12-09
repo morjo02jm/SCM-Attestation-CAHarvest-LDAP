@@ -849,7 +849,7 @@ public class HarvestLdap {
 									if (!sID.endsWith("?")) {
 										int[] iLDAP = cLDAP.find(sTagPmfkey, sID);
 										if (iLDAP.length == 0) {
-											int[] iUsers = cLDAP.find(sTagUserID, sID);
+											int[] iUsers = cRepoInfo.find(sTagUserID, sID);
 											for (int kIndex=0; kIndex<iUsers.length; kIndex++) {
 												cRepoInfo.setString(sTagUserID, sID+"?", iUsers[kIndex]);
 											}
