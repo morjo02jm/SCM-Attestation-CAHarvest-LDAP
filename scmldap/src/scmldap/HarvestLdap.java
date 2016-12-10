@@ -38,7 +38,7 @@ public class HarvestLdap {
 	private static String combineAttributes(String sLastAccess, String sAccess) {
 		// Combine the access levels
 		String sToken = sAccess;
-		sAccess = sLastAccess;
+		String sCombAccess = sLastAccess;
 		String sNext = "";
 		
 		while (!sToken.isEmpty()) {
@@ -52,14 +52,14 @@ public class HarvestLdap {
 				sToken = "";							
 			}
 			
-			if (!sAccess.contains(sNext)) {
-				if (!sAccess.isEmpty())
-					sAccess += ";";
-				sAccess += sNext;
+			if (!sCombAccess.contains(sNext)) {
+				if (!sCombAccess.isEmpty())
+					sCombAccess += ";";
+				sCombAccess += sNext;
 			}
 		} // loop parsing out individual access tokens	
 		
-		return sAccess;
+		return sCombAccess;
 	}
 	
 	private static int readDBToRepoContainer(JCaContainer cRepoInfo,
