@@ -708,12 +708,11 @@ public class HarvestLdap {
 				sOutputFile = args[++i];
 			}			
 			else {
-					frame.printLog("Usage: scmldap [-attest] [-del] [-log pathname] [-h]");
+					frame.printLog("Usage: scmldap [-attest | -del | -report [ -outputfile fullpathname ]] [-log pathname] [-h]");
 					frame.printLog(" -attest option will display all users");
 					frame.printLog(" -report option will generate an IMAG feed");
 					frame.printLog(" -del  option will delete all external, disabled users");
-					frame.printLog(" -report option will generate an IMAG feed");
-					frame.printLog(" -outputfile option will write the report data to a designated file");
+					frame.printLog(" -outputfile option will write the report data to a designated file (.tsv)");
 					frame.printLog(" -log  option specifies location of log file");
 					System.exit(iReturnCode);
 				}
