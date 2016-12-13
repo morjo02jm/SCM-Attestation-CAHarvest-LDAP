@@ -252,8 +252,8 @@ public class HarvestLdap {
 					                 "access="   + cRepoInfo.getString("ACCESSLEVEL", iIndex);
 					
 					sContact = cRepoInfo.getString("CONTACT",iIndex);
-					if (!sContact.isEmpty())
-						sContact += "@ca.com";
+					//if (!sContact.isEmpty())
+					//	sContact += "@ca.com";
 					
 					sValues = "('"  + sApp + "',"+
 							  "'"   + cRepoInfo.getString("APP_INSTANCE", iIndex) + "',"+
@@ -521,6 +521,49 @@ public class HarvestLdap {
 		return lStrings;
 	}
 	
+	private static boolean processProjectReleases(String sProject, String sReleases, boolean bActive) {
+		boolean bIsActive = bActive;
+		
+		if (bIsActive && !sReleases.isEmpty()) {
+			boolean bFound = false;		
+			String sToken = sReleases;
+			while (!bFound && !sToken.isEmpty()) {
+				int nIndex = sToken.indexOf(';');
+				String sNextRelease = sToken;
+				if (nIndex >= 0) {
+					sNextRelease = sToken.substring(0, nIndex);
+					sToken = sToken.substring(nIndex+1);
+				}
+				else 
+					sToken = "";
+				
+				sNextRelease = sNextRelease.toLowerCase();
+				if (sNextRelease.startsWith("r")) {
+					sNextRelease = sNextRelease.substring(1);
+				}
+				if (sNextRelease.endsWith("*")) {
+					sNextRelease = sNextRelease.replace("*", "");
+				}
+				
+				String[] aCheck = {
+						sNextRelease,
+						sNextRelease.replace(".", "_"),
+						sNextRelease.replace(".", "")
+				};
+				
+				for (int i=0; i<aCheck.length && !bFound; i++) {
+					if (sProject.contains(aCheck[i]))
+						bFound = true;
+				}
+				
+			} // loop over broker specifications
+			
+			bIsActive = bFound;
+		}
+		
+		return bIsActive;
+	}
+	
 
 	public static void main(String[] args) {
 		int iParms = args.length;
@@ -785,12 +828,13 @@ public class HarvestLdap {
 								String[] sProjects = readAssignedBrokerProjects(sLocation, sBroker);
 								String[] sApprovers = readAssignedApprovers(cHarvestContacts.getString("Approver", iIndex));
 								boolean bActive = cHarvestContacts.getString("Active", iIndex).contentEquals("Y");
+								String sReleases = cHarvestContacts.getString("Release", iIndex);
 								
 								if (sProjects.length > 0) {
 									String sApprover = "";
 									for (int jIndex=0; jIndex<sApprovers.length; jIndex++) {
 										if (!sApprover.isEmpty()) sApprover += ";";
-										sApprover += sApprovers[jIndex]+"ca.com";
+										sApprover += sApprovers[jIndex] + (sApprovers[jIndex].contains("@")? "":"@ca.com");
 									}
 									
 									for (int k=0; k<sProjects.length; k++) {
@@ -800,8 +844,6 @@ public class HarvestLdap {
 												if (cRepoInfo.getString("CONTACT", kIndex).isEmpty()) {
 													cRepoInfo.setString("CONTACT", bActive? sApprover : "Toolsadmin@ca.com", kIndex);
 													bFound = true;
-													
-													//TODO process release list
 												}
 											}
 										}
@@ -809,10 +851,11 @@ public class HarvestLdap {
 											String sPrefix = sProjects[k].replace("*", "").toLowerCase();
 											
 											for (int kIndex=0; kIndex<cRepoInfo.getKeyElementCount("PROJECT"); kIndex++) {
-												if (cRepoInfo.getString("PROJECT", kIndex).toLowerCase().startsWith(sPrefix)) {
-													cRepoInfo.setString("CONTACT", bActive? sApprover : "Toolsadmin@ca.com", kIndex);
+												String sProject = cRepoInfo.getString("PROJECT", kIndex).toLowerCase();
+												if (sProject.startsWith(sPrefix)) {
+													boolean bIsActive = processProjectReleases(sProject, sReleases, bActive);
+													cRepoInfo.setString("CONTACT", bIsActive? sApprover : "Toolsadmin@ca.com", kIndex);
 													bFound = true;
-													//TODO process release list
 												}
 											}											
 										}  // list of prefixes present
@@ -831,7 +874,7 @@ public class HarvestLdap {
 								String sProject = cRepoInfo.getString("PROJECT", k);
 								if (cRepoInfo.getString("CONTACT", k).equalsIgnoreCase("Toolsadmin@ca.com") &&
 									!cRepoInfo.getString("APP", k).isEmpty()) {
-									if (deactivateEndOfLifeProject(cscrBrokers[i], sProject, sHarvestDBPassword)) {
+									if (false /*deactivateEndOfLifeProject(cscrBrokers[i], sProject, sHarvestDBPassword)*/) {
 							    		if (sProblems.isEmpty()) sProblems = tagUL;
 							    		sProblems+= "<li>The project, <b>"+sProject+"</b>, in broker, <b>"+sBroker+"</b>, has been deactived because it is at End of Life.</li>\n";
 							    		
