@@ -24,6 +24,9 @@ public class HarvestLdap {
 	private static String sTagAcctExternal = "ACCOUNTEXTERNAL";
 	private static String sTagAcctDisabled = "ACCOUNTDISABLED";
 	private static String sTagUserID       = "USERID";
+	private static String sTagProject      = "PROJECT";
+	private static String sTagContact      = "CONTACT";
+	private static String sTagApp          = "APP";
 	
 	// LDAP columns
 	private static String sTagPmfkey       = "sAMAccountName";
@@ -235,8 +238,8 @@ public class HarvestLdap {
 			int nRecordsWritten = 0;
 			int nBlock = 100;
 			
-			for (int iIndex=0,nRecords=0; iIndex<cRepoInfo.getKeyElementCount("APP"); iIndex++) {
-				if (!cRepoInfo.getString("APP", iIndex).isEmpty()) { 
+			for (int iIndex=0,nRecords=0; iIndex<cRepoInfo.getKeyElementCount(sTagApp); iIndex++) {
+				if (!cRepoInfo.getString(sTagApp, iIndex).isEmpty()) { 
 					if (nRecords%nBlock == 0)
 						sqlStmt = sqlStmt0;
 					else 
@@ -251,14 +254,14 @@ public class HarvestLdap {
 						sUserAttrs = "external=" + cRepoInfo.getString("ACCOUNTEXTERNAL", iIndex) + ";" +
 					                 "access="   + cRepoInfo.getString("ACCESSLEVEL", iIndex);
 					
-					sContact = cRepoInfo.getString("CONTACT",iIndex);
+					sContact = cRepoInfo.getString(sTagContact,iIndex);
 					//if (!sContact.isEmpty())
 					//	sContact += "@ca.com";
 					
 					sValues = "('"  + sApp + "',"+
 							  "'"   + cRepoInfo.getString("APP_INSTANCE", iIndex) + "',"+
 							  "'"   + cRepoInfo.getString("BROKER", iIndex) + "',"+
-							  "'"   + cRepoInfo.getString("PROJECT", iIndex).replace("'", "''") + "',"+
+							  "'"   + cRepoInfo.getString(sTagProject, iIndex).replace("'", "''") + "',"+
 							  "'"   + cRepoInfo.getString("STATE", iIndex) + "',"+
 							  "'"   + sEntitlementAttrs + "',"+
 							  "'"   + sContact + "',"+
@@ -443,128 +446,8 @@ public class HarvestLdap {
 		    System.exit(iReturnCode);
 		}
 	} // end ProcessHarvestDatabase
-	
-	static String[] readAssignedApprovers(String sApprovers) {
-		List<String> lObj = new ArrayList<String>();
-		
-		String sToken = sApprovers;
-		
-		while (!sToken.isEmpty()) {
-			int nIndex = sToken.indexOf(';');
-			String sApprover = sToken;
-			if (nIndex >= 0) {
-				sApprover = sToken.substring(0, nIndex);
-				sToken = sToken.substring(nIndex+1);
-			}
-			else 
-				sToken = "";
-			
-			lObj.add(sApprover);
-		}
-		
-		String[] lStrings = new String[lObj.size()];
-		ListIterator<String> lIter = lObj.listIterator();
-		int i=0;
-		
-		while (lIter.hasNext()) {
-			lStrings[i++] = (String)lIter.next();
-		}
-		return lStrings;
-	}
-	
-	static String[] readAssignedBrokerProjects(String sLocation, String sBroker) {
-		List<String> lObj = new ArrayList<String>();
-		
-		boolean bFound = false;		
-		String sToken = sLocation;
-		while (!bFound && !sToken.isEmpty()) {
-			int nIndex = sToken.indexOf(';');
-			String sNextBroker = sToken;
-			if (nIndex >= 0) {
-				sNextBroker = sToken.substring(0, nIndex);
-				sToken = sToken.substring(nIndex+1);
-			}
-			else 
-				sToken = "";
-			
-			if (sNextBroker.startsWith(sBroker)) {
-				bFound = true;
-				int mIndex = sNextBroker.indexOf('/');
-				if (mIndex == -1) 
-					lObj.add("");
-				else {
-					String sNextProject = sNextBroker.substring(mIndex+1);
-					while (!sNextProject.isEmpty()) {
-						int lIndex = sNextProject.indexOf(',');
-						String sProject = sNextProject;
-						if (lIndex>=0) {
-							sProject = sNextProject.substring(0, lIndex);
-							sNextProject = sNextProject.substring(lIndex+1);
-						}
-						else 
-							sNextProject = "";
-						
-						lObj.add(sProject);
-					}
-				} // parse out leading project names					
-			} // current broker found
-			
-		} // loop over broker specifications
-		
-		String[] lStrings = new String[lObj.size()];
-		ListIterator<String> lIter = lObj.listIterator();
-		int i=0;
-		
-		while (lIter.hasNext()) {
-			lStrings[i++] = (String)lIter.next();
-		}
-		return lStrings;
-	}
-	
-	private static boolean processProjectReleases(String sProject, String sReleases, boolean bActive) {
-		boolean bIsActive = bActive;
-		
-		if (bIsActive && !sReleases.isEmpty()) {
-			boolean bFound = false;		
-			String sToken = sReleases;
-			while (!bFound && !sToken.isEmpty()) {
-				int nIndex = sToken.indexOf(';');
-				String sNextRelease = sToken;
-				if (nIndex >= 0) {
-					sNextRelease = sToken.substring(0, nIndex);
-					sToken = sToken.substring(nIndex+1);
-				}
-				else 
-					sToken = "";
-				
-				sNextRelease = sNextRelease.toLowerCase();
-				if (sNextRelease.startsWith("r")) {
-					sNextRelease = sNextRelease.substring(1);
-				}
-				if (sNextRelease.endsWith("*")) {
-					sNextRelease = sNextRelease.replace("*", "");
-				}
-				
-				String[] aCheck = {
-						sNextRelease,
-						sNextRelease.replace(".", "_"),
-						sNextRelease.replace(".", "")
-				};
-				
-				for (int i=0; i<aCheck.length && !bFound; i++) {
-					if (sProject.contains(aCheck[i]))
-						bFound = true;
-				}
-				
-			} // loop over broker specifications
-			
-			bIsActive = bFound;
-		}
-		
-		return bIsActive;
-	}
-	
 
+	
 	public static void main(String[] args) {
 		int iParms = args.length;
 		String sBCC = "";
@@ -741,50 +624,7 @@ public class HarvestLdap {
 			
 			JCaContainer cHarvestContacts = new JCaContainer();
 			if (bReport) {
-				JCaContainer cContacts = new JCaContainer();
-				
-				frame.readInputListGeneric(cContacts, "SourceMinder_Product_Contacts.tsv", '\t');
-				
-				int nIndex = 0;
-				
-				for (int iIndex=0; iIndex<cContacts.getKeyElementCount("PROD_NAME"); iIndex++) {
-					boolean bActive = true;
-					if (cContacts.getString("SRC_MNGMT_TOOL", iIndex).contains("Harvest")) {
-						switch(cContacts.getString("PROD_STAT", iIndex).toLowerCase()) {
-						case "end of life":
-							bActive = false;
-						case "active":
-						case "stabilized":
-						case "internal":
-							if (cContacts.getString("NON_MAINFRAME_SRC_PHYS_LOC", iIndex).toLowerCase().contains("cscr")) {
-								String sProduct  = cContacts.getString("PROD_NAME", iIndex).replace("\"", "");
-								String sRelease  = cContacts.getString("RELEASE", iIndex).replace("\"", "");
-								String sLocation = cContacts.getString("NON_MAINFRAME_SRC_PHYS_LOC", iIndex).replace("\"", "");
-								
-								String sApprovers = cContacts.getString("APPROVERS_PMFKEY", iIndex);
-								sApprovers = sApprovers.replace("\"[", "[");
-								sApprovers = sApprovers.replace("]\"", "]");
-								sApprovers = sApprovers.replace("\"\"", "\"");
-								JSONArray ja = new JSONArray(sApprovers);
-								sApprovers = "";
-								for (int j=0; j<ja.length(); j++) {
-									if (!sApprovers.isEmpty()) sApprovers += ";";
-									sApprovers += ja.getJSONObject(j).getString("PMFKEY");
-								}
-
-								cHarvestContacts.setString("Product",  sProduct, nIndex);
-								cHarvestContacts.setString("Release",  sRelease, nIndex);
-								cHarvestContacts.setString("Location", sLocation, nIndex);
-								cHarvestContacts.setString("Active", bActive? "Y":"N", nIndex);
-								cHarvestContacts.setString("Approver", sApprovers, nIndex++);								
-							}
-							break;
-							
-						default:
-							break;
-						}
-					} // Harvest Contact
-				} // loop over SourceMinder contact list
+				frame.readSourceMinderContacts(cHarvestContacts, "Harvest");
 			} // GovernanceMinder report
 
 			JCaContainer cRepoInfo = new JCaContainer();
@@ -824,8 +664,8 @@ public class HarvestLdap {
 							// a. from SourceMinder Contacts
 							for (int iIndex=0; iIndex<cHarvestContacts.getKeyElementCount("Approver"); iIndex++) {
 								String sLocation = cHarvestContacts.getString("Location", iIndex).toLowerCase();
-								String[] sProjects = readAssignedBrokerProjects(sLocation, sBroker);
-								String[] sApprovers = readAssignedApprovers(cHarvestContacts.getString("Approver", iIndex));
+								String[] sProjects = frame.readAssignedBrokerProjects(sLocation, sBroker);
+								String[] sApprovers = frame.readAssignedApprovers(cHarvestContacts.getString("Approver", iIndex));
 								boolean bActive = cHarvestContacts.getString("Active", iIndex).contentEquals("Y");
 								String sReleases = cHarvestContacts.getString("Release", iIndex);
 								
@@ -839,9 +679,9 @@ public class HarvestLdap {
 									for (int k=0; k<sProjects.length; k++) {
 										if (sProjects[k].isEmpty()) {
 											// process all the unassigned approvers in the project
-											for (int kIndex=0; kIndex<cRepoInfo.getKeyElementCount("PROJECT"); kIndex++) {
-												if (cRepoInfo.getString("CONTACT", kIndex).isEmpty()) {
-													cRepoInfo.setString("CONTACT", bActive? sApprover : "Toolsadmin@ca.com", kIndex);
+											for (int kIndex=0; kIndex<cRepoInfo.getKeyElementCount(sTagProject); kIndex++) {
+												if (cRepoInfo.getString(sTagContact, kIndex).isEmpty()) {
+													cRepoInfo.setString(sTagContact, bActive? sApprover : "Toolsadmin@ca.com", kIndex);
 													bFound = true;
 												}
 											}
@@ -849,11 +689,11 @@ public class HarvestLdap {
 										else { // process each project prefix 
 											String sPrefix = sProjects[k].replace("*", "").toLowerCase();
 											
-											for (int kIndex=0; kIndex<cRepoInfo.getKeyElementCount("PROJECT"); kIndex++) {
-												String sProject = cRepoInfo.getString("PROJECT", kIndex).toLowerCase();
+											for (int kIndex=0; kIndex<cRepoInfo.getKeyElementCount(sTagProject); kIndex++) {
+												String sProject = cRepoInfo.getString(sTagProject, kIndex).toLowerCase();
 												if (sProject.startsWith(sPrefix)) {
-													boolean bIsActive = processProjectReleases(sProject, sReleases, bActive);
-													cRepoInfo.setString("CONTACT", bIsActive? sApprover : "Toolsadmin@ca.com", kIndex);
+													boolean bIsActive = frame.processProjectReleases(sProject, sReleases, bActive);
+													cRepoInfo.setString(sTagContact, bIsActive? sApprover : "Toolsadmin@ca.com", kIndex);
 													bFound = true;
 												}
 											}											
@@ -869,25 +709,25 @@ public class HarvestLdap {
 							}
 							
 							// Process all end of life projects (make them inactive projects in Harvest)
-							for (int k=0; k<cRepoInfo.getKeyElementCount("PROJECT"); k++) {
-								String sProject = cRepoInfo.getString("PROJECT", k);
-								if (cRepoInfo.getString("CONTACT", k).equalsIgnoreCase("Toolsadmin@ca.com") &&
-									!cRepoInfo.getString("APP", k).isEmpty()) {
+							for (int k=0; k<cRepoInfo.getKeyElementCount(sTagProject); k++) {
+								String sProject = cRepoInfo.getString(sTagProject, k);
+								if (cRepoInfo.getString(sTagContact, k).equalsIgnoreCase("Toolsadmin@ca.com") &&
+									!cRepoInfo.getString(sTagApp, k).isEmpty()) {
 									if (deactivateEndOfLifeProject(cscrBrokers[i], sProject, sHarvestDBPassword)) {
 							    		if (sProblems.isEmpty()) sProblems = tagUL;
 							    		sProblems+= "<li>The project, <b>"+sProject+"</b>, in broker, <b>"+sBroker+"</b>, has been deactived because it is at End of Life.</li>\n";
 							    		
-										int[] iProjects = cRepoInfo.find("PROJECT", sProject);
+										int[] iProjects = cRepoInfo.find(sTagProject, sProject);
 										for (int iIndex=0; iIndex<iProjects.length; iIndex++) {
-											cRepoInfo.setString("APP", "", iProjects[iIndex]);
+											cRepoInfo.setString(sTagApp, "", iProjects[iIndex]);
 										}
 									}
 								} // end of life entry					
 							} //loop over broker entries
 							
 							// Check for internal user accounts and marked them as unmapped
-							for (int k=0; k<cRepoInfo.getKeyElementCount("PROJECT"); k++) {
-								if (!cRepoInfo.getString("APP", k).isEmpty()) {
+							for (int k=0; k<cRepoInfo.getKeyElementCount(sTagProject); k++) {
+								if (!cRepoInfo.getString(sTagApp, k).isEmpty()) {
 									String sID = cRepoInfo.getString(sTagUserID,k);
 									if (!sID.endsWith("?")) {
 										int[] iLDAP = cLDAP.find(sTagPmfkey, sID);
