@@ -7,6 +7,9 @@ import java.sql.*;
 import java.util.*;
 
 
+import gvjava.org.json.*;
+
+
 // Main Class
 public class HarvestLdap {
 	private static int iReturnCode = 0;
@@ -15,17 +18,288 @@ public class HarvestLdap {
 	private static boolean bAttest = false;
 	private static boolean deleteDisabledUsers = false;
 	
-	private static String sTagUsername = "USERNAME";
-	private static String sTagRealname = "REALNAME";
+	// Repository columns
+	private static String sTagUsername     = "USERNAME";
+	private static String sTagRealname     = "REALNAME";
 	private static String sTagAcctExternal = "ACCOUNTEXTERNAL";
 	private static String sTagAcctDisabled = "ACCOUNTDISABLED";
+	private static String sTagUserID       = "USERID";
+	
+	// LDAP columns
 	private static String sTagPmfkey       = "sAMAccountName";
+	
+	// Notification
+	static String tagUL = "<ul> ";
 	
 	HarvestLdap()
 	{
 		// Leave blank for now
 	}
-    
+	
+	private static String combineAttributes(String sLastAccess, String sAccess) {
+		// Combine the access levels
+		String sToken = sAccess;
+		String sCombAccess = sLastAccess;
+		String sNext = "";
+		
+		while (!sToken.isEmpty()) {
+			int mIndex = sToken.indexOf(';');
+			if (mIndex > 0) {
+				sNext = sToken.substring(0, mIndex);
+				sToken = sToken.substring(mIndex+1);
+			}
+			else {
+				sNext = sToken;
+				sToken = "";							
+			}
+			
+			if (!sCombAccess.contains(sNext)) {
+				if (!sCombAccess.isEmpty())
+					sCombAccess += ";";
+				sCombAccess += sNext;
+			}
+		} // loop parsing out individual access tokens	
+		
+		return sCombAccess;
+	}
+	
+	private static int readDBToRepoContainer(JCaContainer cRepoInfo,
+			                                  String sJDBC,
+            								  String sHarvestDBPassword,
+            								  String sProjectFilter) {
+		PreparedStatement pstmt = null; 
+		String sqlStmt;
+		int iIndex = 0;
+		ResultSet rSet;
+		boolean byState = false;
+		
+		String sqlError = "DB2. Unable to execute query.";
+		
+		try {			
+			int nIndex, lIndex;
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			String sURL = sJDBC + "password=" + sHarvestDBPassword+";";
+			nIndex = sJDBC.indexOf("jdbc:sqlserver://")+17;
+			lIndex = sJDBC.indexOf(";databaseName=");
+			String sAppInstance = sJDBC.substring(nIndex, lIndex);
+			nIndex = lIndex+14;
+			lIndex = sJDBC.indexOf(";integratedSecurity");
+			String sBroker = sJDBC.substring(nIndex, lIndex);
+			
+			Connection conn = DriverManager.getConnection(sURL);
+			
+			sqlError = "SQLServer. Error reading Harvest records from broker, "+ sBroker + ".";
+			sqlStmt = frame.readTextResource("Harvest_Attestation_DB_Query.txt", 
+					                         sBroker, 
+					                         !byState? "" : "S.statename,", 
+					                         !byState? "order by 1,2,3,6,8,7" : "order by 1,2,3,4,7,9,8",
+					                         sProjectFilter
+					                        );
+			pstmt=conn.prepareStatement(sqlStmt); 
+			rSet = pstmt.executeQuery();
+			String sLastRecord = "", sLastAccess = "", sLastUserGroup = "";
+			
+			while (rSet.next()) {		
+				String sApp         = rSet.getString("APP").trim();
+				sBroker             = rSet.getString("BROKER").trim();
+				String sProject     = rSet.getString("ENVIRONMENTNAME").trim();
+				String sState       = byState? rSet.getString("STATENAME").trim() : "***All***";
+				String sUserID      = rSet.getString("USERNAME").trim();
+				String sAcctExt     = rSet.getString("ACCOUNTEXTERNAL").trim();
+				String sRealname    = rSet.getString("REALNAME");
+				sRealname           = sRealname==null? "" : sRealname.trim().replace(',', '|');
+				String sUserGroup   = rSet.getString("USERGROUPNAME").trim().replace(',', ';');
+				String sAccess      = rSet.getString("ACCESSLEVEL").trim().replace(',', ';');
+				
+				String sRecord      = sBroker+";"+sProject+";"+sState+";"+sUserID;
+				
+				if (sRecord.equalsIgnoreCase(sLastRecord)) {
+					sAccess    = combineAttributes(sLastAccess, sAccess);
+					sUserGroup = combineAttributes(sLastUserGroup, sUserGroup);
+				}
+				else {
+					if (!sLastRecord.isEmpty())
+						iIndex++;
+				}
+				cRepoInfo.setString("APP",             sApp,         iIndex);
+				cRepoInfo.setString("APP_INSTANCE",    sAppInstance, iIndex);
+				cRepoInfo.setString("BROKER",          sBroker,      iIndex);
+				cRepoInfo.setString("PROJECT",         sProject,     iIndex);
+				cRepoInfo.setString("STATE",           sState,       iIndex);
+				cRepoInfo.setString("CONTACT",         "",           iIndex);
+				cRepoInfo.setString("USERID",          sUserID,      iIndex);
+				cRepoInfo.setString("ACCOUNTEXTERNAL", sAcctExt,     iIndex);
+				cRepoInfo.setString("REALNAME",        sRealname,    iIndex);
+				cRepoInfo.setString("ACCESSLEVEL",     sAccess,      iIndex);
+				cRepoInfo.setString("USERGROUP",       sUserGroup,   iIndex);
+				
+				sLastRecord = sRecord;
+				sLastAccess = sAccess;
+				sLastUserGroup = sUserGroup;
+			} // loop over record sets
+			
+			if (!sLastRecord.isEmpty())
+				iIndex++;
+			
+			if (iIndex>0)
+				frame.printLog(">>>:"+iIndex+" Records Read From Harvest Broker, " +sBroker+ "(filter="+ sProjectFilter+").");
+			
+		} catch (ClassNotFoundException e) {
+			iReturnCode = 101;
+			frame.printErr(sqlError);
+			frame.printErr(e.getLocalizedMessage());			
+			System.exit(iReturnCode);
+		} catch (SQLException e) {     
+			iReturnCode = 102;
+			frame.printErr(sqlError);
+			frame.printErr(e.getLocalizedMessage());			
+			System.exit(iReturnCode);
+		}	
+
+		return iIndex;
+	}  
+
+	private static boolean deactivateEndOfLifeProject(String sJDBC, String sProject, String sHarvestDBPassword) {
+		boolean bSuccess = false;
+		String sqlError = "DB2. Unable to execute query.";
+		
+		try {			
+			PreparedStatement pstmt = null; 
+			String sqlStmt;
+
+			int nIndex, lIndex;
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			String sURL = sJDBC + "password=" + sHarvestDBPassword+";";
+			nIndex = sJDBC.indexOf("jdbc:sqlserver://")+17;
+			lIndex = sJDBC.indexOf(";databaseName=");
+			String sAppInstance = sJDBC.substring(nIndex, lIndex);
+			nIndex = lIndex+14;
+			lIndex = sJDBC.indexOf(";integratedSecurity");
+			String sBroker = sJDBC.substring(nIndex, lIndex);
+			
+			Connection conn = DriverManager.getConnection(sURL);
+			
+			sqlError = "SQLServer. Error updating active status for project, "+sProject+", in broker, "+ sBroker + ".";
+			sqlStmt = "update harenvironment set ENVISACTIVE=\'N\' where ENVIRONMENTNAME=\'"+sProject+"\' and ENVISACTIVE=\'Y\'";			
+
+			pstmt=conn.prepareStatement(sqlStmt);  
+			int iResult = pstmt.executeUpdate();
+			if (iResult > 0) 
+				bSuccess = true;
+			
+		} catch (ClassNotFoundException e) {
+			iReturnCode = 101;
+			frame.printErr(sqlError);
+			frame.printErr(e.getLocalizedMessage());			
+			System.exit(iReturnCode);
+		} catch (SQLException e) {     
+			iReturnCode = 102;
+			frame.printErr(sqlError);
+			frame.printErr(e.getLocalizedMessage());			
+			System.exit(iReturnCode);
+		}			
+		return bSuccess;
+	}
+	
+	private static void writeDBFromRepoContainer(JCaContainer cRepoInfo, String sImagDBPassword, String sBroker, String sFilter) {
+		PreparedStatement pstmt = null; 
+		String sqlStmt;
+		int iResult;
+		
+		String sqlError = "";
+		String sJDBC = "jdbc:sqlserver://AWS-UQAPA6ZZ:1433;databaseName=GMQARITCGISTOOLS;user=gm_tools_user;password="+sImagDBPassword+";";
+		String sqlStmt0 = "insert into GITHUB_REVIEW "+
+	              "( Application, ApplicationLocation, EntitlementOwner1, EntitlementOwner2, EntitlementName, EntitlementAttributes, ContactEmail, User_ID, UserAttributes) values ";
+		
+		String sEntitlementAttrs = "";
+		String sUserAttrs = "";
+		String sContact = "";
+		String sValues = "";
+		
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Connection conn = DriverManager.getConnection(sJDBC);
+	
+			String sApp = "CA Harvest SCM";
+
+			sqlError = "DB. Error deleting previous records.";
+			sqlStmt = "delete from GITHUB_REVIEW where Application in ('"+ sApp + "')"+
+			          " and EntitlementOwner1 in ('"+sBroker+"')"+
+					  " and EntitlementOwner2 like ('"+sFilter+"')";
+			pstmt=conn.prepareStatement(sqlStmt);  
+			iResult = pstmt.executeUpdate();
+			if (iResult > 0) 
+				frame.printLog(">>>:"+iResult+" Previous IMAG Feed Records Deleted.");
+			
+			sqlError = "DB. Error inserting record.";
+			int nRecordsWritten = 0;
+			int nBlock = 100;
+			
+			for (int iIndex=0,nRecords=0; iIndex<cRepoInfo.getKeyElementCount("APP"); iIndex++) {
+				if (!cRepoInfo.getString("APP", iIndex).isEmpty()) { 
+					if (nRecords%nBlock == 0)
+						sqlStmt = sqlStmt0;
+					else 
+						sqlStmt += " , ";
+					
+					sEntitlementAttrs = "";
+					sUserAttrs = "external=" + cRepoInfo.getString("ACCOUNTEXTERNAL", iIndex) + ";" +
+					             "access="   + cRepoInfo.getString("ACCESSLEVEL", iIndex) + ";" +
+							     "group="    + cRepoInfo.getString("USERGROUP", iIndex) ;
+					
+					if (sUserAttrs.length()>255)
+						sUserAttrs = "external=" + cRepoInfo.getString("ACCOUNTEXTERNAL", iIndex) + ";" +
+					                 "access="   + cRepoInfo.getString("ACCESSLEVEL", iIndex);
+					
+					sContact = cRepoInfo.getString("CONTACT",iIndex);
+					//if (!sContact.isEmpty())
+					//	sContact += "@ca.com";
+					
+					sValues = "('"  + sApp + "',"+
+							  "'"   + cRepoInfo.getString("APP_INSTANCE", iIndex) + "',"+
+							  "'"   + cRepoInfo.getString("BROKER", iIndex) + "',"+
+							  "'"   + cRepoInfo.getString("PROJECT", iIndex).replace("'", "''") + "',"+
+							  "'"   + cRepoInfo.getString("STATE", iIndex) + "',"+
+							  "'"   + sEntitlementAttrs + "',"+
+							  "'"   + sContact + "',"+
+							  "'"   + cRepoInfo.getString(sTagUserID, iIndex) + "',"+
+							  "'"   + sUserAttrs.replace("'", "''") + "')";
+					
+				    sqlStmt += sValues;
+				    
+				    if (nRecords%nBlock == (nBlock-1)) {
+						pstmt=conn.prepareStatement(sqlStmt);  
+						iResult = pstmt.executeUpdate();
+						if (iResult > 0) 
+							nRecordsWritten += iResult;	
+						sqlStmt = "";
+				    }
+					nRecords++;	
+				}
+			} // loop over records
+			
+			if (!sqlStmt.isEmpty()) {
+				pstmt=conn.prepareStatement(sqlStmt);  
+				iResult = pstmt.executeUpdate();
+				if (iResult > 0) 
+					nRecordsWritten += iResult;					
+			}
+			frame.printLog(">>>:"+nRecordsWritten+" Inserted Records Made to DB.");
+		
+		} catch (ClassNotFoundException e) {
+			iReturnCode = 301;
+		    frame.printErr(sqlError);
+		    frame.printErr(e.getLocalizedMessage());			
+		    System.exit(iReturnCode);
+		} catch (SQLException e) {     
+			iReturnCode = 302;
+		    frame.printErr(sqlError);
+		    frame.printErr(e.getLocalizedMessage());			
+		    System.exit(iReturnCode);
+		}
+	} // writeDBFromRepoContainer		
+	
+	
 	private static void processHarvestDatabase(String dburl, 
 			                               	   JCaContainer cLDAP,
 			                               	   String sHarvestDBPassword) 
@@ -170,17 +444,139 @@ public class HarvestLdap {
 		}
 	} // end ProcessHarvestDatabase
 	
+	static String[] readAssignedApprovers(String sApprovers) {
+		List<String> lObj = new ArrayList<String>();
+		
+		String sToken = sApprovers;
+		
+		while (!sToken.isEmpty()) {
+			int nIndex = sToken.indexOf(';');
+			String sApprover = sToken;
+			if (nIndex >= 0) {
+				sApprover = sToken.substring(0, nIndex);
+				sToken = sToken.substring(nIndex+1);
+			}
+			else 
+				sToken = "";
+			
+			lObj.add(sApprover);
+		}
+		
+		String[] lStrings = new String[lObj.size()];
+		ListIterator<String> lIter = lObj.listIterator();
+		int i=0;
+		
+		while (lIter.hasNext()) {
+			lStrings[i++] = (String)lIter.next();
+		}
+		return lStrings;
+	}
+	
+	static String[] readAssignedBrokerProjects(String sLocation, String sBroker) {
+		List<String> lObj = new ArrayList<String>();
+		
+		boolean bFound = false;		
+		String sToken = sLocation;
+		while (!bFound && !sToken.isEmpty()) {
+			int nIndex = sToken.indexOf(';');
+			String sNextBroker = sToken;
+			if (nIndex >= 0) {
+				sNextBroker = sToken.substring(0, nIndex);
+				sToken = sToken.substring(nIndex+1);
+			}
+			else 
+				sToken = "";
+			
+			if (sNextBroker.startsWith(sBroker)) {
+				bFound = true;
+				int mIndex = sNextBroker.indexOf('/');
+				if (mIndex == -1) 
+					lObj.add("");
+				else {
+					String sNextProject = sNextBroker.substring(mIndex+1);
+					while (!sNextProject.isEmpty()) {
+						int lIndex = sNextProject.indexOf(',');
+						String sProject = sNextProject;
+						if (lIndex>=0) {
+							sProject = sNextProject.substring(0, lIndex);
+							sNextProject = sNextProject.substring(lIndex+1);
+						}
+						else 
+							sNextProject = "";
+						
+						lObj.add(sProject);
+					}
+				} // parse out leading project names					
+			} // current broker found
+			
+		} // loop over broker specifications
+		
+		String[] lStrings = new String[lObj.size()];
+		ListIterator<String> lIter = lObj.listIterator();
+		int i=0;
+		
+		while (lIter.hasNext()) {
+			lStrings[i++] = (String)lIter.next();
+		}
+		return lStrings;
+	}
+	
+	private static boolean processProjectReleases(String sProject, String sReleases, boolean bActive) {
+		boolean bIsActive = bActive;
+		
+		if (bIsActive && !sReleases.isEmpty()) {
+			boolean bFound = false;		
+			String sToken = sReleases;
+			while (!bFound && !sToken.isEmpty()) {
+				int nIndex = sToken.indexOf(';');
+				String sNextRelease = sToken;
+				if (nIndex >= 0) {
+					sNextRelease = sToken.substring(0, nIndex);
+					sToken = sToken.substring(nIndex+1);
+				}
+				else 
+					sToken = "";
+				
+				sNextRelease = sNextRelease.toLowerCase();
+				if (sNextRelease.startsWith("r")) {
+					sNextRelease = sNextRelease.substring(1);
+				}
+				if (sNextRelease.endsWith("*")) {
+					sNextRelease = sNextRelease.replace("*", "");
+				}
+				
+				String[] aCheck = {
+						sNextRelease,
+						sNextRelease.replace(".", "_"),
+						sNextRelease.replace(".", "")
+				};
+				
+				for (int i=0; i<aCheck.length && !bFound; i++) {
+					if (sProject.contains(aCheck[i]))
+						bFound = true;
+				}
+				
+			} // loop over broker specifications
+			
+			bIsActive = bFound;
+		}
+		
+		return bIsActive;
+	}
+	
 
 	public static void main(String[] args) {
 		int iParms = args.length;
 		String sBCC = "";
 		String sLogPath = "scmldap.log";
+		String sOutputFile = "";
 		String sImagDBPassword  = "";
 		String sHarvestDBPassword = "";
 		String sProblems = "";
+		boolean bReport = false;
 		
-		String[] cscrBrokers = /* 191, 229, 231, 232, 233, 234 */
-		{			
+		String[] cscrBrokers = 
+		{						
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr001;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr003;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr004;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
@@ -234,8 +630,8 @@ public class HarvestLdap {
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr704;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr706;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr707;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
-			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr708;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
-			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr709;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
+			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr708;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",			
+			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr709;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",			
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr801;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr802;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr803;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
@@ -283,37 +679,43 @@ public class HarvestLdap {
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr1306;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr1307;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr1308;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
-			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr1309;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
+			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr1309;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",			
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr1400;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;"
 		};
 		
 		// check parameters
 		for (int i = 0; i < iParms; i++)
 		{
-			if (args[i].compareToIgnoreCase("-h") == 0 || 
-				args[i].compareToIgnoreCase("-?") == 0)
-			{
-				frame.printLog("Usage: scmldap [-attest] [-del] [-log pathname] [-h]");
-				frame.printLog(" -attest option will display all users");
-				frame.printLog(" -del  option will delete all external, disabled users");
-				frame.printLog(" -log  option specifies location of log file");
-				System.exit(iReturnCode);
-			}
 
 			if (args[i].compareToIgnoreCase("-attest") == 0 )
 			{
 				bAttest = true;
+			}
+			else if (args[i].compareToIgnoreCase("-report") == 0 )
+			{
+				bReport = true;
 			}			
-			
-			if (args[i].compareToIgnoreCase("-del") == 0 )
+			else if (args[i].compareToIgnoreCase("-del") == 0 )
 			{
 				deleteDisabledUsers = true;
-			}			
-			
-			if (args[i].compareToIgnoreCase("-log") == 0 )
+			}						
+			else if (args[i].compareToIgnoreCase("-log") == 0 )
 			{
 				sLogPath = args[++i];
 			}			
+			else if (args[i].compareToIgnoreCase("-outputfile") == 0 )
+			{
+				sOutputFile = args[++i];
+			}			
+			else {
+					frame.printLog("Usage: scmldap [-attest | -del | -report [ -outputfile fullpathname ]] [-log pathname] [-h]");
+					frame.printLog(" -attest option will display all users");
+					frame.printLog(" -report option will generate an IMAG feed");
+					frame.printLog(" -del  option will delete all external, disabled users");
+					frame.printLog(" -outputfile option will write the report data to a designated file (.tsv)");
+					frame.printLog(" -log  option specifies location of log file");
+					System.exit(iReturnCode);
+				}
 		} // end for
 
 		// execution from here
@@ -337,12 +739,197 @@ public class HarvestLdap {
 			if (bAttest)
 				frame.printLog("Broker\tDisplay Name\tPMFKEY\tDomain Account\tDisabled Account");
 			
-			for (int i=0; i<cscrBrokers.length; i++)
-			{
+			JCaContainer cHarvestContacts = new JCaContainer();
+			if (bReport) {
+				JCaContainer cContacts = new JCaContainer();
+				
+				frame.readInputListGeneric(cContacts, "SourceMinder_Product_Contacts.tsv", '\t');
+				
+				int nIndex = 0;
+				
+				for (int iIndex=0; iIndex<cContacts.getKeyElementCount("PROD_NAME"); iIndex++) {
+					boolean bActive = true;
+					if (cContacts.getString("SRC_MNGMT_TOOL", iIndex).contains("Harvest")) {
+						switch(cContacts.getString("PROD_STAT", iIndex).toLowerCase()) {
+						case "end of life":
+							bActive = false;
+						case "active":
+						case "stabilized":
+						case "internal":
+							if (cContacts.getString("NON_MAINFRAME_SRC_PHYS_LOC", iIndex).toLowerCase().contains("cscr")) {
+								String sProduct  = cContacts.getString("PROD_NAME", iIndex).replace("\"", "");
+								String sRelease  = cContacts.getString("RELEASE", iIndex).replace("\"", "");
+								String sLocation = cContacts.getString("NON_MAINFRAME_SRC_PHYS_LOC", iIndex).replace("\"", "");
+								
+								String sApprovers = cContacts.getString("APPROVERS_PMFKEY", iIndex);
+								sApprovers = sApprovers.replace("\"[", "[");
+								sApprovers = sApprovers.replace("]\"", "]");
+								sApprovers = sApprovers.replace("\"\"", "\"");
+								JSONArray ja = new JSONArray(sApprovers);
+								sApprovers = "";
+								for (int j=0; j<ja.length(); j++) {
+									if (!sApprovers.isEmpty()) sApprovers += ";";
+									sApprovers += ja.getJSONObject(j).getString("PMFKEY");
+								}
+
+								cHarvestContacts.setString("Product",  sProduct, nIndex);
+								cHarvestContacts.setString("Release",  sRelease, nIndex);
+								cHarvestContacts.setString("Location", sLocation, nIndex);
+								cHarvestContacts.setString("Active", bActive? "Y":"N", nIndex);
+								cHarvestContacts.setString("Approver", sApprovers, nIndex++);								
+							}
+							break;
+							
+						default:
+							break;
+						}
+					} // Harvest Contact
+				} // loop over SourceMinder contact list
+			} // GovernanceMinder report
+
+			JCaContainer cRepoInfo = new JCaContainer();
+			
+			for (int i=0; i<cscrBrokers.length; i++) {
+				if (!bReport) {
 					processHarvestDatabase( cscrBrokers[i], 
 					           				cLDAP,
 					           				sHarvestDBPassword);
-			}
+				}
+				else {		
+					String sJDBC = cscrBrokers[i];
+					int nIndex = sJDBC.indexOf("databaseName=")+13;
+					int lIndex = sJDBC.indexOf(";integratedSecurity");
+					String sBroker = sJDBC.substring(nIndex, lIndex);
+					int mIndex = sBroker.indexOf('_');
+					if (mIndex >= 0)
+						sBroker = sBroker.substring(0, mIndex);
+					
+					String[] sProjectFilter = {"%", "A%", "B%", "C%", "D%", "E%", "F%", "G%", "H%", "I%", "J%", "K%","L%", "M%", "N%", "O%", "P%", "Q%", "R%", "S%", "T%", "U%", "V%", "W%", "X%", "Y%", "Z%"};
+					
+					for (int j=0; j<sProjectFilter.length; j++) {
+						if (sBroker.equalsIgnoreCase("cscr1001")) {
+							if (j==0) continue;
+						}
+						else {
+							if (j>0) continue;
+						}
+							
+						if (readDBToRepoContainer(cRepoInfo,
+	                  			  cscrBrokers[i],
+	                  			  sHarvestDBPassword,
+	                  			  sProjectFilter[j]) > 0) {
+							boolean bFound = false;
+							
+							// Apply contact information for records
+							// a. from SourceMinder Contacts
+							for (int iIndex=0; iIndex<cHarvestContacts.getKeyElementCount("Approver"); iIndex++) {
+								String sLocation = cHarvestContacts.getString("Location", iIndex).toLowerCase();
+								String[] sProjects = readAssignedBrokerProjects(sLocation, sBroker);
+								String[] sApprovers = readAssignedApprovers(cHarvestContacts.getString("Approver", iIndex));
+								boolean bActive = cHarvestContacts.getString("Active", iIndex).contentEquals("Y");
+								String sReleases = cHarvestContacts.getString("Release", iIndex);
+								
+								if (sProjects.length > 0) {
+									String sApprover = "";
+									for (int jIndex=0; jIndex<sApprovers.length; jIndex++) {
+										if (!sApprover.isEmpty()) sApprover += ";";
+										sApprover += sApprovers[jIndex] + (sApprovers[jIndex].contains("@")? "":"@ca.com");
+									}
+									
+									for (int k=0; k<sProjects.length; k++) {
+										if (sProjects[k].isEmpty()) {
+											// process all the unassigned approvers in the project
+											for (int kIndex=0; kIndex<cRepoInfo.getKeyElementCount("PROJECT"); kIndex++) {
+												if (cRepoInfo.getString("CONTACT", kIndex).isEmpty()) {
+													cRepoInfo.setString("CONTACT", bActive? sApprover : "Toolsadmin@ca.com", kIndex);
+													bFound = true;
+												}
+											}
+										}
+										else { // process each project prefix 
+											String sPrefix = sProjects[k].replace("*", "").toLowerCase();
+											
+											for (int kIndex=0; kIndex<cRepoInfo.getKeyElementCount("PROJECT"); kIndex++) {
+												String sProject = cRepoInfo.getString("PROJECT", kIndex).toLowerCase();
+												if (sProject.startsWith(sPrefix)) {
+													boolean bIsActive = processProjectReleases(sProject, sReleases, bActive);
+													cRepoInfo.setString("CONTACT", bIsActive? sApprover : "Toolsadmin@ca.com", kIndex);
+													bFound = true;
+												}
+											}											
+										}  // list of prefixes present
+									} // loop over project prefixes
+								} 	// broker record exists in contact info					
+							} // loop over contact records
+							
+							if (!bFound && j==0) {
+								// Didn't find any contact entry for this broker
+					    		if (sProblems.isEmpty()) sProblems = tagUL;
+					    		sProblems+= "<li>The broker, <b>"+sBroker+"</b>, currently has no contact information from SourceMinder</li>\n";			    					    		
+							}
+							
+							// Process all end of life projects (make them inactive projects in Harvest)
+							for (int k=0; k<cRepoInfo.getKeyElementCount("PROJECT"); k++) {
+								String sProject = cRepoInfo.getString("PROJECT", k);
+								if (cRepoInfo.getString("CONTACT", k).equalsIgnoreCase("Toolsadmin@ca.com") &&
+									!cRepoInfo.getString("APP", k).isEmpty()) {
+									if (deactivateEndOfLifeProject(cscrBrokers[i], sProject, sHarvestDBPassword)) {
+							    		if (sProblems.isEmpty()) sProblems = tagUL;
+							    		sProblems+= "<li>The project, <b>"+sProject+"</b>, in broker, <b>"+sBroker+"</b>, has been deactived because it is at End of Life.</li>\n";
+							    		
+										int[] iProjects = cRepoInfo.find("PROJECT", sProject);
+										for (int iIndex=0; iIndex<iProjects.length; iIndex++) {
+											cRepoInfo.setString("APP", "", iProjects[iIndex]);
+										}
+									}
+								} // end of life entry					
+							} //loop over broker entries
+							
+							// Check for internal user accounts and marked them as unmapped
+							for (int k=0; k<cRepoInfo.getKeyElementCount("PROJECT"); k++) {
+								if (!cRepoInfo.getString("APP", k).isEmpty()) {
+									String sID = cRepoInfo.getString(sTagUserID,k);
+									if (!sID.endsWith("?")) {
+										int[] iLDAP = cLDAP.find(sTagPmfkey, sID);
+										if (iLDAP.length == 0) {
+											int[] iUsers = cRepoInfo.find(sTagUserID, sID);
+											for (int kIndex=0; kIndex<iUsers.length; kIndex++) {
+												cRepoInfo.setString(sTagUserID, sID+"?", iUsers[kIndex]);
+											}
+										}
+									}
+								}
+							}
+							
+							// Append records to output file, if any
+							if (!sOutputFile.isEmpty()) {
+								String sFile = sOutputFile.replace("broker", sBroker);
+								frame.setFileAppend(i>0); 
+								frame.writeCSVFileFromListGeneric(cRepoInfo, sFile, ',');	
+								frame.setFileAppend(false);
+							}
+							
+							// Write out processed records to database
+							writeDBFromRepoContainer(cRepoInfo, sImagDBPassword, sBroker, sProjectFilter[j]);
+							
+							cRepoInfo.clear();
+						}
+					}	//loop over filters				
+					
+				} // -report flag set
+			} // loop over brokers
+			
+			if (!sProblems.isEmpty()) {
+				sProblems+="</ul>\n";
+				String email = "faudo01@ca.com";
+				String sSubject, sScope;
+				
+				sSubject = "Notification of Problematic CA Harvest SCM Contacts";
+				sScope = "Harvest SQLServer Database";
+				
+		        String bodyText = frame.readTextResource("Notification_of_Noncompliant_Harvest_Contacts.txt", sScope, sProblems, "", "");								        								          
+		        frame.sendEmailNotification(email, sSubject, bodyText, true);
+			} // had some notifications
 		
 		} catch (Exception e) {
 			iReturnCode = 1;

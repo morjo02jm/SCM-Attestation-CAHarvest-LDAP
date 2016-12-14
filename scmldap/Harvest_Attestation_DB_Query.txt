@@ -1,0 +1,289 @@
+select distinct 'CA Harvest SCM' as 'app','%1' as 'broker',E.environmentname,  
+                %2 LOWER(U.username) as 'username', UD.accountexternal, U.realname, UG.usergroupname,  
+				'SECURE,ADMIN,UPDATE,READ,UDP,VIEW,PROMOTE' as 'accesslevel' 
+from harusergroup UG 
+join harusersingroup UIG on UIG.usrgrpobjid = UG.usrgrpobjid 
+join haruser U on U.usrobjid = UIG.usrobjid 
+join haruserdata UD on (UD.usrobjid = U.usrobjid and UD.accountdisabled = 'N') 
+left outer join harenvironment E on E.envobjid > '0' 
+join harstate S on S.envobjid = E.envobjid 
+where E.envisactive = 'Y' 
+  and UPPER(E.environmentname) like ('%4') 
+  and UG.usergroupname = 'Administrator' 
+union all /* scm level */ 
+select distinct 'CA Harvest SCM' as 'app','%1' as 'broker',E.environmentname,  
+                %2 LOWER(U.username) as 'username', UD.accountexternal, U.realname, UG.usergroupname, 
+				'SECURE' as 'accesslevel' 
+from harharvest HA 
+join harusersingroup UIG on UIG.usrgrpobjid = HA.usrgrpobjid 
+join haruser U on U.usrobjid = UIG.usrobjid 
+join haruserdata UD on (UD.usrobjid=U.usrobjid and UD.accountdisabled = 'N') 
+join harusergroup UG on UG.usrgrpobjid = UIG.usrgrpobjid 
+left outer join harenvironment E on E.envobjid > '0' 
+join harstate S on S.envobjid = E.envobjid 
+where E.envisactive = 'Y' 
+  and UPPER(E.environmentname) like ('%4') 
+  and HA.secureharvest = 'Y' 
+union all 
+select distinct 'CA Harvest SCM' as 'app','%1' as 'broker',E.environmentname,  
+                %2 LOWER(U.username) as 'username', UD.accountexternal, U.realname, UG.usergroupname,  
+				'ADMIN' as 'accesslevel' 
+from harharvest HA 
+join harusersingroup UIG on UIG.usrgrpobjid = HA.usrgrpobjid 
+join haruser U on U.usrobjid = UIG.usrobjid 
+join haruserdata UD on (UD.usrobjid=U.usrobjid and UD.accountdisabled = 'N') 
+join harusergroup UG on UG.usrgrpobjid = UIG.usrgrpobjid 
+left outer join harenvironment E on E.envobjid > '0' 
+join harstate S on S.envobjid = E.envobjid 
+where E.envisactive = 'Y' 
+  and UPPER(E.environmentname) like ('%4') 
+  and (HA.adminenvironment = 'Y' or HA.adminuser = 'Y' )   
+union all 
+select distinct 'CA Harvest SCM' as 'app','%1' as 'broker',E.environmentname,  
+                %2 LOWER(U.username) as 'username', UD.accountexternal, U.realname, UG.usergroupname,  
+				'VIEW' as 'accesslevel' 
+from harharvest HA 
+join harusersingroup UIG on UIG.usrgrpobjid = HA.usrgrpobjid 
+join haruser U on U.usrobjid = UIG.usrobjid 
+join haruserdata UD on (UD.usrobjid=U.usrobjid and UD.accountdisabled = 'N') 
+join harusergroup UG on UG.usrgrpobjid = UIG.usrgrpobjid 
+left outer join harenvironment E on E.envobjid > '0' 
+join harstate S on S.envobjid = E.envobjid 
+where E.envisactive = 'Y' 
+  and UPPER(E.environmentname) like ('%4') 
+  and (HA.viewenvironment = 'Y' or HA.adminuser = 'Y' ) 
+union all /* project level */ 
+select distinct 'CA Harvest SCM' as 'app','%1' as 'broker',E.environmentname,  
+                %2 LOWER(U.username) as 'username', UD.accountexternal, U. realname, UG.usergroupname,  
+				'SECURE' as 'accesslevel' 
+from harenvironmentaccess EA 
+join harenvironment E on E.envobjid = EA.envobjid 
+join harstate S on S.envobjid = E.envobjid 
+join harusersingroup UIG on UIG.usrgrpobjid = EA.usrgrpobjid  
+join haruser U on U.usrobjid = UIG.usrobjid 
+join haruserdata UD on (UD.usrobjid = U.usrobjid and UD.accountdisabled = 'N') 
+join harusergroup UG on UG.usrgrpobjid = UIG.usrgrpobjid 
+where E.envisactive = 'Y' 
+  and UPPER(E.environmentname) like ('%4') 
+  and EA.secureaccess = 'Y' 
+union all 
+select distinct 'CA Harvest SCM' as 'app','%1' as 'broker',E.environmentname,  
+                %2 LOWER(U.username) as 'username', UD.accountexternal, U.realname, UG.usergroupname,  
+				'ADMIN' as 'accesslevel' 
+from harenvironmentaccess EA 
+join harenvironment E on E.envobjid = EA.envobjid 
+join harstate S on S.envobjid = E.envobjid 
+join harusersingroup UIG on UIG.usrgrpobjid = EA.usrgrpobjid  
+join haruser U on U.usrobjid = UIG.usrobjid 
+join haruserdata UD on (UD.usrobjid = U.usrobjid and UD.accountdisabled = 'N') 
+join harusergroup UG on UG.usrgrpobjid = UIG.usrgrpobjid 
+where E.envisactive = 'Y' 
+  and UPPER(E.environmentname) like ('%4') 
+  and EA.updateaccess = 'Y' 
+union all 
+select distinct 'CA Harvest SCM' as 'app','%1' as 'broker',E.environmentname,  
+                %2 LOWER(U.username) as 'username', UD.accountexternal, U.realname, UG.usergroupname,  
+				'VIEW' as 'accesslevel' 
+from harenvironmentaccess EA 
+join harenvironment E on E.envobjid = EA.envobjid 
+join harstate S on S.envobjid = E.envobjid 
+join harusersingroup UIG on UIG.usrgrpobjid = EA.usrgrpobjid  
+join haruser U on U.usrobjid = UIG.usrobjid 
+join haruserdata UD on (UD.usrobjid = U.usrobjid and UD.accountdisabled = 'N') 
+join harusergroup UG on UG.usrgrpobjid = UIG.usrgrpobjid 
+where E.envisactive = 'Y' 
+  and UPPER(E.environmentname) like ('%4') 
+  and (EA.viewaccess = 'Y' or EA.executeaccess = 'Y' or EA.updateaccess = 'Y' or EA.secureaccess = 'Y') 
+union all /* state access */  
+select distinct 'CA Harvest SCM' as 'app','%1' as 'broker',E.environmentname, 
+                %2 LOWER(U.username) as 'username', UD.accountexternal, U.realname, UG.usergroupname,  
+				'ADMIN' as 'accesslevel' 
+from harstateaccess SA 
+join harstate S on S.stateobjid = SA.stateobjid  
+join harenvironment E on E.envobjid = S.envobjid  
+join harusersingroup UIG on UIG.usrgrpobjid = SA.usrgrpobjid 
+join haruser U on U.usrobjid = UIG.usrobjid 
+join haruserdata UD on (UD.usrobjid = U.usrobjid and UD.accountdisabled = 'N') 
+join harusergroup UG on UG.usrgrpobjid = UIG.usrgrpobjid 
+where E.envisactive = 'Y' 
+  and UPPER(E.environmentname) like ('%4') 
+  and SA.updateaccess = 'Y' 
+union all /* state process access */ 
+select distinct 'CA Harvest SCM' as 'app','%1' as 'broker',E.environmentname,  
+                %2 LOWER(U.username) as 'username', UD.accountexternal, U.realname, UG.usergroupname,  
+				'READ' as 'accesslevel' 
+from harstateprocessaccess SPA 
+join harstateprocess SP on SP.processobjid = SPA.processobjid 
+join harstate S on S.stateobjid = SP.stateobjid 
+join harenvironment E on E.envobjid = S.envobjid 
+join harusersingroup UIG on UIG.usrgrpobjid = SPA.usrgrpobjid 
+join haruser U on U.usrobjid = UIG.usrobjid 
+join haruserdata UD on (UD.usrobjid = U.usrobjid and UD.accountdisabled = 'N') 
+join harusergroup UG on UG.usrgrpobjid = UIG.usrgrpobjid 
+where E.envisactive = 'Y' 
+  and UPPER(E.environmentname) like ('%4') 
+  and SP.processtype in ('CompareViewProcess','ListVersionProcess') 
+  and SPA.executeaccess = 'Y' 
+  and U.usrobjid in ( 
+     select U2.usrobjid 
+	 from harenvironmentaccess EA  
+	 join harusersingroup UIG2 on UIG2.usrgrpobjid = EA.usrgrpobjid 
+	 join harenvironment E2 on E2.envobjid = EA.envobjid 
+	 join haruser U2 on U2.usrobjid = UIG2.usrobjid 
+	 where EA.executeaccess = 'Y' 
+  ) 
+union all   
+select distinct 'CA Harvest SCM' as 'app','%1' as 'broker',E.environmentname,  
+                %2 LOWER(U.username) as 'username', UD.accountexternal, U.realname, UG.usergroupname,  
+				'READ' as 'accesslevel' 
+from harstateprocessaccess SPA 
+join harstateprocess SP on SP.processobjid = SPA.processobjid 
+join harstate S on S.stateobjid = SP.stateobjid 
+join harenvironment E on E.envobjid = S.envobjid 
+join harusersingroup UIG on UIG.usrgrpobjid = SPA.usrgrpobjid 
+join haruser U on U.usrobjid = UIG.usrobjid 
+join haruserdata UD on (UD.usrobjid = U.usrobjid and UD.accountdisabled = 'N') 
+join harusergroup UG on UG.usrgrpobjid = UIG.usrgrpobjid 
+join harcheckoutproc P on P.processobjid = SPA.processobjid 
+where E.envisactive = 'Y' 
+  and UPPER(E.environmentname) like ('%4') 
+  and SP.processtype in ('CheckOutProcess') 
+  and (P.updmode = 'N' and P.concurupdmode = 'N' and P.reservemode = 'N') 
+  and SPA.executeaccess = 'Y' 
+  and U.usrobjid in ( 
+     select U2.usrobjid 
+	 from harenvironmentaccess EA  
+	 join harusersingroup UIG2 on UIG2.usrgrpobjid = EA.usrgrpobjid 
+	 join harenvironment E2 on E2.envobjid = EA.envobjid  
+	 join haruser U2 on U2.usrobjid = UIG2.usrobjid 
+	 where EA.executeaccess = 'Y' 
+  ) 
+union all 
+select distinct 'CA Harvest SCM' as 'app','%1' as 'broker',E.environmentname,  
+                %2 LOWER(U.username) as 'username', UD.accountexternal, U.realname, UG.usergroupname,  
+				'UPDATE' as 'accesslevel' 
+from harstateprocessaccess SPA 
+join harstateprocess SP on SP.processobjid = SPA.processobjid 
+join harstate S on S.stateobjid = SP.stateobjid 
+join harenvironment E on E.envobjid = S.envobjid 
+join harusersingroup UIG on UIG.usrgrpobjid = SPA.usrgrpobjid 
+join haruser U on U.usrobjid = UIG.usrobjid 
+join haruserdata UD on (UD.usrobjid = U.usrobjid and UD.accountdisabled = 'N') 
+join harusergroup UG on UG.usrgrpobjid = UIG.usrgrpobjid 
+where E.envisactive = 'Y' 
+  and UPPER(E.environmentname) like ('%4') 
+  and SP.processtype in ('CheckInProcess','DeleteVersionsProcess','CreatePackageProcess','ConcurrentMergeProcess', 
+                         'CrossEnvMergeProcess','DeletePackageProcess','DemoteProcess', 'InteractiveMergeProcess', 
+						 'MoveItemProcess','MovePackageProcess','MovePathProcess','RemoveItemProcess', 
+						 'RemovePathProcess','RenameItemProcess','RenamePathProcess','SwitchPackageProcess', 
+						 'TakeSnapshotProcess') 
+  and SPA.executeaccess = 'Y' 
+  and U.usrobjid in ( 
+     select U2.usrobjid  
+	 from harenvironmentaccess EA  
+	 join harusersingroup UIG2 on UIG2.usrgrpobjid = EA.usrgrpobjid 
+	 join harenvironment E2 on E2.envobjid = EA.envobjid 
+	 join haruser U2 on U2.usrobjid = UIG2.usrobjid 
+	 where EA.executeaccess = 'Y' 
+  )  
+union all 
+select distinct 'CA Harvest SCM' as 'app','%1' as 'broker',E.environmentname,  
+                %2 LOWER(U.username) as 'username', UD.accountexternal, U.realname, UG.usergroupname,  
+				'UPDATE' as 'accesslevel' 
+from harstateprocessaccess SPA 
+join harstateprocess SP on SP.processobjid = SPA.processobjid 
+join harstate S on S.stateobjid = SP.stateobjid 
+join harenvironment E on E.envobjid = S.envobjid 
+join harusersingroup UIG on UIG.usrgrpobjid = SPA.usrgrpobjid 
+join haruser U on U.usrobjid = UIG.usrobjid 
+join haruserdata UD on (UD.usrobjid = U.usrobjid and UD.accountdisabled = 'N') 
+join harusergroup UG on UG.usrgrpobjid = UIG.usrgrpobjid 
+join harcheckoutproc P on P.processobjid = SPA.processobjid 
+where E.envisactive = 'Y' 
+  and UPPER(E.environmentname) like ('%4') 
+  and SP.processtype in ('CheckOutProcess') 
+  and (P.updmode = 'Y' or P.concurupdmode = 'Y' or P.reservemode = 'N') 
+  and SPA.executeaccess = 'Y' 
+  and U.usrobjid in ( 
+     select U2.usrobjid  
+	 from harenvironmentaccess EA  
+	 join harusersingroup UIG2 on UIG2.usrgrpobjid = EA.usrgrpobjid 
+	 join harenvironment E2 on E2.envobjid = EA.envobjid 
+	 join haruser U2 on U2.usrobjid = UIG2.usrobjid 
+	 where EA.executeaccess = 'Y' 
+  )  
+union all 
+select distinct 'CA Harvest SCM' as 'app','%1' as 'broker',E.environmentname,  
+                %2 LOWER(U.username) as 'username', UD.accountexternal, U.realname, UG.usergroupname,  
+				'PROMOTE' as 'accesslevel' 
+from harstateprocessaccess SPA 
+join harstateprocess SP on SP.processobjid = SPA.processobjid 
+join harstate S on S.stateobjid = SP.stateobjid 
+join harenvironment E on E.envobjid = S.envobjid 
+join harusersingroup UIG on UIG.usrgrpobjid = SPA.usrgrpobjid 
+join haruser U on U.usrobjid = UIG.usrobjid 
+join haruserdata UD on (UD.usrobjid = U.usrobjid and UD.accountdisabled = 'N') 
+join harusergroup UG on UG.usrgrpobjid = UIG.usrgrpobjid 
+where E.envisactive = 'Y' 
+  and UPPER(E.environmentname) like ('%4') 
+  and SP.processtype in ('PromoteProcess') 
+  and SPA.executeaccess = 'Y' 
+  and U.usrobjid in ( 
+     select U2.usrobjid  
+	 from harenvironmentaccess EA  
+	 join harusersingroup UIG2 on UIG2.usrgrpobjid = EA.usrgrpobjid 
+	 join harenvironment E2 on E2.envobjid = EA.envobjid 
+	 join haruser U2 on U2.usrobjid = UIG2.usrobjid 
+	 where EA.executeaccess = 'Y' 
+  )  
+union all 
+select distinct 'CA Harvest SCM' as 'app','%1' as 'broker',E.environmentname,  
+                %2 LOWER(U.username) as 'username', UD.accountexternal, U.realname, UG.usergroupname,  
+				'APPROVE' as 'accesslevel' 
+from harstateprocessaccess SPA 
+join harstateprocess SP on SP.processobjid = SPA.processobjid 
+join harstate S on S.stateobjid = SP.stateobjid 
+join harenvironment E on E.envobjid = S.envobjid 
+join harusersingroup UIG on UIG.usrgrpobjid = SPA.usrgrpobjid 
+join haruser U on U.usrobjid = UIG.usrobjid 
+join haruserdata UD on (UD.usrobjid = U.usrobjid and UD.accountdisabled = 'N') 
+join harusergroup UG on UG.usrgrpobjid = UIG.usrgrpobjid 
+join harapprovelist PL on PL.processobjid = SPA.processobjid 
+where E.envisactive = 'Y' 
+  and UPPER(E.environmentname) like ('%4') 
+  and SP.processtype in ('ApproveProcess') 
+  and (PL.usrgrpobjid = SPA.usrgrpobjid or PL.usrobjid = UIG.usrobjid ) 
+  and SPA.executeaccess = 'Y' 
+  and U.usrobjid in ( 
+     select U2.usrobjid  
+	 from harenvironmentaccess EA  
+	 join harusersingroup UIG2 on UIG2.usrgrpobjid = EA.usrgrpobjid 
+	 join harenvironment E2 on E2.envobjid = EA.envobjid 
+	 join haruser U2 on U2.usrobjid = UIG2.usrobjid 
+	 where EA.executeaccess = 'Y' 
+  )   
+union all 
+select distinct 'CA Harvest SCM' as 'app','%1' as 'broker',E.environmentname,  
+                %2 LOWER(U.username) as 'username', UD.accountexternal, U.realname, UG.usergroupname,  
+				'UDP' as 'accesslevel' 
+from harstateprocessaccess SPA 
+join harstateprocess SP on SP.processobjid = SPA.processobjid 
+join harstate S on S.stateobjid = SP.stateobjid 
+join harenvironment E on E.envobjid = S.envobjid 
+join harusersingroup UIG on UIG.usrgrpobjid = SPA.usrgrpobjid 
+join haruser U on U.usrobjid = UIG.usrobjid 
+join haruserdata UD on (UD.usrobjid = U.usrobjid and UD.accountdisabled = 'N') 
+join harusergroup UG on UG.usrgrpobjid = UIG.usrgrpobjid 
+where E.envisactive = 'Y' 
+  and UPPER(E.environmentname) like ('%4') 
+  and SP.processtype in ('UDPProcess','NotifyProcess') 
+  and SPA.executeaccess = 'Y' 
+  and U.usrobjid in ( 
+     select U2.usrobjid  
+	 from harenvironmentaccess EA  
+	 join harusersingroup UIG2 on UIG2.usrgrpobjid = EA.usrgrpobjid 
+	 join harenvironment E2 on E2.envobjid = EA.envobjid 
+	 join haruser U2 on U2.usrobjid = UIG2.usrobjid 
+	 where EA.executeaccess = 'Y' 
+  )    
+%3
