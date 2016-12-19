@@ -110,7 +110,8 @@ public class HarvestLdap {
 				String sUserID      = rSet.getString("USERNAME").trim();
 				String sAcctExt     = rSet.getString("ACCOUNTEXTERNAL").trim();
 				String sRealname    = rSet.getString("REALNAME");
-				sRealname           = sRealname==null? "" : sRealname.trim().replace(',', '|');
+				//sRealname           = sRealname==null? "" : sRealname.trim().replace(',', '|');
+				sRealname           = sRealname==null? "" : sRealname.trim();
 				String sUserGroup   = rSet.getString("USERGROUPNAME").trim().replace(',', ';');
 				String sAccess      = rSet.getString("ACCESSLEVEL").trim().replace(',', ';');
 				
@@ -745,7 +746,7 @@ public class HarvestLdap {
 							if (!sOutputFile.isEmpty()) {
 								String sFile = sOutputFile.replace("broker", sBroker);
 								frame.setFileAppend(i>0); 
-								frame.writeCSVFileFromListGeneric(cRepoInfo, sFile, ',');	
+								frame.writeCSVFileFromListGeneric(cRepoInfo, sFile, '\t');	
 								frame.setFileAppend(false);
 							}
 							
