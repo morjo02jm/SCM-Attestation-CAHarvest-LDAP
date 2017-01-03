@@ -716,7 +716,7 @@ public class HarvestLdap {
 									!cRepoInfo.getString(sTagApp, k).isEmpty()) {
 									if (deactivateEndOfLifeProject(cscrBrokers[i], sProject, sHarvestDBPassword)) {
 							    		if (sProblems.isEmpty()) sProblems = tagUL;
-							    		sProblems+= "<li>The project, <b>"+sProject+"</b>, in broker, <b>"+sBroker+"</b>, has been deactived because it is at End of Life.</li>\n";
+							    		sProblems+= "<li>The source project, <b>"+sProject+"</b>, in broker, <b>"+sBroker+"</b>, has been deactived because the project is now End of Life.</li>\n";
 							    		
 										int[] iProjects = cRepoInfo.find(sTagProject, sProject);
 										for (int iIndex=0; iIndex<iProjects.length; iIndex++) {
