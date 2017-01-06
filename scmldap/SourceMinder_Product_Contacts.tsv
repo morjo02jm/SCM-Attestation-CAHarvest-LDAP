@@ -18,14 +18,15 @@ ASM2	4.2	Active	CSCRE/Endevor	null	Islandia Data Center;Lisle DR Center - volume
 Astex	2.8	Active	CSCRE/Endevor	ASTEX	"The SMD volume pool on z/OS which is accessible from TSO1, CA11, CA31 and others. SCCS only on TSO1. "	"[{""PMFKEY"":""mayja07""},{""PMFKEY"":""casjo02""},{""PMFKEY"":""hurro01""}]"	hodda01	mayja07	casjo02
 Auditor - Common Srvcs (CAECIS)	r12;r12.1	Active	PDS;Endevor	AUDIT	Islandia	"[{""PMFKEY"":""petja04""}]"	hodda01	cheje18	petja04
 AutoSys	r11	Active	CSCR/Harvest	null	CSCR109	"[{""PMFKEY"":""minni01""},{""PMFKEY"":""badve01""}]"	madmi06	minni01	badve01
-AutoSys	r11.3*;r11.4;trunk	Active	CSCR/Harvest	null	"CSCR102/AutoSys, CSCR709/wa-autosys"	"[{""PMFKEY"":""minni01""},{""PMFKEY"":""badve01""}]"	madmi06	minni01	badve01
+AutoSys	r11.3*;r11.4;trunk	Active	CSCR/Harvest	null	"CSCR102/AutoSys, CSCR709/wa-autosys"	"[{""PMFKEY"":""minni01""},{""PMFKEY"":""badve01""}]"	madmi06	minni01	abbwi01
 Batch Processor	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM;Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""eduja01""}]"	hodda01	eduja01	tucjo02
 Bind Analyzer	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM;Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""eduja01""}]"	hodda01	eduja01	tucjo02
 Blockmaster	2.2	Active	CSCRE/Endevor;PDS	null	Islandia Data Center;Lisle DR center - replicated volumes	"[{""PMFKEY"":""mayja07""},{""PMFKEY"":""casjo02""},{""PMFKEY"":""hurro01""}]"	hodda01	mayja07	casjo02
 BUNDL	r5.0	Active	CSCRE/Endevor	BUNDL	N/A	"[{""PMFKEY"":""kokja01""},{""PMFKEY"":""raubr02""}]"	hodda01	kokja01	raubr02
 CA Access Control		Active	CSCR/Harvest	null	"CSCR402/AC,FLASH,GORDON,HAWKEYE,SC"	"[{""PMFKEY"":""sarav02""},{""PMFKEY"":""matsu04""}]"		matsu04	sarav02
 CA APIM -Concierge - Orchestrator	r1.0	Active	CSCR/Harvest	null	CSCR807	"[{""PMFKEY"":""munbh01""}]"		bhara24	munbh01
-CA Application Lifecycle Conductor	2.3.1;2.4;3.0 ir1	Active	CSCR/Harvest	null	"CSCR606/ACMEW,AEECL,AENWS"	"[{""PMFKEY"":""layro01""}]"		fagsc01	layro01
+CA Application Lifecycle Conductor	r12	Active	CSCR/Harvest	null	CSCR606/ACMEW	"[{""PMFKEY"":""layro01""}]"		fagsc01	layro01
+CA Application Lifecycle Conductor	v17;v18	Active	CSCR/Harvest	null	"CSCR606/AEECL,AENWS"	"[{""PMFKEY"":""layro01""}]"		fagsc01	layro01
 CA CATALYST / USM Connector Project / SSA	1.*2.0;2.5;3.0	Active	CSCR/Harvest	null	CSCR929	"[{""PMFKEY"":""taoyu04""}]"		merja01	taoyu04
 CA CATALYST / USM Connector Project / SSA	1.7;trunk	Active	CSCR/Harvest	null	"CSCR709/spectrum-sa,ssa,nimsoft"	"[{""PMFKEY"":""taoyu04""}]"		merja01	taoyu04
 CA Clarity PPM	13.0;13.1;13.2;13.3;14.1;14.2;14.3;trunk	Active	CSCR/Harvest	null	CSCR612	"[{""PMFKEY"":""papgo01""}]"		aruma01	papgo01
@@ -37,7 +38,7 @@ CA WF	1.1.5 SP6	Active	CSCR/Harvest	null	CSCR110/Workflow	"[{""PMFKEY"":""vensu0
 Catalog Facility Common	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	SCLM;Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""eduja01""}]"	hodda01	eduja01	tucjo02
 CCIPC	r2.1;r12.0;r12.1;r14.0;r14.1	Active	CSCR/Harvest	null	CSCR920	"[{""PMFKEY"":""lazth01""},{""PMFKEY"":""tunem01""}]"	fagsc01	tunem01	lazth01;tunem01;helke03
 Change Manager Enterprise Workbench (CMEW)	r12   	Active	CSCR/Harvest	null	CSCR606	"[{""PMFKEY"":""kruju01""},{""PMFKEY"":""ricar01""},{""PMFKEY"":""melmi08""}]"	hodda01	kruju01	svami01;melmi08
-Chorus	r3.0;r4.0	Active	CSCR/Harvest;CVS;RTC;MF 2.0 Endevor	"CHOIN,FLO"	CSCR702;RTC server: https://cscrrtc003.ca.com;TSO1 for CVS source control (Islandia data center)	"[{""PMFKEY"":""sajna02""}]"	madmi06	sajna02	sajna02
+Chorus	r3.0;r4.0	Active	CSCR/Harvest;CVS;RTC;MF 2.0 Endevor	"CHOIN,FLO"	CSCR702	"[{""PMFKEY"":""sajna02""}]"	madmi06	sajna02	sajna02
 Chorus DB2 Database Mgmt Role	1.0;2.0;16.0;17.0;18.0;19.0	Active	CSCRE/Endevor;RTC server https://cscrtc03.ca.com	"FDB2,DBT"	Source Resides on DEV DASD packs  The GA releaase of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes. For the pre-beta and BETA release the datasets are allocated on DEV volumes which are not part of DR.  When the products are moved into GA the datasets are moved to the DEVR volumes;Source also kept on RTC Server https://cscrrtc003.ca.com/ccm/	"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""eduja01""}]"	hodda01	eduja01	tucjo02
 Chorus DB2 Database Mgmt Role	2.0;2.5;3.0;4.0	Active	Endevor;RTC server  https://cscrrtc003.ca.com/ccm/	MDB2	Source Resides on DEV DASD packs  The GA releaase of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes. For the pre-beta and BETA release the datasets are allocated on DEV volumes which are not part of DR.  When the products are moved into GA the datasets are moved to the DEVR volumes   RTC server   https://cscrtc03.ca.com	"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""eduja01""}]"	hodda01	eduja01	tucjo02
 Chorus Security Discipline	3.0;4.0	Active	SVN;MF 2.0 Endevor	CAE1M	Lisle;IL 251-b212-auto.ca.com	"[{""PMFKEY"":""petja04""}]"	hodda01	cheje18	rozmi02
@@ -135,7 +136,7 @@ InterTest Batch	8.5;9.1;Base	Active	CSCRE/Endevor	INTBT	Mainframe	"[{""PMFKEY"":
 InterTest Common GUI	8.5;9.1	Active	CSCR/Harvest	null	CSCR801	"[{""PMFKEY"":""dubmi01""},{""PMFKEY"":""navri01""}]"	hodda01	dubmi01	navri01
 InterTest for CICS	8.5;9.1;Base	Active	CSCRE/Endevor	"INTCI,INTERT"	Mainframe	"[{""PMFKEY"":""dubmi01""}]"	hodda01	dubmi01	dubmi01
 JCLCheck	r7.1; r11	Active	CSCRE/Endevor	JCK	N/A	"[{""PMFKEY"":""simdo01""},{""PMFKEY"":""macco01""},{""PMFKEY"":""davfe01""}]"	madmi06	simdo01	macco01;davfe01
-JMO	11.x	Active	CSCR/Harvest	null	"CSCR907,CSCR912"	"[{""PMFKEY"":""anadh01"",""APPROVEStamp"":""none""},{""PMFKEY"":""parsr02"",""APPROVEStamp"":""none""},{""PMFKEY"":""srigi02"",""APPROVEStamp"":""none""}]"	madmi06	anadh01	srigi02
+JMO	11.x	Active	CSCR/Harvest	null	CSCR907;CSCR912	"[{""PMFKEY"":""anadh01"",""APPROVEStamp"":""none""},{""PMFKEY"":""parsr02"",""APPROVEStamp"":""none""},{""PMFKEY"":""srigi02"",""APPROVEStamp"":""none""}]"	madmi06	anadh01	srigi02
 Jobtrac	r11	Active	CSCRE/Endevor	JTR	N/A	"[{""PMFKEY"":""simdo01""},{""PMFKEY"":""macco01""},{""PMFKEY"":""davfe01""}]"	madmi06	simdo01	macco01;davfe01
 Librarian	4.3; 4.4	Stabilized	Librarian;Endevor;PanAPT	LIBR	usildamd.ca.com	"[{""PMFKEY"":""kruju01""},{""PMFKEY"":""odomi05""},{""PMFKEY"":""cropa02""}]"	hodda01	kruju01	odomi05;cropa02
 Log Analyzer	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM;Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""eduja01""}]"	hodda01	eduja01	tucjo02
@@ -152,7 +153,7 @@ Merge/Modify	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM;Endevor	DBT	S
 MICS Q&R	12.5-12.9	Active	CSCR/Harvest	null	CSCR810	"[{""PMFKEY"":""angth01""},{""PMFKEY"":""wasch01""}]"	tyaal01	angth01	wasch01
 MIGRATE-COBOL	2	Active	CSCRE/Endevor	null	Islandia Data Center	"[{""PMFKEY"":""mayja07""},{""PMFKEY"":""casjo02""},{""PMFKEY"":""hurro01""}]"	hodda01	mayja07	casjo02
 MIM	r4.1;r4.2 r4.6;r11.5;r11.6;r11.7;r11.8;r11.9;r12.0;r12.1	Active	PDS;Endevor	MIM	GIS Islandia data center	"[{""PMFKEY"":""kokja01""},{""PMFKEY"":""slejo01""}]"	hodda01	kokja01	slejo01
-MLINK	r6.5	Stabilized	CSCR/Harvest	null	"Islandia, Harvest CSCR806 Project"	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"	madmi06	stoda04	cafjo01
+MLINK	r6.5	Stabilized	CSCR/Harvest	null	CSCR806/MLINK	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"	madmi06	stoda04	cafjo01
 NetMaster File Transfer Management	r11.6; r11.7	Active	PDS;Endevor	NETM	GIS Islandia data center	"[{""PMFKEY"":""angth01""},{""PMFKEY"":""norst02""},{""PMFKEY"":""joheu02""}]"	angth01	norst02	joheu02
 NetMaster Network Automation	r12.1	Active	PDS;Endevor	NETM	CSCR904;GIS Islandia data center	"[{""PMFKEY"":""angth01""},{""PMFKEY"":""norst02""},{""PMFKEY"":""joheu02""}]"	angth01	norst02	joheu02
 NetMaster Network Management for SNA	r12.1	Active	PDS;Endevor	NETM	GIS Islandia data center	"[{""PMFKEY"":""angth01""},{""PMFKEY"":""norst02""},{""PMFKEY"":""joheu02""}]"	angth01	norst02	joheu02
@@ -201,7 +202,7 @@ Recovery Analyzer	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM;Endevor	
 Remote Console	2.3	Active	PDS;Endevor	RCS	N/A	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"	hodda01	stoda04	cafjo01
 Report Facility	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM;Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""eduja01""}]"	hodda01	eduja01	tucjo02
 Repository - Distributed	2.2; 2.3	End of Life	CSCR/Harvest	null	CSCR604/CAARDS	"[{""PMFKEY"":""shuke01""},{""PMFKEY"":""stuce01""}]"	madmi06	shuke01	stuce01
-Repository for z/OS	r7; r7.1; r7.2	Active	CSCR/Harvest;PDS	null	"CSCR603 projects: ARzOS Rel 7.0, ARzOS Rel 7.2, ARzOS WSO r7.0"	"[{""PMFKEY"":""shuke01""},{""PMFKEY"":""stuce01""}]"	madmi06	shuke01	stuce01
+Repository for z/OS	r7; r7.1; r7.2	Active	CSCR/Harvest;PDS	null	"CSCR603/ARzOS Rel,ARzOS WSO"	"[{""PMFKEY"":""shuke01""},{""PMFKEY"":""stuce01""}]"	madmi06	shuke01	stuce01
 RI Manager	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM;Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""eduja01""}]"	hodda01	eduja01	tucjo02
 RSVP	1	Active	CSCRE/Endevor	null	Islandia Data Center	"[{""PMFKEY"":""mayja07""},{""PMFKEY"":""casjo02""},{""PMFKEY"":""hurro01""}]"	hodda01	mayja07	casjo02
 SANTEFE		Active	CSCR/Harvest	null	CSCR927/SANTAFE	"[{""PMFKEY"":""vakmo01""},{""PMFKEY"":""vensu02""}]"		vensu02	vakmo01
@@ -354,3 +355,89 @@ MFSO QA		End of Life	CSCR/Harvest	null	CSCR1306	"[{""PMFKEY"":""abavi01""}]"			a
 CA Labs LabTrack		Active	CSCR/Harvest	null	CSCR1308	"[{""PMFKEY"":""muvi02""}]"			munvi02
 SPNA System Scripts		End of Life	CSCR/Harvest	null	CSCR1309	"[{""PMFKEY"":""ganra08""}]"			ganra08
 Smartphone Challenge		Active	CSCR/Harvest	null	CSCR1400	"[{""PMFKEY"":""kabni01""}]"			kabni01
+$LSRVDSN		Active	CSCRE/Endevor	$LSRVDSN		"[{""PMFKEY"":""damda01""}]"			damda01
+**		Active	CSCRE/Endevor	**		"[{""PMFKEY"":""armfr01""}]"			armfr01
+AD		Active	CSCRE/Endevor	AD		"[{""PMFKEY"":""stuce01""},{""PMFKEY"":""lynjo02""}]"	madmi06	lynjo02	colde05;stuce01
+ALC		Active	CSCRE/Endevor	ALC		"[{""PMFKEY"":""berbe02""}]"			berbe02
+APCTOOLS		Active	CSCRE/Endevor	APCTOOLS		"[{""PMFKEY"":""mayja07""},{""PMFKEY"":""casjo02""},{""PMFKEY"":""carju01""}]"	hodda01	mayja07	casjo02
+APPDEV		Active	CSCRE/Endevor	APPDEV		"[{""PMFKEY"":""berbe02""}]"			berbe02
+ARZOS		Active	CSCRE/Endevor	ARZOS		"[{""PMFKEY"":""berbe02""}]"			berbe02
+ASSOC		Active	CSCRE/Endevor	ASSOC		"[{""PMFKEY"":""berbe02""}]"			berbe02
+AUDTT		Active	CSCRE/Endevor	AUDTT		"[{""PMFKEY"":""kazri01""},{""PMFKEY"":""tunem01""},{""PMFKEY"":""wooky01""}]"	fagsc01	tunem01	kazri01;lazth01;rosth05
+BSDBA		Active	CSCRE/Endevor	BSDBA		"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""eduja01""}]"	hodda01	eduja01	tucjo02
+CAACF		Active	CSCRE/Endevor	CAACF		"[{""PMFKEY"":""kazri01""},{""PMFKEY"":""tunem01""},{""PMFKEY"":""wooky01""}]"	fagsc01	tunem01	kazri01;lazth01;rosth05
+CASAF		Active	CSCRE/Endevor	CASAF		"[{""PMFKEY"":""kazri01""},{""PMFKEY"":""tunem01""},{""PMFKEY"":""wooky01""}]"	fagsc01	tunem01	kazri01;lazth01;rosth05
+CASEC		Active	CSCRE/Endevor	CASEC		"[{""PMFKEY"":""gagto01""},{""PMFKEY"":""giero01""},{""PMFKEY"":""angth01""}]"	angth01	giero01	gagto01
+CBDM		Active	CSCRE/Endevor	CBDM		"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""eduja01""}]"	hodda01	eduja01	tucjo02
+CEM		Active	CSCRE/Endevor	CEM		"[{""PMFKEY"":""kazri01""},{""PMFKEY"":""tunem01""},{""PMFKEY"":""wooky01""}]"	fagsc01	tunem01	kazri01;lazth01;rosth05
+CMPRS		Active	CSCRE/Endevor	CMPRS		"[{""PMFKEY"":""gagto01""},{""PMFKEY"":""giero01""},{""PMFKEY"":""angth01""}]"	angth01	giero01	gagto01
+CPM		Active	CSCRE/Endevor	CPM		"[{""PMFKEY"":""mayja07""},{""PMFKEY"":""casjo02""},{""PMFKEY"":""carju01""}]"	hodda01	mayja07	casjo02
+CPS		Active	CSCRE/Endevor	CPS		"[{""PMFKEY"":""simdo01""},{""PMFKEY"":""macco01""},{""PMFKEY"":""hawba03""}]"			macco01
+DADSP		Active	CSCRE/Endevor	DADSP		"[{""PMFKEY"":""minni01""},{""PMFKEY"":""badve01""}]"	madmi06	minni01	abbwi01
+DBAPD		Active	CSCRE/Endevor	DBAPD		"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""eduja01""}]"	hodda01	eduja01	tucjo02
+DBSRV		Active	CSCRE/Endevor	DBSRV		"[{""PMFKEY"":""stuce01""},{""PMFKEY"":""lynjo02""}]"	madmi06	lynjo02	colde05;stuce01
+DBVT		Active	CSCRE/Endevor	DBVT		"[{""PMFKEY"":""stuce01""},{""PMFKEY"":""lynjo02""}]"	madmi06	lynjo02	colde05;stuce01
+DSST		Active	CSCRE/Endevor	DSST		"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""eduja01""}]"	hodda01	eduja01	tucjo02
+DVWEB		Active	CSCRE/Endevor	DVWEB		"[{""PMFKEY"":""kokja01""},{""PMFKEY"":""raubr02""}]"	hodda01	kokja01	raubr02
+D2V		Active	CSCRE/Endevor	D2V		"[{""PMFKEY"":""jambr01""},{""PMFKEY"":""esqfr01""}]"	hodda01	jambr01	esqfr01
+EA.		Active	CSCRE/Endevor	EA.		"[{""PMFKEY"":""berbe02""}]"			berbe02
+EABASE		Active	CSCRE/Endevor	EABASE		"[{""PMFKEY"":""berbe02""}]"			berbe02
+EAR120		Active	CSCRE/Endevor	EAR120		"[{""PMFKEY"":""berbe02""}]"			berbe02
+EAR140		Active	CSCRE/Endevor	EAR140		"[{""PMFKEY"":""berbe02""}]"			berbe02
+EAR150		Active	CSCRE/Endevor	EAR150		"[{""PMFKEY"":""berbe02""}]"			berbe02
+EA140		Active	CSCRE/Endevor	EA140		"[{""PMFKEY"":""berbe02""}]"			berbe02
+EA150		Active	CSCRE/Endevor	EA150		"[{""PMFKEY"":""berbe02""}]"			berbe02
+ENBDM		Active	CSCRE/Endevor	ENBDM		"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""eduja01""}]"	hodda01	eduja01	tucjo02
+ENDPANV		Active	CSCRE/Endevor	ENDPANV		"[{""PMFKEY"":""kruju01""},{""PMFKEY"":""ricar01""},{""PMFKEY"":""melmi08""}]"	hodda01	kruju01	svami01;melmi08
+ENFDN		Active	CSCRE/Endevor	ENFDN		"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""eduja01""}]"	hodda01	eduja01	tucjo02
+ESCJ		Active	CSCRE/Endevor	ESCJ		"[{""PMFKEY"":""berbe02""}]"			berbe02
+ESD		Active	CSCRE/Endevor	ESD		"[{""PMFKEY"":""damda01""}]"			damda01
+ESP		Active	CSCRE/Endevor	ESP		"[{""PMFKEY"":""mayja07""},{""PMFKEY"":""casjo02""},{""PMFKEY"":""carju01""}]"	hodda01	mayja07	casjo02
+ESTG		Active	CSCRE/Endevor	ESTG		"[{""PMFKEY"":""damda01""}]"			damda01
+FE4		Active	CSCRE/Endevor	FE4		"[{""PMFKEY"":""damda01""}]"			damda01
+FINANCE		Active	CSCRE/Endevor	FINANCE		"[{""PMFKEY"":""berbe02""}]"			berbe02
+GSS		Active	CSCRE/Endevor	GSS		"[{""PMFKEY"":""mayja07""},{""PMFKEY"":""casjo02""},{""PMFKEY"":""carju01""}]"	hodda01	mayja07	casjo02
+GTS		Active	CSCRE/Endevor	GTS		"[{""PMFKEY"":""mayja07""},{""PMFKEY"":""casjo02""},{""PMFKEY"":""carju01""}]"	hodda01	mayja07	casjo02
+IAS		Active	CSCRE/Endevor	IAS		"[{""PMFKEY"":""mayja07""},{""PMFKEY"":""casjo02""},{""PMFKEY"":""carju01""}]"	hodda01	mayja07	casjo02
+IDIPC		Active	CSCRE/Endevor	IDIPC		"[{""PMFKEY"":""stuce01""},{""PMFKEY"":""lynjo02""}]"	madmi06	lynjo02	colde05;stuce01
+IPC		Active	CSCRE/Endevor	IPC		"[{""PMFKEY"":""stuce01""},{""PMFKEY"":""lynjo02""}]"	madmi06	lynjo02	colde05;stuce01
+JARS		Active	CSCRE/Endevor	JARS		"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"	hodda01	stoda04	cafjo01
+JMR		Active	CSCRE/Endevor	JMR		"[{""PMFKEY"":""jambr01""},{""PMFKEY"":""esqfr01""}]"	hodda01	jambr01	esqfr01
+MAA		Active	CSCRE/Endevor	MAA		"[{""PMFKEY"":""kazri01""},{""PMFKEY"":""tunem01""},{""PMFKEY"":""wooky01""}]"	fagsc01	tunem01	kazri01;lazth01;rosth05
+MATUN		Active	CSCRE/Endevor	MATUN		"[{""PMFKEY"":""minni01""},{""PMFKEY"":""badve01""}]"	madmi06	minni01	abbwi01
+METAL		Active	CSCRE/Endevor	METAL		"[{""PMFKEY"":""damda01""}]"			damda01
+MFPROD.		Active	CSCRE/Endevor	MFPROD.		"[{""PMFKEY"":""jambr01""},{""PMFKEY"":""esqfr01""}]"	hodda01	jambr01	esqfr01
+MF20.		Active	CSCRE/Endevor	MF20.		"[{""PMFKEY"":""damda01""}]"			damda01
+MSPS		Active	CSCRE/Endevor	MSPS		"[{""PMFKEY"":""damda01""}]"			damda01
+M2SCM		Active	CSCRE/Endevor	M2SCM		"[{""PMFKEY"":""berbe02""}]"			berbe02
+NIA		Active	CSCRE/Endevor	NIA		"[{""PMFKEY"":""joheu02""},{""PMFKEY"":""angth01""},{""PMFKEY"":""norst02""}]"	angth01	norst02	joheu02
+OMWS		Active	CSCRE/Endevor	OMWS		"[{""PMFKEY"":""kokja01""},{""PMFKEY"":""raubr02""}]"	hodda01	kokja01	raubr02
+PANEX		Active	CSCRE/Endevor	PANEX		"[{""PMFKEY"":""berbe02""}]"			berbe02
+PANS		Active	CSCRE/Endevor	PANS		"[{""PMFKEY"":""kazri01""},{""PMFKEY"":""tunem01""},{""PMFKEY"":""wooky01""}]"	fagsc01	tunem01	kazri01;lazth01;rosth05
+PANV		Active	CSCRE/Endevor	PANV		"[{""PMFKEY"":""svami01""}]"	hodda01	svami01	watke08
+PAZ		Active	CSCRE/Endevor	PAZ		"[{""PMFKEY"":""berbe02""}]"			berbe02
+PMACB		Active	CSCRE/Endevor	PMACB		"[{""PMFKEY"":""damda01""}]"			damda01
+PRFCH		Active	CSCRE/Endevor	PRFCH		"[{""PMFKEY"":""berbe02""}]"			berbe02
+PTST		Active	CSCRE/Endevor	PTST		"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""eduja01""}]"	hodda01	eduja01	tucjo02
+QFS		Active	CSCRE/Endevor	QFS		"[{""PMFKEY"":""jambr01""},{""PMFKEY"":""esqfr01""}]"	hodda01	jambr01	esqfr01
+RCM		Active	CSCRE/Endevor	RCM		"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""eduja01""}]"	hodda01	eduja01	tucjo02
+RECUT		Active	CSCRE/Endevor	RECUT		"[{""PMFKEY"":""damda01""}]"			damda01
+ROS		Active	CSCRE/Endevor	ROS		"[{""PMFKEY"":""jambr01""},{""PMFKEY"":""esqfr01""}]"	hodda01	jambr01	esqfr01
+RSLTS		Active	CSCRE/Endevor	RSLTS		"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"	hodda01	stoda04	cafjo01
+SMFD		Active	CSCRE/Endevor	SMFD		"[{""PMFKEY"":""damda01""}]"			damda01
+SMR		Active	CSCRE/Endevor	SMR		"[{""PMFKEY"":""damda01""}]"			damda01
+STAR		Active	CSCRE/Endevor	STAR		"[{""PMFKEY"":""stuce01""},{""PMFKEY"":""lynjo02""}]"	madmi06	lynjo02	colde05;stuce01
+SVTS125.		Active	CSCRE/Endevor	SVTS125.		"[{""PMFKEY"":""gagto01""},{""PMFKEY"":""giero01""},{""PMFKEY"":""angth01""}]"	angth01	giero01	gagto01
+SYSPROG		Active	CSCRE/Endevor	SYSPROG		"[{""PMFKEY"":""berbe02""}]"			berbe02
+SYSVW		Active	CSCRE/Endevor	SYSVW		"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""eduja01""}]"	hodda01	eduja01	tucjo02
+TDM		Active	CSCRE/Endevor	TDM		"[{""PMFKEY"":""berbe02""}]"			berbe02
+TLNTS999		Active	CSCRE/Endevor	TLNTS999		"[{""PMFKEY"":""minni01""},{""PMFKEY"":""badve01""}]"	madmi06	minni01	abbwi01
+TOPST		Active	CSCRE/Endevor	TOPST		"[{""PMFKEY"":""kazri01""},{""PMFKEY"":""tunem01""},{""PMFKEY"":""wooky01""}]"	fagsc01	tunem01	kazri01;lazth01;rosth05
+TSS		Active	CSCRE/Endevor	TSS		"[{""PMFKEY"":""kazri01""},{""PMFKEY"":""tunem01""},{""PMFKEY"":""wooky01""}]"	fagsc01	tunem01	kazri01;lazth01;rosth05
+TSSDB		Active	CSCRE/Endevor	TSSDB		"[{""PMFKEY"":""kazri01""},{""PMFKEY"":""tunem01""},{""PMFKEY"":""wooky01""}]"	fagsc01	tunem01	kazri01;lazth01;rosth05
+TTDSS		Active	CSCRE/Endevor	TTDSS		"[{""PMFKEY"":""minni01""},{""PMFKEY"":""badve01""}]"	madmi06	minni01	abbwi01
+UEX		Active	CSCRE/Endevor	UEX		"[{""PMFKEY"":""berbe02""}]"			berbe02
+VTAPE		Active	CSCRE/Endevor	VTAPE		"[{""PMFKEY"":""gagto01""},{""PMFKEY"":""giero01""},{""PMFKEY"":""angth01""}]"	angth01	giero01	gagto01
+WIZ		Active	CSCRE/Endevor	WIZ		"[{""PMFKEY"":""damda01""}]"			damda01
+XPS		Active	CSCRE/Endevor	XPS		"[{""PMFKEY"":""mayja07""},{""PMFKEY"":""casjo02""},{""PMFKEY"":""carju01""}]"	hodda01	mayja07	casjo02
+Z2L		Active	CSCRE/Endevor	Z2L		"[{""PMFKEY"":""damda01""}]"			damda01
