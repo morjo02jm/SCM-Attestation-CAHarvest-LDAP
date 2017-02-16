@@ -215,7 +215,7 @@ Service Desk Manager		Active	CSCR/Harvest	null	CSCR616/SDMAF;CSCR927/SDM	"[{""PM
 Service Desk Manager	R12;12.1;12.5;12.6;12.7;12.9;14.1;14.1.01;14.1.02;14.1.03	Active	CSCR/Harvest	null	CSCR927/SDr	"[{""PMFKEY"":""vakmo01""},{""PMFKEY"":""vensu02""}]"		vensu02	vakmo01
 Service Desk Manager - Catalyst Connector		Active	CSCR/Harvest	null	CSCR709/cmdb	"[{""PMFKEY"":""vakmo01""},{""PMFKEY"":""vensu02""}]"		vensu02	vakmo01
 Snapshot General Services	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	SCLM;Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""eduja01""}]"	hodda01	eduja01	tucjo02
-Solution Integrations		Active	CSCR/Harvest	null	"CSCR709/bmc,ciscoworks,cloudstack,emc,hp-operationsmanager,hp-bsm,hp-paw,hp-ucmdb,hp-service-manager,hp-system-insight,ibm-netcool,ibm-systems-director,ibm-tec,ibm-tsrm,itm-teps,ibm-tivoli,netapp-sanscreen,nim-common,normalized-service-manager,odbc-jdbc-catalyst,oracle-gridcontrol,sap-hcm-fi,scom-catalyst,servicenow-connector,snmp-generic,vmware-vcloud"	"[{""PMFKEY"":""goppr01""},{""PMFKEY"":""ainjo01""}]"		ainjo01	goppr01
+Solution Integrations		Active	CSCR/Harvest	null	"CSCR709/bmc,ciscoworks,cloudstack,emc,hp-operationsmanager,hp-bsm,hp-paw,hp-ucmdb,hp-service-manager,hp-system-insight,ibm-netcool,ibm-systems-director,ibm-tec,ibm-tsrm,itm-teps,ibm-tivoli,netapp-sanscreen,nim-common,normalized-service-manager,odbc-jdbc-catalyst,oracle-gridcontrol,sap-hcm-fi,scom-catalyst,servicenow-connector,snmp-generic,vmware-vcloud"	"[{""PMFKEY"":""chaso05""}]"			chaso05
 Solve CPT	6.1	Stabilized	CSCRE/Endevor;CMS	null	N/A	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"	hodda01	stoda04	cafjo01
 Solve:Access	r5.0	Active	PDS;Endevor	NETM	GIS Islandia data center	"[{""PMFKEY"":""joheu02""},{""PMFKEY"":""angth01""},{""PMFKEY"":""norst02""}]"	angth01	norst02	joheu02
 SOLVE:Central	v5.0	Active	PDS;Endevor	NETM	N/A;GIS Islandia data center	"[{""PMFKEY"":""joheu02""},{""PMFKEY"":""angth01""},{""PMFKEY"":""norst02""}]"	angth01	norst02	joheu02
@@ -307,7 +307,7 @@ iTechnology IGateway		Active	CSCR/Harvest	null	CSCR707	"[{""PMFKEY"":""kumra10""
 Application Configuration Manager		Active	CSCR/Harvest	null	CSCR708	"[{""PMFKEY"":""akupr01""},{""PMFKEY"":""trejo05""}]"			akupr01;treje05
 APM connectors		Active	CSCR/Harvest	null	CSCR709/apm	"[{""PMFKEY"":""fusle01""}]"			fusle01
 APPDynamics connector		Active	CSCR/Harvest	null	"CSCR709/appdynamics,applogic,bca,business-service-insight,ca-service-model,connect-wise-cmdb,Connector Unification,CSU,dbinsight,DSM,equal,GraphCheck"	"[{""PMFKEY"":""asisc01""},{""PMFKEY"":""bucgr01""}]"			asisc01;bucgr01
-Catalyst Connector other		Active	CSCR/Harvest	null	CSCR709	"[{""PMFKEY"":""goppr01""},{""PMFKEY"":""ainjo01""}]"		ainjo01	goppr01
+Catalyst Connector other		Active	CSCR/Harvest	null	CSCR709	"[{""PMFKEY"":""chaso05""}]"			chaso05
 CA Products--Easy View / Intraccess		End of Life	CSCR/Harvest	null	CSCR804	"[{""PMFKEY"":""shika01""}]"			shika01
 CA Products--Datacom		Active	CSCR/Harvest	null	CSCR805	"[{""PMFKEY"":""behka01""},{""PMFKEY"":""elwly02""},{""PMFKEY"":""hogmi01""}]"			behka01;elwly02;hogmi01
 Unicenter CAAMToolkit		Active	CSCR/Harvest	null	CSCR901	"[{""PMFKEY"":""bn_ba01""}]"			bn_ba01
