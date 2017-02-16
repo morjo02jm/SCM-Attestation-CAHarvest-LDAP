@@ -31,7 +31,7 @@ CA CATALYST / USM Connector Project / SSA	1.*2.0;2.5;3.0	Active	CSCR/Harvest	nul
 CA CATALYST / USM Connector Project / SSA	1.7;trunk	Active	CSCR/Harvest	null	"CSCR709/spectrum-sa,ssa,nimsoft"	"[{""PMFKEY"":""taoyu04""}]"		merja01	taoyu04
 CA Clarity PPM	13.0;13.1;13.2;13.3;14.1;14.2;14.3;trunk	Active	CSCR/Harvest	null	CSCR612	"[{""PMFKEY"":""papgo01""}]"		aruma01	papgo01
 CA Clarity PPM Catalyst Connector	r14.2;trunk	Active	CSCR/Harvest	null	CSCR709/clarity	"[{""PMFKEY"":""papgo01""},{""PMFKEY"":""yadga02""}]"		aruma01	papgo01
-CA CMDB	11.0;11.1;11.2;12.0;12.1	Active	CSCR/Harvest	null	CSCR616/CA-CMDB	"[{""PMFKEY"":""vakmo01""},{""PMFKEY"":""vensu02""}]"		vensu02	vakmo01
+CA CMDB		Active	CSCR/Harvest	null	CSCR616/CA-CMDB	"[{""PMFKEY"":""vakmo01""},{""PMFKEY"":""vensu02""}]"		vensu02	vakmo01
 CA LDAP	15.0;15.1	Active	SVN;Endevor	CAEIG	Lisle;IL	"[{""PMFKEY"":""petja04""}]"	hodda01	cheje18	pflda02
 CA Web Administrator	15.0;Chorus 3.0;Chorus 4.0	Active	SVN;Endevor	"CAEIG,CAE1M"	Lisle;IL	"[{""PMFKEY"":""petja04""}]"	hodda01	cheje18	pflda02
 CA WF	1.1.5 SP6	Active	CSCR/Harvest	null	CSCR110/Workflow	"[{""PMFKEY"":""vensu02""},{""PMFKEY"":""desan04""}]"		vensu02	desan04
