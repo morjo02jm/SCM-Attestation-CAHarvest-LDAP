@@ -1,5 +1,7 @@
 package scmldap;
 
+// comment
+
 import commonldap.CommonLdap;
 import commonldap.JCaContainer;
 
