@@ -27,6 +27,7 @@ public class HarvestLdap {
 	private static String sTagProject      = "PROJECT";
 	private static String sTagContact      = "CONTACT";
 	private static String sTagApp          = "APP";
+	private static String sTagProduct      = "PRODUCT";
 	
 	// LDAP columns
 	private static String sTagPmfkey       = "sAMAccountName";
@@ -128,6 +129,7 @@ public class HarvestLdap {
 				cRepoInfo.setString("APP",             sApp,         iIndex);
 				cRepoInfo.setString("APP_INSTANCE",    sAppInstance, iIndex);
 				cRepoInfo.setString("BROKER",          sBroker,      iIndex);
+				cRepoInfo.setString("PRODUCT",         "",           iIndex);
 				cRepoInfo.setString("PROJECT",         sProject,     iIndex);
 				cRepoInfo.setString("STATE",           sState,       iIndex);
 				cRepoInfo.setString("CONTACT",         "",           iIndex);
@@ -246,7 +248,7 @@ public class HarvestLdap {
 					else 
 						sqlStmt += " , ";
 					
-					sEntitlementAttrs = "";
+					sEntitlementAttrs = "product=" + cRepoInfo.getString("PRODUCT", iIndex);
 					sUserAttrs = "external=" + cRepoInfo.getString("ACCOUNTEXTERNAL", iIndex) + ";" +
 					             "access="   + cRepoInfo.getString("ACCESSLEVEL", iIndex) + ";" +
 							     "group="    + cRepoInfo.getString("USERGROUP", iIndex) ;
@@ -606,7 +608,7 @@ public class HarvestLdap {
 		JCaContainer cLDAP = new JCaContainer();
 		frame = new CommonLdap("scmldap",
                                sLogPath,
-                               sBCC,
+                               "", //sBCC,
                                cLDAP);
 
 
@@ -664,6 +666,7 @@ public class HarvestLdap {
 							// Apply contact information for records
 							// a. from SourceMinder Contacts
 							for (int iIndex=0; iIndex<cHarvestContacts.getKeyElementCount("Approver"); iIndex++) {
+								String sProduct = cHarvestContacts.getString("Product", iIndex);
 								String sLocation = cHarvestContacts.getString("Location", iIndex).toLowerCase();
 								String[] sProjects = frame.readAssignedBrokerProjects(sLocation, sBroker);
 								String[] sApprovers = frame.readAssignedApprovers(cHarvestContacts.getString("Approver", iIndex));
@@ -683,6 +686,7 @@ public class HarvestLdap {
 											for (int kIndex=0; kIndex<cRepoInfo.getKeyElementCount(sTagProject); kIndex++) {
 												if (cRepoInfo.getString(sTagContact, kIndex).isEmpty()) {
 													cRepoInfo.setString(sTagContact, bActive? sApprover : "Toolsadmin@ca.com", kIndex);
+													cRepoInfo.setString(sTagProduct, sProduct, kIndex);
 													bFound = true;
 												}
 											}
@@ -695,6 +699,7 @@ public class HarvestLdap {
 												if (sProject.startsWith(sPrefix)) {
 													boolean bIsActive = frame.processProjectReleases(sProject, sReleases, bActive);
 													cRepoInfo.setString(sTagContact, bIsActive? sApprover : "Toolsadmin@ca.com", kIndex);
+													cRepoInfo.setString(sTagProduct, sProduct, kIndex);
 													bFound = true;
 												}
 											}											
