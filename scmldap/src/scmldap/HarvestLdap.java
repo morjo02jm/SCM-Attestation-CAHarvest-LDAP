@@ -231,7 +231,7 @@ public class HarvestLdap {
 
 			sqlError = "DB. Error deleting previous records.";
 			sqlStmt = "delete from GITHUB_REVIEW where Application in ('"+ sApp + "')"+
-			          " and EntitlementOwner1 in ('"+sBroker+"')"+
+			          " and EntitlementOwner1 like ('"+sBroker+"%')"+
 					  " and EntitlementOwner2 like ('"+sFilter+"')";
 			pstmt=conn.prepareStatement(sqlStmt);  
 			iResult = pstmt.executeUpdate();
@@ -258,9 +258,17 @@ public class HarvestLdap {
 						sUserAttrs = "external=" + cRepoInfo.getString("ACCOUNTEXTERNAL", iIndex) + ";" +
 					                 "access="   + cRepoInfo.getString("ACCESSLEVEL", iIndex);
 					
-					sContact = cRepoInfo.getString(sTagContact,iIndex);
-					//if (!sContact.isEmpty())
-					//	sContact += "@ca.com";
+//					sContact = cRepoInfo.getString(sTagContact,iIndex);
+					String sContactEmail = "";
+					String[] aContacts = frame.readAssignedApprovers(cRepoInfo.getString(sTagContact, iIndex));
+					for (int j=0; j<aContacts.length; j++) {
+						if (!sContactEmail.isEmpty())
+							sContactEmail += ";";
+						if (aContacts[j].equalsIgnoreCase("toolsadmin"))
+							sContactEmail += "Toolsadmin@ca.com";
+						else
+							sContactEmail += aContacts[j]+"@ca.com";
+					}
 					
 					sValues = "('"  + sApp + "',"+
 							  "'"   + cRepoInfo.getString("APP_INSTANCE", iIndex) + "',"+
@@ -268,7 +276,7 @@ public class HarvestLdap {
 							  "'"   + cRepoInfo.getString(sTagProject, iIndex).replace("'", "''") + "',"+
 							  "'"   + cRepoInfo.getString("STATE", iIndex) + "',"+
 							  "'"   + sEntitlementAttrs + "',"+
-							  "'"   + sContact + "',"+
+							  "'"   + sContactEmail + "',"+
 							  "'"   + cRepoInfo.getString(sTagUserID, iIndex) + "',"+
 							  "'"   + sUserAttrs.replace("'", "''") + "')";
 					
@@ -463,7 +471,7 @@ public class HarvestLdap {
 		boolean bReport = false;
 		
 		String[] cscrBrokers = 
-		{						
+		{		
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr001;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr003;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr004;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
@@ -566,7 +574,7 @@ public class HarvestLdap {
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr1306;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr1307;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr1308;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
-			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr1309;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",			
+			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr1309;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr1400;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;"
 		};
 		
@@ -586,6 +594,10 @@ public class HarvestLdap {
 			{
 				deleteDisabledUsers = true;
 			}						
+			else if (args[i].compareToIgnoreCase("-bcc") == 0 )
+			{
+				sBCC = args[++i];
+			}			
 			else if (args[i].compareToIgnoreCase("-log") == 0 )
 			{
 				sLogPath = args[++i];
@@ -609,7 +621,7 @@ public class HarvestLdap {
 		JCaContainer cLDAP = new JCaContainer();
 		frame = new CommonLdap("scmldap",
                                sLogPath,
-                               "", //sBCC,
+                               sBCC,
                                cLDAP);
 
 
@@ -678,7 +690,7 @@ public class HarvestLdap {
 									String sApprover = "";
 									for (int jIndex=0; jIndex<sApprovers.length; jIndex++) {
 										if (!sApprover.isEmpty()) sApprover += ";";
-										sApprover += sApprovers[jIndex] + (sApprovers[jIndex].contains("@")? "":"@ca.com");
+										sApprover += sApprovers[jIndex];
 									}
 									
 									for (int k=0; k<sProjects.length; k++) {
@@ -686,7 +698,7 @@ public class HarvestLdap {
 											// process all the unassigned approvers in the project
 											for (int kIndex=0; kIndex<cRepoInfo.getKeyElementCount(sTagProject); kIndex++) {
 												if (cRepoInfo.getString(sTagContact, kIndex).isEmpty()) {
-													cRepoInfo.setString(sTagContact, bActive? sApprover : "Toolsadmin@ca.com", kIndex);
+													cRepoInfo.setString(sTagContact, bActive? sApprover : "toolsadmin", kIndex);
 													cRepoInfo.setString(sTagProduct, sProduct, kIndex);
 													bFound = true;
 												}
@@ -699,7 +711,7 @@ public class HarvestLdap {
 												String sProject = cRepoInfo.getString(sTagProject, kIndex).toLowerCase();
 												if (sProject.startsWith(sPrefix)) {
 													boolean bIsActive = frame.processProjectReleases(sProject, sReleases, bActive);
-													cRepoInfo.setString(sTagContact, bIsActive? sApprover : "Toolsadmin@ca.com", kIndex);
+													cRepoInfo.setString(sTagContact, bIsActive? sApprover : "toolsadmin", kIndex);
 													cRepoInfo.setString(sTagProduct, sProduct, kIndex);
 													bFound = true;
 												}
@@ -718,7 +730,7 @@ public class HarvestLdap {
 							// Process all end of life projects (make them inactive projects in Harvest)
 							for (int k=0; k<cRepoInfo.getKeyElementCount(sTagProject); k++) {
 								String sProject = cRepoInfo.getString(sTagProject, k);
-								if (cRepoInfo.getString(sTagContact, k).equalsIgnoreCase("Toolsadmin@ca.com") &&
+								if (cRepoInfo.getString(sTagContact, k).equalsIgnoreCase("toolsadmin") &&
 									!cRepoInfo.getString(sTagApp, k).isEmpty()) {
 									if (deactivateEndOfLifeProject(cscrBrokers[i], sProject, sHarvestDBPassword)) {
 							    		if (sProblems.isEmpty()) sProblems = tagUL;

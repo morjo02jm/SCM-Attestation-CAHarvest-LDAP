@@ -1,7 +1,6 @@
 select
-     concat('Broker: '+ github.[EntitlementOwner1],
-            '/ Project: ' + github.[EntitlementOwner2] , 
-            '/ State: ' + github.[EntitlementName]) as 'ResName1',
+     concat('Product: '+ substring(github.[EntitlementAttributes],9,len(github.[EntitlementAttributes])-7)),
+            '/ Broker: ' + github.[EntitlementOwner1] ) as 'ResName1',
      '-' as 'ResName2',
      left(github.[ContactEmail], charindex('@',github.[ContactEmail])-1) as 'ResName3',
      github.[User_ID] as 'PersonID',
@@ -24,7 +23,7 @@ select
      'Active ('+emp.Status+')' as 'Status'
      FROM /* GITHUB_REVIEW as github */
      (     
-        select distinct R1.Application, R1.ApplicationLocation, R1.EntitlementOwner1, R1.EntitlementOwner2, R1.EntitlementName, R1.ContactEmail, R1.User_ID 
+        select distinct R1.Application, R1.ApplicationLocation, R1.EntitlementAttributes, R1.EntitlementOwner1, R1.ContactEmail, R1.User_ID 
         from GITHUB_REVIEW R1
      ) github
      left join QAR_EMPINFO as emp on emp.SAM=github.[User_ID]
