@@ -764,7 +764,7 @@ public class HarvestLdap {
 							if (!sOutputFile.isEmpty()) {
 								String sFile = sOutputFile.replace("broker", sBroker);
 								frame.setFileAppend(i>0); 
-								frame.writeCSVFileFromListGeneric(cRepoInfo, sFile, '\t');	
+								frame.writeCSVFileFromListGeneric(cRepoInfo, sFile, '\t', cLDAP);	
 								frame.setFileAppend(false);
 							}
 							
