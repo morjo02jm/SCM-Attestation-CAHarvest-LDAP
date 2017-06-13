@@ -640,7 +640,7 @@ public class HarvestLdap {
 			
 			JCaContainer cHarvestContacts = new JCaContainer();
 			if (bReport) {
-				frame.readSourceMinderContacts(cHarvestContacts, "Harvest");
+				frame.readSourceMinderContacts(cHarvestContacts, "Harvest", cLDAP);
 			} // GovernanceMinder report
 
 			JCaContainer cRepoInfo = new JCaContainer();
@@ -691,6 +691,12 @@ public class HarvestLdap {
 									for (int jIndex=0; jIndex<sApprovers.length; jIndex++) {
 										if (!sApprover.isEmpty()) sApprover += ";";
 										sApprover += sApprovers[jIndex];
+									}
+									
+									if (sApprover.isEmpty()) {
+							    		if (sProblems.isEmpty()) 
+							    			sProblems = tagUL;			    		
+							    		sProblems+= "<li>The Harvest product, <b>"+sProduct+"</b>, has no valid contact.</li>\n";									
 									}
 									
 									for (int k=0; k<sProjects.length; k++) {
