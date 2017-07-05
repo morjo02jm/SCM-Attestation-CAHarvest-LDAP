@@ -693,10 +693,10 @@ public class HarvestLdap {
 										sApprover += sApprovers[jIndex];
 									}
 									
-									if (sApprover.isEmpty()) {
+									if (sApprover.isEmpty() && bActive) {
 							    		if (sProblems.isEmpty()) 
 							    			sProblems = tagUL;			    		
-							    		sProblems+= "<li>The Harvest product, <b>"+sProduct+"</b>, has no valid contact.</li>\n";									
+							    		sProblems+= "<li>The active Harvest product, <b>"+sProduct+"</b>, has no valid contact.</li>\n";									
 									}
 									
 									for (int k=0; k<sProjects.length; k++) {
