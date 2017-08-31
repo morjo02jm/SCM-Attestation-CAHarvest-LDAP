@@ -469,7 +469,7 @@ public class HarvestLdap {
 		String sHarvestDBPassword = "";
 		String sProblems = "";
 		boolean bReport = false;
-		
+/*		
 		String[] cscrBrokers = 
 		{						
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr001;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
@@ -577,7 +577,7 @@ public class HarvestLdap {
 			"jdbc:sqlserver://L1AGUSDB003P-1;databaseName=cscr1309;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;",
 			"jdbc:sqlserver://L1AGUSDB002P-1;databaseName=cscr1400;integratedSecurity=false;selectMethod=cursor;multiSubnetFailover=true;user=harvest;"
 		};
-		
+*/		
 		// check parameters
 		for (int i = 0; i < iParms; i++)
 		{
@@ -633,6 +633,8 @@ public class HarvestLdap {
 	        	if (envName.equalsIgnoreCase("IMAG_DB_PASSWORD"))        
 	        		sImagDBPassword = frame.AESDecrypt(environ.get(envName));
 	        }
+	        
+	        String[] cscrBrokers = frame.getHarvestJDBCConnections();
 	        
 			// Show cLDAP statistics
 			if (bAttest)
