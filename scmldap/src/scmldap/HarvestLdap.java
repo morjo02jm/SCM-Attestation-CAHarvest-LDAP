@@ -3,6 +3,7 @@ package scmldap;
 
 import commonldap.CommonLdap;
 import commonldap.JCaContainer;
+import commonldap.SDTicket;
 
 import java.sql.*;
 import java.util.*;
@@ -18,6 +19,8 @@ public class HarvestLdap {
 
 	private static boolean bAttest = false;
 	private static boolean deleteDisabledUsers = false;
+	private static String sProblems = "";
+	private static List<String> ticketProblems = new ArrayList<String>();
 	
 	// Repository columns
 	private static String sTagUsername     = "USERNAME";
@@ -467,7 +470,6 @@ public class HarvestLdap {
 		String sOutputFile = "";
 		String sImagDBPassword  = "";
 		String sHarvestDBPassword = "";
-		String sProblems = "";
 		boolean bReport = false;
 		
 		// check parameters
@@ -679,13 +681,31 @@ public class HarvestLdap {
 			} // loop over brokers
 			
 			if (!sProblems.isEmpty()) {
-				sProblems+="</ul>\n";
 				String email = "faudo01@ca.com";
-				String sSubject, sScope;
+				String sSubject, sScope, sTicket;
 				
-				sSubject = "Notification of Problematic CA Harvest SCM Contacts";
+				sSubject = "Notification of CA Harvest SCM Governance Problems and Changes";
 				sScope = "Harvest SQLServer Database";
+				sTicket = "Application:UserAssistance Harvest CSCR";
 				
+		        //create a service desk ticket from ticketProblem
+		        String prblms = "";
+		        for(String prbm: ticketProblems){
+		            prblms += prbm + "\n";
+		        }
+		        
+		        if(!prblms.isEmpty()) {
+		        	String ticket = "";
+		            SDTicket sd = new SDTicket("test");
+		            ticket = sd.serviceTicket(sTicket, prblms, "", "", frame);
+		        	if (!ticket.isEmpty()) {	
+		        		if (!sProblems.isEmpty()) 
+		        			sProblems += tagUL;
+		        		sProblems += "<li>CSM ticket, <b>SRQ#"+ticket+"</b> created.</li>";
+		        	}	
+		        }
+				
+				sProblems+="</ul>\n";				
 		        String bodyText = frame.readTextResource("Notification_of_Noncompliant_Harvest_Contacts.txt", sScope, sProblems, "", "");								        								          
 		        frame.sendEmailNotification(email, sSubject, bodyText, true);
 			} // had some notifications
