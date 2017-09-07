@@ -312,6 +312,7 @@ GIS - Services Clarity		Active	CSCR/Harvest	null	CSCR1101/Services_Clarity	"[{""
 GIS - Compensation Planning		Active	CSCR/Harvest	null	CSCR1101/CompPlanning	"[{""PMFKEY"":""gansu08""}]"			gansu08		
 GIS - Support		Active	CSCR/Harvest	null	CSCR1101/Support	"[{""PMFKEY"":""vursh01""}]"			vursh01		
 GIS - CPQ		Active	CSCR/Harvest	null	CSCR1101/CPQ	"[{""PMFKEY"":""banma06""}]"			banma06		
+GIS - Clarity		Active	CSCR/Harvest	null	CSCR1101/GIS - Clarity	"[{""PMFKEY"":""raydi02""}]"			raydi02		
 GIS - Other		Inactive	CSCR/Harvest	null	CSCR1101	"[{""PMFKEY"":""banma06""}]"			banma06		
 GIS DBA		Active	CSCR/Harvest	null	CSCR1103	"[{""PMFKEY"":""kotra06""}]"			kotra06		
 GPO-Translation Services		Active	CSCR/Harvest	null	CSCR009	"[{""PMFKEY"":""rajap01""},{""PMFKEY"":""iijku01""}]"			iijku01;rajap01		
