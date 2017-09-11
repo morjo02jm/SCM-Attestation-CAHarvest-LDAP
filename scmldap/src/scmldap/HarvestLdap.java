@@ -699,7 +699,7 @@ public class HarvestLdap {
 		            SDTicket sd = new SDTicket("test");
 		            ticket = sd.serviceTicket(sTicket, prblms, "", "", frame);
 		        	if (!ticket.isEmpty()) {	
-		        		if (!sProblems.isEmpty()) 
+		        		if (sProblems.isEmpty()) 
 		        			sProblems += tagUL;
 		        		sProblems += "<li>CSM ticket, <b>SRQ#"+ticket+"</b> created.</li>";
 		        	}	
