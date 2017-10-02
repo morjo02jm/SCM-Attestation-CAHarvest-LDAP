@@ -165,7 +165,7 @@ CPS		Active	CSCRE/Endevor	CPS		"[{""PMFKEY"":""macco01""}]"			macco01
 CREWS	4.5;4.3;4.2	Active	CSCRE/Endevor	CREW	Islandia Data Center	"[{""PMFKEY"":""kucka01""}]"			kucka01		
 CSCR Management Pool		End of Life	CSCR/Harvest	null	CSCR601	"[{""PMFKEY"":""gaoyu01""},{""PMFKEY"":""faudo01""}]"			gaoyu01;faudo01		
 CPortal SDK		Inactive	CSCR/Harvest	null	CSCR101	"[{""PMFKEY"":""gamma02""}]"			ganma02		
-Cybermation ESP dSeries	r5.*; r11.1; r11.3;trunk	Active	CSCR/Harvest;RTC	null	CSCR102/dSeries;CSCR709/wa-dseries	"[{""PMFKEY"":""chinna08""},{""PMFKEY"":""parkr02""}]"			chinna08;parkr02		
+Cybermation ESP dSeries	r5.*; r11.1; r11.3;trunk	Active	CSCR/Harvest;RTC	null	CSCR102/dSeries;CSCR709/wa-dseries	"[{""PMFKEY"":""china08""}]"			chinna08		
 D2V		Active	CSCRE/Endevor	D2V		"[{""PMFKEY"":""baljo03""},{""PMFKEY"":""madca02""}]"		jambr01	baljo03;madca02		
 DADS Plus	4	Active	Librarian	null	AD1DEV.DADSPL40.*	"[{""PMFKEY"":""cafjo01""}]"			cafjo01	DSN	
 DADS Plus -Base	Base	Active	CSCRE/Endevor	null	TFM.CSCRE.DADSPL41.*	"[{""PMFKEY"":""cafjo01""}]"			cafjo01	DSN	
@@ -685,7 +685,7 @@ VTERM	3.3	Active	CMS	null	Type:;CMS;DISK;Directories:;CAVTERM	"[{""PMFKEY"":""ja
 Web Viewer CCI Client	r12;12.1	Internal	CSCR/Harvest	null	cscr809/WebView CCI Client	"[{""PMFKEY"":""raubr02""},{""PMFKEY"":""kokja01""}]"		kokja01	raubr02		
 WIZ		Active	CSCRE/Endevor	WIZ		"[{""PMFKEY"":""damda01""}]"			damda01		
 Workload Automation Test Scripts		Active	CSCR/Harvest	null	CSCR111	"[{""PMFKEY"":""veeka01""}]"			veeka01		
-Workload Control Center		Active	CSCR/Harvest	null	CSCR113	"[{""PMFKEY"":""chinna08""},{""PMFKEY"":""parkr02""}]"			chinna08;parkr02		
+Workload Control Center		Active	CSCR/Harvest	null	CSCR113	"[{""PMFKEY"":""china08""}]"			chinna08		
 Workstation Common - XGN	r12;r14;r14.5;r15;16.0;17.0;999	Internal	SCLM	null	XGN.PRD+++S.;XGN.HLD+++S.;XGN.BLD+++S.;XGN.INP+++S.;XGN.WRK+++S.;XGN.WK++++S.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 XCOM - Distributed	r2.1;r3.0;r11;r11.5;r11.6;r12.0	Active	CSCR/Harvest	null	CSCR806	"[{""PMFKEY"":""shuke01""},{""PMFKEY"":""sonra03""}]"		shuke01	sonra03		
 XCOM - Mainframe z/OS	11;11.5;11.6;12.0	Active	CSCRE/Endevor	XCOM	N/A	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""schbr09""}]"			cafjo01;schbr09		

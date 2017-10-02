@@ -696,7 +696,7 @@ public class HarvestLdap {
 		        
 		        if(!prblms.isEmpty()) {
 		        	String ticket = "";
-		            SDTicket sd = new SDTicket("test");
+		            SDTicket sd = new SDTicket("production");
 		            ticket = sd.serviceTicket(sTicket, prblms, "", "", frame);
 		        	if (!ticket.isEmpty()) {	
 		        		if (sProblems.isEmpty()) 
