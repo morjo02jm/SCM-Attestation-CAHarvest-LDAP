@@ -246,7 +246,8 @@ public class HarvestLdap {
 			int nBlock = 100;
 			
 			for (int iIndex=0,nRecords=0; iIndex<cRepoInfo.getKeyElementCount(sTagApp); iIndex++) {
-				if (!cRepoInfo.getString(sTagApp, iIndex).isEmpty()) { 
+				if (!cRepoInfo.getString(sTagApp, iIndex).isEmpty() &&
+					!cRepoInfo.getString(sTagContact, iIndex).contains("exempt")) { 
 					if (nRecords%nBlock == 0)
 						sqlStmt = sqlStmt0;
 					else 
@@ -579,7 +580,8 @@ public class HarvestLdap {
 								String sLocation = cHarvestContacts.getString("Location", iIndex).toLowerCase();
 								String[] sProjects = frame.readAssignedBrokerProjects(sLocation, sBroker);
 								String[] sApprovers = frame.readAssignedApprovers(cHarvestContacts.getString("Approver", iIndex));
-								boolean bActive = cHarvestContacts.getString("Active", iIndex).contentEquals("Y");
+								boolean bActive = !cHarvestContacts.getString("Active", iIndex).contentEquals("N");
+								boolean bExempt = cHarvestContacts.getString("Active", iIndex).contentEquals("E");
 								String sReleases = cHarvestContacts.getString("Release", iIndex);
 								
 								if (sProjects.length > 0) {
@@ -600,7 +602,7 @@ public class HarvestLdap {
 											// process all the unassigned approvers in the project
 											for (int kIndex=0; kIndex<cRepoInfo.getKeyElementCount(sTagProject); kIndex++) {
 												if (cRepoInfo.getString(sTagContact, kIndex).isEmpty()) {
-													cRepoInfo.setString(sTagContact, bActive? sApprover : "toolsadmin", kIndex);
+													cRepoInfo.setString(sTagContact, bActive? (bExempt?"exempt":sApprover):"inactive", kIndex);
 													cRepoInfo.setString(sTagProduct, sProduct, kIndex);
 													bFound = true;
 												}
@@ -613,7 +615,7 @@ public class HarvestLdap {
 												String sProject = cRepoInfo.getString(sTagProject, kIndex).toLowerCase();
 												if (sProject.startsWith(sPrefix)) {
 													boolean bIsActive = frame.processProjectReleases(sProject, sReleases, bActive);
-													cRepoInfo.setString(sTagContact, bIsActive? sApprover : "toolsadmin", kIndex);
+													cRepoInfo.setString(sTagContact, bIsActive?(bExempt?"exempt":sApprover):"inactive", kIndex);
 													cRepoInfo.setString(sTagProduct, sProduct, kIndex);
 													bFound = true;
 												}
@@ -632,7 +634,7 @@ public class HarvestLdap {
 							// Process all end of life projects (make them inactive projects in Harvest)
 							for (int k=0; k<cRepoInfo.getKeyElementCount(sTagProject); k++) {
 								String sProject = cRepoInfo.getString(sTagProject, k);
-								if (cRepoInfo.getString(sTagContact, k).equalsIgnoreCase("toolsadmin") &&
+								if (cRepoInfo.getString(sTagContact, k).equalsIgnoreCase("inactive") &&
 									!cRepoInfo.getString(sTagApp, k).isEmpty()) {
 									if (deactivateEndOfLifeProject(cscrBrokers[i], sProject, sHarvestDBPassword)) {
 							    		if (sProblems.isEmpty()) sProblems = tagUL;
