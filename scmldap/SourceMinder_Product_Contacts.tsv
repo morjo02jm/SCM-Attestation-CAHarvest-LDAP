@@ -1,19 +1,18 @@
 PROD_NAME	RELEASE	PROD_STAT	SRC_MNGMT_TOOL	ENDEVOR_PRODUCT	SRC_PHYS_LOC	APPROVERS_PMFKEY	ERC	SEM	SCAS  	SRC_RESOURCES	VM_VSE_SRC_LOC
 1	12;12.6;11.5;14.0	Active	CSCRE/Endevor	"CA1,CTS,GATE"	The source resides on Endevor pool volumes MOTMxx;SMDxxx and ASMxxx volumes accessible from TSO1;CA11 and CA31.;Islandia Data Center	"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""shuke01""}]"		shuke01	davfe01		
-7	r11.1;r11.3;r12.0	Active	CSCRE/Endevor;MOTM/Endevor	CA7	N/A	"[{""PMFKEY"":""macco01""},{""PMFKEY"":""davfe01""}]"		davfe01	macco01		
-11	r3.0; r11	Active	CSCRE/Endevor	AL7	N/A	"[{""PMFKEY"":""macco01""},{""PMFKEY"":""davfe01""}]"		davfe01	macco01		
-$LSRVDSN		Active	CSCRE/Endevor	$LSRVDSN		"[{""PMFKEY"":""damda01""}]"			damda01		
-(CATE) Tape Encryption	14.5;14.0;12.6;12.0	Active	CSCRE/Endevor	"CATE,GATE"	Islandia Data Center;Lisle DR location - Replicated	"[{""PMFKEY"":""kucka01""}]"			kucka01		
+7	r11.1;r11.3;r12.0	Active	CSCRE/Endevor;MOTM/Endevor	CA7	N/A	"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""macco01""}]"		davfe01	macco01		
+11	r3.0; r11	Active	CSCRE/Endevor	AL7	N/A	"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""macco01""}]"		davfe01	macco01		
+$LSRVDSN		Active	CSCRE/Endevor	$LSRVDSN		"[{""PMFKEY"":""slejo01""},{""PMFKEY"":""jenth05""}]"		jenth05	slejo01		
+(CATE) Tape Encryption	14.5;14.0;12.6;12.0	Active	CSCRE/Endevor	"CATE,GATE"	Islandia Data Center;Lisle DR location - Replicated	"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""shuke01""}]"		shuke01	davfe01		
 **		Active	CSCRE/Endevor	**		"[{""PMFKEY"":""mcpja01""}]"			mcpja01		
 1 Copycat	11	Active	PDS and Source Code Control System (SCCS)	null	CATC000.*	"[{""PMFKEY"":""davfe01""}]"			davfe01	DSN	
-"7 Distributed Components (Job Flow Illustrator, CPS)"	r11.1;r11.3;r12.0	Active	CSCR/Harvest	null	CSCR102	"[{""PMFKEY"":""macco01""}]"			macco01		
-"7 Distributed Components (Job Flow Illustrator, CPS)"	r11.1;r11.3;r12.0	Active	CSCRE/Endevor	null	APC.MOTM.CA7*;APC.MOTM.IAS*	"[{""PMFKEY"":""macco01""},{""PMFKEY"":""davfe01""}]"		davfe01	macco01	DSN	
+"7 Distributed Components (Job Flow Illustrator, CPS)"	r11.1;r11.3;r12.0	Active	CSCRE/Endevor	null	APC.MOTM.CA7*;APC.MOTM.IAS*	"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""macco01""}]"		davfe01	macco01	DSN	
 ACCUCHECK	1.2	Active	CSCRE/Endevor	null	ASM.ACUCHKL2.CK120011.*;ASMDSK.CSCRE.ACCU.R12.*	"[{""PMFKEY"":""cafjo01""}]"			cafjo01	DSN	
 ACF2 for z/OS	r14;r15	Active	Endevor	ACF	Islandia	"[{""PMFKEY"":""petja04""},{""PMFKEY"":""plfda02""}]"		tunem01	petja04;pflda02		
 ACF2 for z/OS	r14;r15	Active	PDS	null	endacf2;ACF2SRC;B1PROJ;ACF2CICS;ACF2IMS;tss	"[{""PMFKEY"":""petja04""},{""PMFKEY"":""plfda02""}]"		tunem01	petja04;pflda02	DSN	
 ACM	r2.3	Stabilized	CSCR/Harvest	null	CSCR806/ACM	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01		
 ACMEW		Active	CSCR/Harvest	null	CSCR602	"[{""PMFKEY"":""janmi04""}]"			janmi04		
-ACMEW Support		Active	CSCR/Harvest	null	CSCR608	"[{""PMFKEY"":""ocleo01""}]"			ocleo01		
+ACMEW Support		Inactive	CSCR/Harvest	null	CSCR608	"[{""PMFKEY"":""smike11""}]"			unknown		
 AD		Active	CSCRE/Endevor	AD		"[{""PMFKEY"":""abavi01""},{""PMFKEY"":""shuke01""}]"		shuke01	abavi01		
 Aion BRE	r11	Active	Endevor	AION		"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"			cafjo01		
 Aion BRE	r11	Active	CSCR/Harvest		"CSCR105/AionBRE,AionRM,AionJRE,Aion BRE"	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"			cafjo01		
@@ -23,7 +22,7 @@ Aion Other		Active	CSCR/Harvest	null	CSCR105	"[{""PMFKEY"":""cafjo01""},{""PMFKE
 ALC		Active	CSCRE/Endevor	ALC		"[{""PMFKEY"":""puiro01""}]"			puiro01		
 "Allegheny Collector, Asset Converter"		Active	CSCR/Harvest	null	"CSCR702/Allegheny Collector,Asset Converter - Anderson,SE Asset Converter"	"[{""PMFKEY"":""vakmo01""},{""PMFKEY"":""vensu02""}]"		vensu02	vakmo01		
 Allegheny/UAPM		Active	CSCR/Harvest	null	CSCR917	"[{""PMFKEY"":""vakmo01""},{""PMFKEY"":""vensu02""}]"		vensu02	vakmo01		
-Allocate	12.5;12.0;11.5	Active	CSCRE/Endevor	ALLOC	The source resides on CSCR** pool volumes accessible from TSO1;CA11 and CA31 or for release 12.6 from Endevor MOTM** volumes;The source resides on SMD*** pool volumes accessible from TSO1;CA11 and CA31 or for release 12.5 from Endevor MOTM** volumes.	"[{""PMFKEY"":""kucka01""}]"			kucka01		
+Allocate	12.5;12.0;11.5	Active	CSCRE/Endevor	ALLOC	The source resides on CSCR** pool volumes accessible from TSO1;CA11 and CA31 or for release 12.6 from Endevor MOTM** volumes;The source resides on SMD*** pool volumes accessible from TSO1;CA11 and CA31 or for release 12.5 from Endevor MOTM** volumes.	"[{""PMFKEY"":""hurro01""}]"		minni01	hurro01		
 Analyzer Common	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 Analyzer Common	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	SCLM	null	ANL.PRD+++S.;ANL.HLD+++S.;ANL.BLD+++S.;ANL.INP+++S.;ANL.WRK+++S.;ANL.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 APCDDS	r1.1	Stabilized	Librarian	null	OMMTL.SRC.APCMTL.TK11.psource;OMMTL.SRC.APCMTL.TK11.source	"[{""PMFKEY"":""cafjo01""}]"			cafjo01	DSN	
@@ -32,18 +31,17 @@ APCTOOLS		Active	CSCRE/Endevor	APCTOOLS		"[{""PMFKEY"":""davfe01""}]"			davfe01
 APM connectors		Active	CSCR/Harvest	null	CSCR709/apm	"[{""PMFKEY"":""fusle01""},{""PMFKEY"":""zhowe05""}]"			fusle01;zhowe05		
 APPDEV		Active	CSCRE/Endevor	APPDEV		"[{""PMFKEY"":""ricar01""},{""PMFKEY"":""mormi08""}]"			ricar01;mormi08		
 APPDynamics connector		Active	CSCR/Harvest	null	"CSCR709/appdynamics,applogic,bca,business-service-insight,ca-service-model,connect-wise-cmdb,Connector Unification,CSU,dbinsight,DSM,equal,GraphCheck"	"[{""PMFKEY"":""asisc01""},{""PMFKEY"":""bucgr01""}]"			asisc01;bucgr01		
-Appliance Development		Active	CSCR/Harvest	null	CSCR624	"[{""PMFKEY"":""bremi05""}]"			bremi05		
-Application Configuration Manager		Active	CSCR/Harvest	null	CSCR708	"[{""PMFKEY"":""akupr01""}]"			akupr01;treje05		
+Appliance Development		Inactive	CSCR/Harvest	null	CSCR624	"[{""PMFKEY"":""bremi05""}]"			bremi05		
+Application Configuration Manager		Inactive	CSCR/Harvest	null	CSCR708	"[{""PMFKEY"":""akupr01""}]"			akupr01;treje05		
 Applications Configuration Manager / CA Configuration Automation Catalyst Connectors	12.8;trunk	Active	CSCR/Harvest	null	CSCR709/cca	"[{""PMFKEY"":""thaka08""},{""PMFKEY"":""stoda04""}]"		stoda04	thaka08		
 ARZOS		Active	CSCRE/Endevor	ARZOS		"[{""PMFKEY"":""bosry01""},{""PMFKEY"":""shuke01""}]"		shuke01	bosry01		
 ASM2	4.2	Active	CSCRE/Endevor	null	ASMDSK.CSCRE.*;ASMDSK.ASM2DV.R420.*	"[{""PMFKEY"":""cafjo01""}]"			cafjo01	DSN;VMVSE	"[{""location"":""ASM2MS"",""type"":""VMMDISK""}]"
 ASSOC		Active	CSCRE/Endevor	ASSOC		"[{""PMFKEY"":""ricar01""},{""PMFKEY"":""mormi08""}]"			ricar01;mormi08		
-Astex	2.8	Active	CSCRE/Endevor	ASTEX	"The SMD volume pool on z/OS which is accessible from TSO1, CA11, CA31 and others. SCCS only on TSO1. "	"[{""PMFKEY"":""kucka01""}]"			kucka01		
+Astex	2.8	Active	CSCRE/Endevor	ASTEX	"The SMD volume pool on z/OS which is accessible from TSO1, CA11, CA31 and others. SCCS only on TSO1. "	"[{""PMFKEY"":""hurro01""}]"		minni01	hurro01		
 Auditor - Common Srvcs (CAECIS)	r12;r12.1	Active	PDS;Endevor	AUDIT	Islandia	"[{""PMFKEY"":""petja04""},{""PMFKEY"":""plfda02""}]"		tunem01	petja04;pflda02		
 AUDTT		Active	CSCRE/Endevor	AUDTT		"[{""PMFKEY"":""petja04""},{""PMFKEY"":""plfda02""}]"		tunem01	petja04;pflda02		
-AutoSys	r11	Active	CSCR/Harvest	null	CSCR109	"[{""PMFKEY"":""badve01""},{""PMFKEY"":""minni01""}]"		minni01	badve01		
-AutoSys	r11.3*;r11.4;trunk	Active	CSCR/Harvest	null	"CSCR102/AutoSys, CSCR709/wa-autosys"	"[{""PMFKEY"":""badve01""},{""PMFKEY"":""minni01""}]"		minni01	abbwi01		
-AutoSys Other		Active	CSCR/Harvest	null	CSCR102	"[{""PMFKEY"":""badve01""},{""PMFKEY"":""minni01""}]"		minni01	badve01		
+AutoSys	r11	Active	CSCR/Harvest	null	CSCR109	"[{""PMFKEY"":""badve01""},{""PMFKEY"":""ragdi01""}]"		ragdi01	badve01		
+AutoSys	r11.3*;r11.4;trunk	Active	CSCR/Harvest	null	CSCR102/AutoSys;CSCR709/wa-autosys	"[{""PMFKEY"":""badve01""},{""PMFKEY"":""ragdi01""}]"		ragdi01	badve01		
 Batch Processor	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 Batch Processor	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	RBP.PRD+++S.;RPB.HLD+++S.;RBP.BLD+++S.;RBP.INP+++S.;RBP.WRK+++S.;RBP.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 Bind Analyzer	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
@@ -51,14 +49,14 @@ Bind Analyzer	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	PBA.PRD
 Blockmaster	2.2	Active	CSCRE/Endevor;PDS	null	ASM.BLKMST-;ASMDSK.BLKMST-	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""hurro01""}]"			cafjo01;hurro01	DSN	
 BrightStor Distributed		End of Life	CSCR/Harvest	null	CSCR503	"[{""PMFKEY"":""ganra08""}]"			ganra08		
 BSDBA		Active	CSCRE/Endevor	BSDBA		"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
-BSO Asset Intelligence		Active	CSCR/Harvest	null	CSCR610	"[{""PMFKEY"":""banza01""}]"			banza01		
+BSO Asset Intelligence		Inactive	CSCR/Harvest	null	CSCR610	"[{""PMFKEY"":""banza01""}]"			banza01		
 BUNDL	r5.0	Active	CSCRE/Endevor	BUNDL	N/A	"[{""PMFKEY"":""sirjo01""},{""PMFKEY"":""shuke01""}]"		shuke01	sirjo01		
 C20		End of Life	CSCR/Harvest	null	CSCR619	"[{""PMFKEY"":""ganra08""}]"			ganra08		
 CA Access Control		Active	CSCR/Harvest	null	"CSCR402/AC,FLASH,GORDON,HAWKEYE,SC"	"[{""PMFKEY"":""sarav02""},{""PMFKEY"":""matsu04""}]"		matsu04	sarav02		
 CA Access Control Other		Active	CSCR/Harvest	null	CSCR402	"[{""PMFKEY"":""sarav02""},{""PMFKEY"":""matsu04""}]"		matsu04	sarav02		
 CA APIM -Concierge - Orchestrator	r1.0	Inactive	CSCR/Harvest	null	CSCR807	"[{""PMFKEY"":""munbh01""}]"		bhara24	munbh01		
-CA Application Lifecycle Conductor	r12	Active	CSCR/Harvest	null	CSCR606_R12.5/ACMEW	"[{""PMFKEY"":""layro01""}]"			layro01		
-CA Application Lifecycle Conductor	v17;v18	Active	CSCR/Harvest	null	"CSCR606_R12.5/AEECL,AENWS"	"[{""PMFKEY"":""layro01""}]"			layro01		
+CA Application Lifecycle Conductor	r12	Active	CSCR/Harvest	null	CSCR606_R12.5/ACMEW	"[{""PMFKEY"":""thaka08""}]"			thaka08		
+CA Application Lifecycle Conductor	v17;v18	Active	CSCR/Harvest	null	"CSCR606_R12.5/AEECL,AENWS"	"[{""PMFKEY"":""thaka08""}]"			thaka08		
 CA CATALYST / USM Connector Project / SSA	1.*2.0;2.5;3.0	Active	CSCR/Harvest	null	CSCR929	"[{""PMFKEY"":""taoyu04""}]"		merja01	taoyu04		
 CA CATALYST / USM Connector Project / SSA	1.7;trunk	Active	CSCR/Harvest	null	"CSCR709/spectrum-sa,nimsoft"	"[{""PMFKEY"":""taoyu04""}]"		merja01	taoyu04		
 CA Clarity PPM	13.0;13.1;13.2;13.3;14.1;14.2;14.3;trunk	Active	CSCR/Harvest	null	CSCR612	"[{""PMFKEY"":""papgo01""}]"		aruma01	papgo01		
@@ -68,6 +66,7 @@ CA GWT		Active	CSCR/Harvest	null	CSCR618	"[{""PMFKEY"":""mitsa06""}]"			mitsa06
 CA Labs LabTrack		Active	CSCR/Harvest	null	CSCR1308	"[{""PMFKEY"":""munvi02""}]"			munvi02		
 CA LDAP	15.0;15.1	Active	SVN;Endevor	CAEIG	Lisle;IL	"[{""PMFKEY"":""petja04""},{""PMFKEY"":""rozmi02""}]"		tunem01	petja04;rozmi02		
 CA MAT		Active	CSCR/Harvest	null	CSCR801/CA MAT	"[{""PMFKEY"":""corma21""}]"			corma21		
+CA Mainframe Operational Intelligence	"1.0,2.0"	Active	CSCRE/Endevor	Z2L		"[{""PMFKEY"":""carju01""}]"			carju01		
 CA Picasso		Active	CSCR/Harvest	null	CSCR625	"[{""PMFKEY"":""vakmo01""}]"			vakmo01		
 CA Products--Datacom		Active	CSCR/Harvest	null	CSCR805	"[{""PMFKEY"":""behka01""},{""PMFKEY"":""elwly02""},{""PMFKEY"":""hogmi01""}]"			behka01;elwly02;hogmi01		
 CA Products--Easy View / Intraccess		End of Life	CSCR/Harvest	null	CSCR804	"[{""PMFKEY"":""shika01""}]"			shika01		
@@ -88,23 +87,22 @@ CA TS PPM Clarity		Active	CSCR/Harvest	null	CSCR1001/PPM	"[{""PMFKEY"":""ragba01
 CA TS CA-IM		Active	CSCR/Harvest	null	CSCR1001/CA-IM	"[{""PMFKEY"":""varsr03""}]"			varsr03		
 CA TS VSA		Active	CSCR/Harvest	null	CSCR1001/VSA	"[{""PMFKEY"":""vemha02""}]"			vemha02		
 CA Ts USD Int		Active	CSCR/Harvest	null	CSCR1001/USD	"[{""PMFKEY"":""vemha02""}]"			vemha02		
-CA TS Wily		Inctive	CSCR/Harvest	null	CSCR1001/Wily	"[{""PMFKEY"":""redpr02""}]"			redpr02		
+CA TS Wily		Inactive	CSCR/Harvest	null	CSCR1001/Wily	"[{""PMFKEY"":""redpr02""}]"			redpr02		
 CA TS ITPAM		End of Life	CSCR/Harvest	null	CSCR1001/ITPAM	"[{""PMFKEY"":""foxmi01""}]"			foxmi01		
 CA TS other		Active	CSCR/Harvest	null	CSCR1001	"[{""PMFKEY"":""varsr03""}]"			varsr03		
 CA WCOM		Active	CSCR/Harvest	null	"CSCR809/CA WCOM,WCOM"	"[{""PMFKEY"":""raubr02""},{""PMFKEY"":""kokja01""}]"		kokja01	raubr02		
 CA Web Administrator	15.0;Chorus 3.0;Chorus 4.0	Active	SVN;Endevor	"CAEIG,CAE1M"	Lisle;IL	"[{""PMFKEY"":""petja04""},{""PMFKEY"":""rozmi02""}]"		tunem01	petja04;rozmi02		
 CA WF	1.1.5 SP6	Active	CSCR/Harvest	null	CSCR110/Workflow	"[{""PMFKEY"":""vensu02""},{""PMFKEY"":""desan04""}]"		vensu02	desan04		
-CA7 Smart Console	1.1	Active	PDS	null	MFBUMISC.OPERA.DIST31.+;MFBUMISC.OPERA.DEVLR32.MACLIB	"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""slejo01""}]"	davfe01		slejo01	DSN	
+CA7 Smart Console	1.1	Stabilized	PDS	null	MFBUMISC.OPERA.DIST31.+;MFBUMISC.OPERA.DEVLR32.MACLIB	"[{""PMFKEY"":""kiemi01""}]"			kiemi01	DSN	
 CA90s for Fujitsu	r1.0	Active	PDS	null	CA90SMVS.MOTM.FUJITSU.*	"[{""PMFKEY"":""kazri01""},{""PMFKEY"":""wooky01""},{""PMFKEY"":""natco02""}]"			kazri01;wooky01;natco02	DSN	
 CA90s for Hitachi	r1.0	Active	PDS	null	CA90SMVS.MOTM.HITACHI.*	"[{""PMFKEY"":""kazri01""},{""PMFKEY"":""wooky01""},{""PMFKEY"":""natco02""}]"			kazri01;wooky01;natco02	DSN	
 CAACF		Active	CSCRE/Endevor	CAACF		"[{""PMFKEY"":""petja04""},{""PMFKEY"":""plfda02""}]"		tunem01	petja04;pflda02		
 Calendar Routines	6	Active	PDS	null	CDE.TCCR60.*	"[{""PMFKEY"":""cafjo01""}]"			cafjo01	DSN	
 CAMS/Emerging Technologies		End of Life	CSCR/Harvest	null	CSCR1102	"[{""PMFKEY"":""ganra08""}]"			ganra08		
 CASAF		Active	CSCRE/Endevor	CASAF		"[{""PMFKEY"":""petja04""},{""PMFKEY"":""plfda02""}]"		tunem01	petja04;pflda02		
-CASEC		Active	CSCRE/Endevor	CASEC		"[{""PMFKEY"":""kucka01""}]"	angth01	giero01	kucka01		
+CASEC		Active	CSCRE/Endevor	CASEC		"[{""PMFKEY"":""hurro01""}]"		minni01	hurro01		
 Catalog Facility Common	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 Catalog Facility Common	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	SCLM	null	RCO.PRD+++S.;RCO.HLD+++S.;RCO.BLD+++S.;RCO.INP+++S;RCO.WRK+++S.;RCO.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
-Catalyst Connector other		Active	CSCR/Harvest	null	CSCR709	"[{""PMFKEY"":""chaso05""}]"			chaso05		
 CBDM		Active	CSCRE/Endevor	CBDM		"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 CCE ATG		Active	CSCR/Harvest	null	CSCR1303	"[{""PMFKEY"":""sousr01""}]"			sousr01		
 CCE Insight		Active	CSCR/Harvest	null	CSCR1301/CA Business Service Insight	"[{""PMFKEY"":""kerro06""},{""PMFKEY"":""natco02""}]"			kerro06;natco02		
@@ -112,31 +110,32 @@ CCIPC	r2.1;r12.0;r12.1;r14.0;r14.1	Active	CSCR/Harvest	null	CSCR920	"[{""PMFKEY"
 CEM		Active	CSCRE/Endevor	CEM		"[{""PMFKEY"":""petja04""},{""PMFKEY"":""rozmi02""}]"		tunem01	petja04;rozmi02		
 CEWIT		Active	CSCR/Harvest	null	CSCR703	"[{""PMFKEY"":""kimhy08""}]"			kimhy08		
 Change Manager Enterprise Workbench (CMEW)	r12   	Active	CSCR/Harvest	null	CSCR606_R12.5	"[{""PMFKEY"":""ricar01""},{""PMFKEY"":""melmi08""}]"		ricar01	svami01;melmi08		
-Chorus	r3.0;r4.0	Active	CSCR/Harvest;CVS;RTC;MF 2.0 Endevor	"CHOIN,FLO"	CSCR702	"[{""PMFKEY"":""sajna02""}]"			sajna02		
+Chorus	r3.0;r4.0	Active	CSCR/Endevor	"CHOIN,FLO"		"[{""PMFKEY"":""mansu11""}]"			mansu11		
+Chorus		Active	CSCR/Harvest	null	CSCR702/Chorus	"[{""PMFKEY"":""mansu11""}]"			mansu11		
 Chorus DB2 Database Mgmt Role	1.0;2.0;16.0;17.0;18.0;19.0	Active	CSCRE/Endevor;RTC server https://cscrtc03.ca.com	"FDB2,DBT"	Source Resides on DEV DASD packs  The GA releaase of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes. For the pre-beta and BETA release the datasets are allocated on DEV volumes which are not part of DR.  When the products are moved into GA the datasets are moved to the DEVR volumes;Source also kept on RTC Server https://cscrrtc003.ca.com/ccm/	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 Chorus DB2 Database Mgmt Role	2.0;2.5;3.0;4.0	Active	Endevor;RTC server  https://cscrrtc003.ca.com/ccm/	MDB2	Source Resides on DEV DASD packs  The GA releaase of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes. For the pre-beta and BETA release the datasets are allocated on DEV volumes which are not part of DR.  When the products are moved into GA the datasets are moved to the DEVR volumes   RTC server   https://cscrtc03.ca.com	"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""mormi08""}]"			tucjo02;mormi08		
 Chorus Security Discipline	3.0;4.0	Active	SVN;MF 2.0 Endevor	CAE1M	Lisle;IL 251-b212-auto.ca.com	"[{""PMFKEY"":""petja04""},{""PMFKEY"":""rozmi02""}]"		tunem01	petja04;rozmi02		
-Chorus Storage Role	2.0;2.5;3.0	Active	Endevor;RTC	STOCH		"[{""PMFKEY"":""kucka01""}]"			kucka01		
-Chorus Storage Role	2.0;2.5;3.0	Active	CSCR/Harvest		"CSCR504/Chorus,Distributed Storage Chorus Role;CSCR702"	"[{""PMFKEY"":""kucka01""}]"			kucka01		
+Chorus Storage Role	2.0;2.5;3.0	Active	Endevor;RTC	STOCH		"[{""PMFKEY"":""hurro01""}]"		minni01	hurro01		
+Chorus Storage Role	2.0;2.5;3.0	Inactive	CSCR/Harvest		"CSCR504/Chorus,Distributed Storage Chorus Role"	"[{""PMFKEY"":""hurro01""}]"		minni01	hurro01		
 Chorus Time Series Facility (TSF)	r3.0;r2.5;r2.0;r1.0;r4.0	Active	Endevor	NETM	GIS Islandia data center	"[{""PMFKEY"":""joheu02""},{""PMFKEY"":""hoojo03""},{""PMFKEY"":""tholo01""}]"	angth01	norst02	hoojo03;joheu02;tholo01		
 Chorus Time Series Facility (TSF)	r3.0;r2.5;r2.0;r1.0;r4.0	Active	PDS	null	AUDE0.MOT+.;AUDE0.NMV2SMS.**.SOURCE;AUDE0.NMV2SMS.**.LIST;AUDE0.NMDE1.*TST;AUCM0.FIXREG.*	"[{""PMFKEY"":""joheu02""},{""PMFKEY"":""hoojo03""},{""PMFKEY"":""tholo01""}]"	angth01	norst02	hoojo03;joheu02;tholo01	DSN	
-CI Manager		Active	CSCR/Harvest	null	CSCR611	"[{""PMFKEY"":""ragdi01""}]"		ragdi01	bucgr01		
+CI Manager		Inactive	CSCR/Harvest	null	CSCR611	"[{""PMFKEY"":""ragdi01""}]"		ragdi01	bucgr01		
 CICSort	2.1	Stabilized	PDS	null	MFBUMISC.ASM.CSRTMSDV.+	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	DSN	
-"CIS for VSE (System Adapter, CUI, CCI, ENF, CICSSPAWN, CICSMAC, CAAUDIT, GSSVSE, CAIPROD, CAPRDSEL, CATALOG IXVTOC)"	6.0;6.1	Active	CMS	null	VSEDEV.ADAPTER.;VSEDEV.CUI.;VSEDEV.CCIVSE.;VSEDEV.ENF.;VSEDEV.CATALOG.IXVTOC;VSEDEV.CAIPROD.GSS.42;VSEDEV.CAPRDSEL.SOURCE;COLSFS.CUI.;COLSFS.COMMON.;COLSFS.CAAUDIT.;COLSFS.GSSVSE.;VSEDEV.CCIVM.;VSEDEV.TCPIP	"[{""PMFKEY"":""stoda04""},{""PMFKEY"":""cafjo01""}]"		stoda04	cafjo01	 VMVSE	"[{""location"":""VSESOURC"",""type"":""VMMDISK""},{""location"":""ADAPTVSE"",""type"":""VMMDISK""},{""location"":""ADAPTDOS"",""type"":""VMMDISK""},{""location"":""DOSACT"",""type"":""VMMDISK""},{""location"":""VSEAPAR"",""type"":""VMMDISK""},{""location"":""CUI2"",""type"":""VMMDISK""},{""location"":""VSEDEV.ADAPTER"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CUI"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CCIVSE"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CCIVM"",""type"":""DIRECTRY""},{""location"":""VSEDEV.ENF"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CATALOG"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CAIPROD.GSS.42"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CAPRDSEL.SOURCE"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CICSSPAWN"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CICSMAC"",""type"":""DIRECTRY""},{""location"":""VSEDEV.TCPIP"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CAAUDIT"",""type"":""DIRECTRY""},{""location"":""COLSFS.CUI"",""type"":""DIRECTRY""},{""location"":""COLSFS.CAAUDIT"",""type"":""DIRECTRY""},{""location"":""COLSFS.GSSVSE"",""type"":""DIRECTRY""}]"
-"CIS VM Components (Activator, Task Manager, Panel Manager, Catalog Manager, System Adapter, I/O Subsystem)"	r1.0	Active	CPM	null	CMS;Disks:;ADAPTCMS;CACT;CAMT;CAPRODVM;CAPANMAN;TASKMAN;CCIVMDVL;CDSM;CASE;SFS;Directories:;VSEDEV.CATALOG	"[{""PMFKEY"":""jambr01""}]"		jambr01		 VMVSE	"[{""location"":""SYSADAPT"",""type"":""DIRECTRY""},{""location"":""IOS"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CATALOG"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CAPANMAN"",""type"":""DIRECTRY""},{""location"":""ADAPTCMS"",""type"":""VMMDISK""},{""location"":""CACT"",""type"":""VMMDISK""},{""location"":""CAMT"",""type"":""VMMDISK""},{""location"":""CAPRODVM"",""type"":""VMMDISK""},{""location"":""CAPANMAN"",""type"":""VMMDISK""},{""location"":""TASKMAN"",""type"":""VMMDISK""},{""location"":""CCIVMDVL"",""type"":""VMMDISK""},{""location"":""CDSM"",""type"":""VMMDISK""},{""location"":""CASE"",""type"":""VMMDISK""}]"
+"CIS for VSE (System Adapter, CUI, CCI, ENF, CICSSPAWN, CICSMAC, CAAUDIT, GSSVSE, CAIPROD, CAPRDSEL, CATALOG IXVTOC)"	6.0;6.1	Active	CMS	null	VSEDEV.ADAPTER.;VSEDEV.CUI.;VSEDEV.CCIVSE.;VSEDEV.ENF.;VSEDEV.CATALOG.IXVTOC;VSEDEV.CAIPROD.GSS.42;VSEDEV.CAPRDSEL.SOURCE;COLSFS.CUI.;COLSFS.COMMON.;COLSFS.CAAUDIT.;COLSFS.GSSVSE.;VSEDEV.CCIVM.;VSEDEV.TCPIP	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	 VMVSE	"[{""location"":""VSESOURC"",""type"":""VMMDISK""},{""location"":""ADAPTVSE"",""type"":""VMMDISK""},{""location"":""ADAPTDOS"",""type"":""VMMDISK""},{""location"":""DOSACT"",""type"":""VMMDISK""},{""location"":""VSEAPAR"",""type"":""VMMDISK""},{""location"":""CUI2"",""type"":""VMMDISK""},{""location"":""VSEDEV.ADAPTER"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CUI"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CCIVSE"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CCIVM"",""type"":""DIRECTRY""},{""location"":""VSEDEV.ENF"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CATALOG"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CAIPROD.GSS.42"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CAPRDSEL.SOURCE"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CICSSPAWN"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CICSMAC"",""type"":""DIRECTRY""},{""location"":""VSEDEV.TCPIP"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CAAUDIT"",""type"":""DIRECTRY""},{""location"":""COLSFS.CUI"",""type"":""DIRECTRY""},{""location"":""COLSFS.CAAUDIT"",""type"":""DIRECTRY""},{""location"":""COLSFS.GSSVSE"",""type"":""DIRECTRY""}]"
+"CIS VM Components (Activator, Task Manager, Panel Manager, Catalog Manager, System Adapter, I/O Subsystem)"	r1.0	Active	CPM	null	CMS;Disks:;ADAPTCMS;CACT;CAMT;CAPRODVM;CAPANMAN;TASKMAN;CCIVMDVL;CDSM;CASE;SFS;Directories:;VSEDEV.CATALOG	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		 VMVSE	"[{""location"":""SYSADAPT"",""type"":""DIRECTRY""},{""location"":""IOS"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CATALOG"",""type"":""DIRECTRY""},{""location"":""VSEDEV.CAPANMAN"",""type"":""DIRECTRY""},{""location"":""ADAPTCMS"",""type"":""VMMDISK""},{""location"":""CACT"",""type"":""VMMDISK""},{""location"":""CAMT"",""type"":""VMMDISK""},{""location"":""CAPRODVM"",""type"":""VMMDISK""},{""location"":""CAPANMAN"",""type"":""VMMDISK""},{""location"":""TASKMAN"",""type"":""VMMDISK""},{""location"":""CCIVMDVL"",""type"":""VMMDISK""},{""location"":""CDSM"",""type"":""VMMDISK""},{""location"":""CASE"",""type"":""VMMDISK""}]"
 Clarity R12		Active	CSCR/Harvest	null	CSCR617	"[{""PMFKEY"":""asisc01""},{""PMFKEY"":""bucgr01""}]"			asisc01;bucgr01		
 Cleanup for ACF2	12.0;12.1	Active	Endevor	ETCLA	USLIDAMD	"[{""PMFKEY"":""petja04""},{""PMFKEY"":""plfda02""}]"		tunem01	petja04;pflda02		
 Cleanup for ACF2	12.0;12.1	Active	PDS	null	ACF2CLN;ENDCLNA	"[{""PMFKEY"":""petja04""},{""PMFKEY"":""plfda02""}]"		tunem01	petja04;pflda02	DSN	
 Cleanup for RACF	12.0;12.1	Active	Endevor	ETCLR	Islandia	"[{""PMFKEY"":""petja04""},{""PMFKEY"":""plfda02""}]"		tunem01	petja04;pflda02		
 Cleanup for RACF	12.0;12.1	Active	PDS	null	 RACFCLN;endclnr	"[{""PMFKEY"":""petja04""},{""PMFKEY"":""plfda02""}]"		tunem01	petja04;pflda02	DSN	
-Cleanup for Top Secret	12.0;12.1	Active	Endevor	ETCLT	Islandia	"[{""PMFKEY"":""petja04""},{""PMFKEY"":""plfda02""}]"		tunem01	petja04;pflda02		
-Cleanup for Top Secret	12.0;12.1	Active	PDS	null	ENDCLNT	"[{""PMFKEY"":""petja04""},{""PMFKEY"":""plfda02""}]"		tunem01	petja04;pflda02	DSN	
+Cleanup for Top Secret	12.0;12.1	Active	Endevor	ETCLT	Islandia	"[{""PMFKEY"":""wasch01""}]"		wasch01			
+Cleanup for Top Secret	12.0;12.1	Active	PDS	null	ENDCLNT	"[{""PMFKEY"":""wasch01""}]"		wasch01		DSN	
 CleverPath Portal		End of Life	CSCR/Harvest	null	CSCR104	"[{""PMFKEY"":""wecca01""}]"			weeca01		
 CleverPath Reporter	4.01; 4.1; 4.2	End of Life	CSCR/Harvest	null	CSCR704	"[{""PMFKEY"":""puiro01""},{""PMFKEY"":""shaha07""}]"		puiro01	shaha07		
 CMDB		Active	CSCR/Harvest	null	CSCR616	"[{""PMFKEY"":""vakmo01""},{""PMFKEY"":""vensu02""}]"		vensu02	vakmo01		
 CMDB Connector for z/OS	r2.0;r1.0	Active	Endevor	NETM	GIS Islandia data center	"[{""PMFKEY"":""joheu02""},{""PMFKEY"":""angth01""},{""PMFKEY"":""norst02""}]"	angth01	norst02	joheu02		
-CMDB Connector for z/OS	r2.0;r1.0	Active	PDS	null	AUPK0.DL69.GL1011.*.VSAM;AUDE0.MOT+.;AUDE0.NMV2SMS.**.SOURCE;AUDE0.NMV2SMS.**.LIST;AUDE0.NMDE1.*TST;AUCM0.FIXREG.*	"[{""PMFKEY"":""jambr01""}]"		jambr01		DSN	
-CMPRS		Active	CSCRE/Endevor	CMPRS		"[{""PMFKEY"":""kucka01""}]"	angth01	giero01	kucka01		
+CMDB Connector for z/OS	r2.0;r1.0	Active	PDS	null	AUPK0.DL69.GL1011.*.VSAM;AUDE0.MOT+.;AUDE0.NMV2SMS.**.SOURCE;AUDE0.NMV2SMS.**.LIST;AUDE0.NMDE1.*TST;AUCM0.FIXREG.*	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		DSN	
+CMS for OpenVMS		Active		null		"[{""PMFKEY"":""butda07""},{""PMFKEY"":""stoda04""}]"		stoda04	butda07	OTHER;HARVEST	
 Cobol/XE	3.0.2	Active	PDS;CMS	null	MFBUMISC.IM1SUP.UFO+	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	 DSN;VMVSE	"[{""location"":""UFOSRC.COBOLXE.NEXT.UPDATES"",""type"":""DIRECTRY""},{""location"":""UFOSRC.COBOLXE.R300.BASE"",""type"":""DIRECTRY""},{""location"":""UFOSRC.COBOLXE.R300.ZAPS"",""type"":""DIRECTRY""}]"
 Common Framework	r12	End of Life	SCLM	null	CGN.PRD+++S.;CGN.HLD+++S.;CGN.BLD+++S.;CGN.INP+++S.;CGN.WRK+++S.;CGN.WK++++S.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 Common Insight Services	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
@@ -151,18 +150,20 @@ Compliance Manager	r2	Active	SVN	null	ENDCMGR.*;CAECASRC.*	"[{""PMFKEY"":""petja
 Compress DB2	3.2.0	Active	PDS	null	MFBUMISC.CMPRS.+	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	DSN	
 Compress for IMS	r15;r16;r18;19.0	Active	Endevor	IMS	Source resides on DEV DASD packs.	"[{""PMFKEY"":""strji02""}]"			strji02		
 Compress for IMS	r15;r16;r18;19.0	Active	SCLM	null	CPI.PRD+++S.;ENIMS.MOTM.IMS*;CPI.HLD+++S.;CPI.BLD+++S.;CPI.INP+++S.;CPI.WRK+++S.;CPI.WK++++S.	"[{""PMFKEY"":""strji02""}]"			strji02	DSN	
+Compress MVS	5.2;5.5	Active	CSCRE/Endevor	CMPRS		"[{""PMFKEY"":""hurro01""}]"		minni01	hurro01		
+Compress MVS	5.2;5.5	Active	PDS	null	CCVB550.*;CMVS520*.*;CMPRS.MOTM.*	"[{""PMFKEY"":""hurro01""}]"		minni01	hurro01	DSN	
 Configuration Manager for IMS	r14;r15;r16;r18;19.0	Active	Endevor	IMS	Source resides on DEV DASD packs.    	"[{""PMFKEY"":""strji02""}]"			strji02		
 Configuration Manager for IMS	r14;r15;r16;r18;19.0	Active	SCLM	null	ICM.PRD+++S.;ENIMS.MOTM.IMS*;ICM.HLD+++S.;ICM.BLD+++S.;ICM.INP+++S.;ICM.WRK+++S.;ICM.WK++++S.	"[{""PMFKEY"":""strji02""}]"			strji02	DSN	
 Connector to SSA-Catalyst (NetQos)		Inactive	CSCR/Harvest	null	"CSCR709/ssa-domain,netqos"	"[{""PMFKEY"":""janma07""}]"			janma07		
 Console Management for OpenVMS	3.0 (VAX) ; 3.1	Active		null		"[{""PMFKEY"":""butda07""},{""PMFKEY"":""stoda04""}]"		stoda04	butda07	OTHER;HARVEST	
 CONVERTOR	1.3	Active	CSCRE/Endevor	null	ASMDSK.CSCRE.CONV.R13.*;ASM.CMODV.*;ASM.CONVTRL2.*;ASM.CTFDV.*	"[{""PMFKEY"":""cafjo01""}]"			cafjo01	DSN;VMVSE	"[{""location"":""conv13.191"",""type"":""DIRECTRY""},{""location"":""conv13.192"",""type"":""DIRECTRY""},{""location"":""conv13.193"",""type"":""DIRECTRY""},{""location"":""conv13.194"",""type"":""DIRECTRY""}]"
-Copycat Utility	12	Active	CSCRE/Endevor	CATC	Islandia Data Center;Lisle DR location - Replicated	"[{""PMFKEY"":""kucka01""}]"			kucka01		
-Cost Optimizer	1	Active	Endevor	CSTPT		"[{""PMFKEY"":""dubmi01""},{""PMFKEY"":""sajna02""}]"			dubmi01;sajna02		
-Cost Optimizer	1	Active	z/OS	null	COSTOPT	"[{""PMFKEY"":""dubmi01""},{""PMFKEY"":""sajna02""}]"			dubmi01;sajna02	DSN	
-Cost Optimizer	1	Active	CSCR/Harvest		CSCR702	"[{""PMFKEY"":""dubmi01""},{""PMFKEY"":""sajna02""}]"			dubmi01;sajna02		
+Copycat Utility	12	Active	CSCRE/Endevor	CATC	Islandia Data Center;Lisle DR location - Replicated	"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""shuke01""}]"		shuke01	davfe01		
+Cost Optimizer	1	Inactive	Endevor	CSTPT		"[{""PMFKEY"":""dubmi01""},{""PMFKEY"":""sajna02""}]"			dubmi01;sajna02		
+Cost Optimizer	1	Inactive	z/OS	null	COSTOPT	"[{""PMFKEY"":""dubmi01""},{""PMFKEY"":""sajna02""}]"			dubmi01;sajna02	DSN	
+Cost Optimizer	1	Inactive	CSCR/Harvest		CSCR702/CostOptimizerUI	"[{""PMFKEY"":""sajna02""},{""PMFKEY"":""dubmi01""}]"		dubmi01	sajna02		
 CPM		Active	CSCRE/Endevor	CPM		"[{""PMFKEY"":""davfe01""}]"			davfe01		
-CPS		Active	CSCRE/Endevor	CPS		"[{""PMFKEY"":""macco01""}]"			macco01		
-CREWS	4.5;4.3;4.2	Active	CSCRE/Endevor	CREW	Islandia Data Center	"[{""PMFKEY"":""kucka01""}]"			kucka01		
+CPS		Active	CSCRE/Endevor	CPS		"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""macco01""}]"		davfe01	macco01		
+CREWS	4.5;4.3;4.2	Inactive	CSCRE/Endevor	CREW	Islandia Data Center	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01		
 CSCR Management Pool		End of Life	CSCR/Harvest	null	CSCR601	"[{""PMFKEY"":""gaoyu01""},{""PMFKEY"":""faudo01""}]"			gaoyu01;faudo01		
 CPortal SDK		Inactive	CSCR/Harvest	null	CSCR101	"[{""PMFKEY"":""gamma02""}]"			ganma02		
 Cybermation ESP dSeries	r5.*; r11.1; r11.3;trunk	Active	CSCR/Harvest;RTC	null	CSCR102/dSeries;CSCR709/wa-dseries	"[{""PMFKEY"":""china08""}]"			chinna08		
@@ -171,7 +172,7 @@ DADS Plus	4	Active	Librarian	null	AD1DEV.DADSPL40.*	"[{""PMFKEY"":""cafjo01""}]"
 DADS Plus -Base	Base	Active	CSCRE/Endevor	null	TFM.CSCRE.DADSPL41.*	"[{""PMFKEY"":""cafjo01""}]"			cafjo01	DSN	
 DADSP		Active	CSCRE/Endevor	DADSP		"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"			cafjo01		
 DASDCHECK	3.2	Active	PDS	null	ASM.DASCHKL2.*	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""hurro01""}]"			cafjo01;hurro01	DSN	
-Data Content Discovery	1	Active	Endevor;GIT	CAFEY	Islandia;NY	"[{""PMFKEY"":""gujsa02""}]"		tunem01	gujsa02		
+Data Content Discovery	1	Active	Endevor;GIT	CAFEY	Islandia;NY	"[{""PMFKEY"":""gujsa02""},{""PMFKEY"":""allje05""}]"		tunem01	gujsa02;allje05		
 Database Analyzer	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM;Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 Database Analyzer	r14;r15;r16;r18;19.0	Active	Endevor	IMS	Source resides on DEV DASD packs.    	"[{""PMFKEY"":""strji02""}]"			strji02		
 Database Analyzer	r14;r15;r16;r18;19.0	Active	SCLM	null	PDA.PRD+++S.;PDA.HLD+++S.;PDA.BLD+++S.;PDA.INP+++S.;PDA.WRK+++S.;PDA.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""strji02""}]"			strji02	DSN	
@@ -179,13 +180,16 @@ Database Analyzer Services	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	En
 Database Analyzer Services	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	SCLM	null	DAS.PRD+++S.;DAS.HLD+++S.;DAS.BLD+++S.;DAS.INP+++S.;DAS.WRK+++S.;DAS.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 Database Copier	r14;r15;r16;r18;19.0	Active	SCLM;Endevor	IMS	Source resides on DEV DASD packs.    	"[{""PMFKEY"":""strji02""}]"			strji02		
 Database Copier	r14;r15;r16;r18;19.0	Active	SCLM;Endevor	null	ICP.PRD+++S.;ITK.PRD+++S.;IDO.PRD+++S.;ENIMS.MOTM.IMS*;ICP.HLD+++S.;ITK.HLD+++S.;IDO.HLD+++S.;ICP.BLD+++S.;ITK.BLD+++S.;IDO.BLD+++S.;ICP.INP+++S.;ITK.INP+++S.;IDO.INP+++S.;ICP.WRK+++S.;ITK.WRK+++S.;IDO.WRK+++S.;ICP.WK++++S.;ITK.WK++++S.;IDO.WK++++S. 	"[{""PMFKEY"":""strji02""}]"			strji02	DSN	
-Database Management for Distributed Databases	11.2.2;11.2.4;11.2.4SP1;11.3;11.4;11.4L10N;11.5;11.6	Active	CSCR/Harvest	null	"CSCR201/DDC,UDM,TSx,Insight UI,FUM,FUO,FUU,UDCC,Web XD"	"[{""PMFKEY"":""balmu02""}]"			balmu02		
-Database Management for Distributed Databases		Active	CSCR/Harvest	null	"CSCR201/Fast Unload,FUS,TSR,Web FU,Web TSR"	"[{""PMFKEY"":""balmu02""}]"			balmu02		
+Database Management for Distributed Databases	11.2.2;11.2.4;11.2.4SP1;11.3;11.4;11.4L10N;11.5;11.6	Inactive	CSCR/Harvest	null	"CSCR201/DDC,UDM,TSx,Insight UI,FUM,FUO,FUU,UDCC,Web XD"	"[{""PMFKEY"":""balmu02""}]"			balmu02		
+Database Management for Distributed Databases		Inactive	CSCR/Harvest	null	"CSCR201/Fast Unload,FUS,TSR,Web FU,Web TSR"	"[{""PMFKEY"":""balmu02""}]"			balmu02		
 Database Organizer	r14;r15;r16;r18;19.0	Active	Endevor	IMS	Source resides on DEV DASD packs.    	"[{""PMFKEY"":""strji02""}]"			strji02		
 Database Organizer	r14;r15;r16;r18;19.0	Active	SCLM	null	IDO.PRD+++S.;ITK.PRD+++S.;ITS.PRD+++S.;IHO.PRD+++S.;ENIMS.MOTM.IMS*;IDO.HLD+++S.;ITK.HLD+++S.;ITS.HLD+++S.;IHO.HLD+++S.;IDO.BLD+++S.;ITK.BLD+++S.;ITS.BLD+++S.;IHO.BLD+++S.;IDO.INP+++S.;ITK.INP+++S.;ITS.INP+++S.;IHO.INP+++S.;IDO.WRK+++S.;ITK.WRK+++S.;ITS.WRK+++S.;IHO.WRK+++S.;IDO.WK++++S.;ITK.WK++++S.;ITS.WK++++S.;IHO.WK++++S.	"[{""PMFKEY"":""strji02""}]"			strji02	DSN	
 Datacom CICS Services	11.0;14.0;15.0	Active	CSCRE/Endevor	"DBC,DATCM"	N/A	"[{""PMFKEY"":""abavi01""},{""PMFKEY"":""shuke01""}]"		shuke01	abavi01		
 Datacom DB/DD/DQ/SQL/Presspack/Fast Restore	11.0;12.0;14.0;15.0	Active	CSCRE/Endevor	DATCM	N/A	"[{""PMFKEY"":""abavi01""},{""PMFKEY"":""shuke01""}]"		shuke01	abavi01		
 Datacom DLI-Transparency	2.3; 12.0	Active	CSCRE/Endevor	"DBDT,DATCM"	N/A	"[{""PMFKEY"":""abavi01""},{""PMFKEY"":""shuke01""}]"		shuke01	abavi01		
+Datacom Total-Transparency		Active	CSCRE/Endevor	MF20.		"[{""PMFKEY"":""berbe02""},{""PMFKEY"":""mormi08""}]"			berbe02;mormi08		
+Datacom Star		Inactive	CSCRE/Endevor	STAR		"[{""PMFKEY"":""abavi01""},{""PMFKEY"":""shuke01""}]"		shuke01	abavi01		
+Datacom VSAM-Transparency		Active	CSCRE/Endevor	DBVT		"[{""PMFKEY"":""abavi01""},{""PMFKEY"":""shuke01""}]"		shuke01	abavi01		
 Datamacs II	1.2	Inactive	Librarian	null	CDE.DMACS.DEVL.V1R3.*	"[{""PMFKEY"":""abavi01""},{""PMFKEY"":""shuke01""}]"		shuke01	abavi01	DSN	
 Dataset Facility	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 Dataset Facility	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	PDF.PRD+++S.;PDF.HLD+++S.;PDF.BLD+++S.;PDF.INP+++S.;PDF.WRK+++S.;PDF.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
@@ -195,13 +199,12 @@ DB2 Common Services for Security	r1.2;r1.3	Active	Endevor	CMBAV	Islandia	"[{""PM
 DB2 Common Services for Security	r1.2;r1.3	Active	PDS	null	DB2CMSRC	"[{""PMFKEY"":""petja04""},{""PMFKEY"":""pflda02""}]"		tunem01	petja04;pflda02	DSN	
 DBAPD		Active	CSCRE/Endevor	DBAPD		"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 DBSRV		Active	CSCRE/Endevor	DBSRV		"[{""PMFKEY"":""abavi01""},{""PMFKEY"":""shuke01""}]"		shuke01	abavi01		
-DBVT		Active	CSCRE/Endevor	DBVT		"[{""PMFKEY"":""abavi01""},{""PMFKEY"":""shuke01""}]"		shuke01	abavi01		
 DC Monitor Extensions	r11; r11.5 r11.6	Retired	SCLM	null	IDC.PRD+++S.;IDC.HLD+++S.;IDC.HLD+++S.;IDC.INP+++S.;IDC.WRK+++S.;IDC.WK++++S.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 Deliver	11.5;11.6;11.7;12.0;12.1;12.2	Active	Endevor;CSCRE/Harvest	DLVR	Endevor	"[{""PMFKEY"":""raubr02""},{""PMFKEY"":""obega01""}]"			raubr02;obega01		
 DELIVER - CMS	3.2	Inactive	CMS	null	Type:;SFS;EPSAR;Type:;CMS;Disk;Directories:;VSEDEV.DELIVER	"[{""PMFKEY"":""raubr02""},{""PMFKEY"":""obega01""}]"			raubr02;obega01	 VMVSE	"[{""location"":""VSEDEV.DELIVER"",""type"":""DIRECTRY""},{""location"":""EPSAR"",""type"":""VMMDISK""}]"
 Detector	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 Detector	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	PDT.PRD+++S.;PDT.HLD+++S.;PDT.BLD+++S.;PDT.INP+++S.;PDT.WRK+++S.;PDT.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
-Disk	12.5; 12.6	Active	CSCRE/Endevor	DISK	Islandia Data Center	"[{""PMFKEY"":""kucka01""}]"			kucka01		
+Disk	12.5; 12.6	Active	CSCRE/Endevor	DISK	Islandia Data Center	"[{""PMFKEY"":""hurro01""}]"		minni01	hurro01		
 Disk MSP/VOS3	9.2	Stabilized	Source Code Control System (SCCS)	null	DISK910.*.*	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""hurro01""}]"			cafjo01;hurro01	DSN	
 "Disk USS (UNIX, stabilized)"	2	Active	Source Code Control System (SCCS)	null	SDX1200.*;SDI1200.*	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""hurro01""}]"			cafjo01;hurro01	DSN	
 Dispatch	11.0;11.6;11.7	Active	CSCRE/Endevor	DISPA	Endevor	"[{""PMFKEY"":""raubr02""}]"			raubr02		
@@ -234,28 +237,28 @@ EITM IAM as an Automated Service	1.0;1.0.1;1.0.2;trunk	Active	CSCR/Harvest	null	
 EITM IAM as an Automated Service		Active	CSCR/Harvest	null	CSCR1001/EITM	"[{""PMFKEY"":""lavch01""}]"			lavch01		
 ENBDM		Active	CSCRE/Endevor	ENBDM		"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""mormi08""}]"			tucjo02;mormi08		
 Encore	r5.5; r11.3	Active	CSCRE/Endevor	null	APC.CSCRE.PENC.*	"[{""PMFKEY"":""smima27""},{""PMFKEY"":""webmi04""}]"		webmi04	smima27	DSN	
-Encryption Key manager	14.5;14.0;12.6	Active	CSCRE/Endevor	CATE	Islandia Data Center	"[{""PMFKEY"":""davfe01""}]"			davfe01		
+Encryption Key Manager	14.5;14.0;12.6	Active	CSCRE/Endevor	CATE	Islandia Data Center	"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""shuke01""}]"		shuke01	davfe01		
 Endevor Interface For DB2	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 Endevor Interface For DB2	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	EDB2.PRD+++S.;EDB2.HLD+++S.;EDB2.BLD+++S.;EDB2.INP+++S.;EDB2.WRK+++S.;EDB2.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 Endevor Software Change Manager		Active	CSCRE/Endevor	"ESCM,EINE"	MOTM volumes on mainframe tier one DASD	"[{""PMFKEY"":""ricar01""},{""PMFKEY"":""mormi08""}]"			ricar01;mormi08		
 Endevor Software Change Manager		Active	CSCR/Harvest		"CSCR709/endevor;CSCR606_R12.5/CA Endevor,endevor"	"[{""PMFKEY"":""ricar01""},{""PMFKEY"":""svami01""},{""PMFKEY"":""melmi08""}]"		ricar01	svami01;melmi08		
+Endevor Test System		Active	CSCRE/Endevor	TTDSS		"[{""PMFKEY"":""svami01""}]"			svami01		
 ENDPANV		Active	CSCRE/Endevor	ENDPANV		"[{""PMFKEY"":""ricar01""},{""PMFKEY"":""mormi08""}]"		ricar01	ricar01;mormi08		
 ENFDN		Active	CSCRE/Endevor	ENFDN		"[{""PMFKEY"":""tucjo02""},{""PMFKEY"":""mormi08""}]"			tucjo02;mormi08		
 Enterprise Tester	3.1	Stabilized	PDS	null	AD1DEV.PTE32.*	"[{""PMFKEY"":""sirjo01""},{""PMFKEY"":""shuke01""}]"		shuke01	sirjo01	DSN	
 EPIC/VSE	5.2; 5.1; 4.1	Active	CMS	null	SFS;Directories:;EPC;EPV	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	VMVSE	"[{""location"":""EPC"",""type"":""DIRECTRY""},{""location"":""EPV"",""type"":""DIRECTRY""}]"
 ERM		Active	CSCR/Harvest	null	CSCR809/ERM Web	"[{""PMFKEY"":""raubr02""},{""PMFKEY"":""kokja01""}]"		kokja01	raubr02		
 ESCJ		Active	CSCRE/Endevor	ESCJ		"[{""PMFKEY"":""ricar01""},{""PMFKEY"":""mormi08""}]"			ricar01;mormi08		
-ESD		Active	CSCRE/Endevor	ESD		"[{""PMFKEY"":""gooma04""},{""PMFKEY"":""mormi08""}]"			gooma04;mormi08		
 ESP		Active	CSCRE/Endevor	ESP		"[{""PMFKEY"":""smima27""},{""PMFKEY"":""webmi04""}]"		webmi04	smima27		
 ESP	r11.3	Active	CSCRE/Endevor	null	APC.CSCRE.PESP.*;APC.CSCRE.PCPE.*	"[{""PMFKEY"":""smima27""},{""PMFKEY"":""webmi04""}]"		webmi04	smima27	DSN	
-ESP Distributed Components	r5.5; r11.3	Active	CVS	null	APC.CSCRE.**;APC.CSCRE.PESP.*	"[{""PMFKEY"":""macco01""},{""PMFKEY"":""davfe01""}]"			davfe01;macco01	DSN	
-ESTG		Active	CSCRE/Endevor	ESTG		"[{""PMFKEY"":""newja04""},{""PMFKEY"":""yafna01""}]"			newja04;yafna01		
+ESP Distributed Components	r5.5; r11.3	Active	CVS	null	APC.CSCRE.**;APC.CSCRE.PESP.*	"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""macco01""}]"		davfe01	macco01	DSN	
+ESTG		Inactive	CSCRE/Endevor	ESTG		"[{""PMFKEY"":""smike11""}]"			unknown		
 eTrust Policy Compliance		Active	CSCR/Harvest	null	CSCR403	"[{""PMFKEY"":""kumhe02""}]"			kumhe02		
 Eureka:Strategy	6.2; 6.3	End of Life	CSCR/Harvest	null	CSCR112	"[{""PMFKEY"":""puiro01""},{""PMFKEY"":""shaha07""}]"		puiro01	shaha07		
 Execution Manager for DB2	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 Execution Manager for DB2	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	PXM.PRD+++S.;PXM.HLD+++S.;PXM.BLD+++S.;PXM.INP+++S.;PXM.WRK+++S.;PXM.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 EXPLORE REPORT Writer	7.1; 7.0; 6.8	Active	CMS	null	SFS;Directories:;COLSFS.EXPRPT	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	VMVSE	"[{""location"":""COLSFS.EXPRPT"",""type"":""DIRECTRY""},{""location"":""VSEDEV.EXPRPT"",""type"":""DIRECTRY""}]"
-Explore VM	V5.0;r4.3	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""jambr01""}]"		jambr01		VMVSE	"[{""location"":""EXPLORE"",""type"":""DIRECTRY""},{""location"":""EXPNUC"",""type"":""DIRECTRY""}]"
+Explore VM	V5.0;r4.3	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		VMVSE	"[{""location"":""EXPLORE"",""type"":""DIRECTRY""},{""location"":""EXPNUC"",""type"":""DIRECTRY""}]"
 EXPLORE VTAM	6.5	Active	CMS	null	SFS;Directories:;COLSFS.EXPVTAM	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	 VMVSE	"[{""location"":""COLSFS.EXPVTAM"",""type"":""DIRECTRY""},{""location"":""VSEDEV.EXPVTAM"",""type"":""DIRECTRY""}]"
 EXPLORE/CICS	r7; r6.8; r6.6; r6.5; r6.3	Active	CMS	null	SFS;Directories:;COLSFS.EXPCICS	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	 VMVSE	"[{""location"":""COLSFS.EXPCICS"",""type"":""DIRECTRY""}]"
 EXPLORE/VSE	r7.1; r7.0; r6.8; r6.6; r6.5; r6.3; r5.9	Active	CMS	null	SFS;Directories:;COLSFS.EXPVSE	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	 VMVSE	"[{""location"":""COLSFS.EXPVSE"",""type"":""DIRECTRY""},{""location"":""VSEDEV.EXPLORE"",""type"":""DIRECTRY""}]"
@@ -274,15 +277,15 @@ Fast Recover	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	Endevor	DBT	Source
 Fast Recover	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	PFR.PRD+++S.;PFR.HLD+++S.;PFR.BLD+++S.;PFR.INP+++S.;PFR.WRK+++S.;PFR.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 Fast Unload	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 Fast Unload	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	PFU.PRD+++S.;PFU.HLD+++S.;PFU.BLD+++S.;PFU.INP+++S.;PFU.WRK+++S.;PFU.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
-Faver	4.5;4.3.x	Active	CSCRE/Endevor	"FAVR,FAVER."	Islandia Data Center	"[{""PMFKEY"":""kucka01""}]"			kucka01		
+Faver	4.5;4.3.x	Active	CSCRE/Endevor	"FAVR,FAVER."	Islandia Data Center	"[{""PMFKEY"":""hurro01""}]"		minni01	hurro01		
 "FAVER2, FAVER for VSE"	r3.4; r3.6; r3.5; r3.3	Active	CMS	null	CMS;Disks:;FAVERV;FAVER2;SFS;Directories:;COLSFS.FAVER;ISMQA.VSE.FAV2	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]]"		stoda04	cafjo01	 VMVSE	"[{""location"":""FAVERV"",""type"":""VMMDISK""},{""location"":""FAVER2"",""type"":""VMMDISK""},{""location"":""COLSFS.FAVER"",""type"":""DIRECTRY""},{""location"":""ISMQA.VSE.FAV2"",""type"":""DIRECTRY""}]"
-FE4		Active	CSCRE/Endevor	FE4		"[{""PMFKEY"":""newja04""},{""PMFKEY"":""yafna01""}]"			newja04;yafna01		
+FE4		Active	CSCRE/Endevor	FE4		"[{""PMFKEY"":""baljo03""},{""PMFKEY"":""madca02""}]"		jambr01	baljo03;madca02		
 File Master Plus for DB2 for z/OS	9.0;9.1;Base	Active	Endevor	FMDB2	Mainframe	"[{""PMFKEY"":""svami01""},{""PMFKEY"":""davsc01""}]"		svami01	davsc01		
-File Master Plus for IMS	8.5;9.0;9.1;Base	Active	CSCRE/Endevor	FMIMS	Mainframe	"[{""PMFKEY"":""dubmi01""},{""PMFKEY"":""davsc01""}]"			davsc01;dubmi01		
+File Master Plus for IMS	8.5;9.0;9.1;Base	Active	CSCRE/Endevor	FMIMS	Mainframe	"[{""PMFKEY"":""svami01""}]"		svami01			
 File Master Plus for IMS Eclipse UI		Active	CSCR/Harvest	null	"CSCR801/File Master Plus v,File Master Prime"	"[{""PMFKEY"":""svami01""}]"		svami01			
 File Master Plus for MVS	8.5;9.0;9.1;Base	Active	CSCRE/Endevor	FMMVS	Mainframe	"[{""PMFKEY"":""svami01""},{""PMFKEY"":""davsc01""}]"		svami01	davsc01		
 File Master Plus for MVS	4.1	Active	Librarian	null	AD1DEV.FMMVS41.*	"[{""PMFKEY"":""svami01""}]"		svami01		DSN	
-File Master Plus for MVS Eclipse UI	9.0;9.1	Active	CSCR/Harvest	null	CSCR801/File Master Plus DB2	"[{""PMFKEY"":""dubmi01""}]"			dubmi01		
+File Master Plus for MVS Eclipse UI	9.0;9.1	Inactive	CSCR/Harvest	null	CSCR801/File Master Plus DB2	"[{""PMFKEY"":""dubmi01""}]"			dubmi01		
 FINANCE		Active	CSCRE/Endevor	FINANCE		"[{""PMFKEY"":""ricar01""},{""PMFKEY"":""mormi08""}]"			ricar01;mormi08		
 FLEE	r4; r4.1; r3.7; r3.6; r3.1	Active	CMS	null	SFS;Directories:;COLSFS.FLEE;ISMQA.VSE.FLEE	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	VMVSE	"[{""location"":""COLSFS.FLEE"",""type"":""DIRECTRY""},{""location"":""ISMQA.VSE.FLEE"",""type"":""DIRECTRY""}]"
 Forest & Trees	7.0; 7.1; 7.11	End of Life	CSCR/Harvest	null	CSCR106	"[{""PMFKEY"":""puiro01""},{""PMFKEY"":""shaha07""}]"		puiro01	shaha07		
@@ -296,7 +299,7 @@ General/CICS for DB2	r11.5	End of Life	SCLM	null	GENC.PRD+++S.;GENC.HLD+++S.;GEN
 GENEROL	7.1	Active	CMS;PDS	null	MFBUMISC.SALTLAK+;SALTLAK.*	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	 DSN;VMVSE	"[{""location"":""G471NL1.191"",""type"":""VMMDISK""},{""location"":""G471NL1.192"",""type"":""VMMDISK""},{""location"":""SLCVML.191"",""type"":""VMMDISK""},{""location"":""SLCVML.192"",""type"":""VMMDISK""},{""location"":""SLCVML.194"",""type"":""VMMDISK""},{""location"":""SLCVML.195"",""type"":""VMMDISK""},{""location"":""SLCVML.196"",""type"":""VMMDISK""},{""location"":""SLCVML.197"",""type"":""VMMDISK""},{""location"":""SLCVML.199"",""type"":""VMMDISK""},{""location"":""SLCVML.291"",""type"":""VMMDISK""},{""location"":""SLCVML.292"",""type"":""VMMDISK""},{""location"":""SLCVML.293"",""type"":""VMMDISK""},{""location"":""SLCVML.294"",""type"":""VMMDISK""},{""location"":""SLCVML.295"",""type"":""VMMDISK""},{""location"":""SLCVML.296"",""type"":""VMMDISK""},{""location"":""SLCVML.299"",""type"":""VMMDISK""},{""location"":""SLCVML"",""type"":""DIRECTRY""}]"
 GIS - Business Analytics		Inactive	CSCR/Harvest	null	CSCR1101/Business Analytics	"[{""PMFKEY"":""balli02""}]"			balli02		
 GIS - CASSL		Active	CSCR/Harvest	null	CSCR1101/CASSL	"[{""PMFKEY"":""darsw01""}]"			darsw01		
-GIS - Contract Lifecycle Management		Active	CSCR/Harvest	null	CSCR1101/ContractLifecycleManagement	"[{""PMFKEY"":""govva01""}]"			govva01		
+GIS - Contract Lifecycle Management		Inactive	CSCR/Harvest	null	CSCR1101/ContractLifecycleManagement	"[{""PMFKEY"":""smike11""}]"			unknown		
 GIS - Architecture		Inactive	CSCR/Harvest	null	CSCR1101/Architecture	"[{""PMFKEY"":""morjo02""}]"			morjo02		
 GIS - COPE		End of Life	CSCR/Harvest	null	CSCR1101/Core_Cope	"[{""PMFKEY"":""ramna08""}]"			ramna08		
 GIS - Corporate Reporting		Active	CSCR/Harvest	null	CSCR1101/CorporateReporting	"[{""PMFKEY"":""batra01""}]"			batra01		
@@ -314,28 +317,28 @@ GIS - Support		Active	CSCR/Harvest	null	CSCR1101/Support	"[{""PMFKEY"":""vursh01
 GIS - CPQ		Active	CSCR/Harvest	null	CSCR1101/CPQ	"[{""PMFKEY"":""banma06""}]"			banma06		
 GIS - Clarity		Active	CSCR/Harvest	null	CSCR1101/GIS - Clarity	"[{""PMFKEY"":""raydi02""}]"			raydi02		
 GIS - Other		Inactive	CSCR/Harvest	null	CSCR1101	"[{""PMFKEY"":""banma06""}]"			banma06		
-GIS DBA		Active	CSCR/Harvest	null	CSCR1103	"[{""PMFKEY"":""kotra06""}]"			kotra06		
+GIS DBA		Inactive	CSCR/Harvest	null	CSCR1103	"[{""PMFKEY"":""kotra06""}]"			kotra06		
 GPO-Translation Services		Active	CSCR/Harvest	null	CSCR009	"[{""PMFKEY"":""rajap01""},{""PMFKEY"":""iijku01""}]"			iijku01;rajap01		
 GSS		Active	CSCRE/Endevor	GSS		"[{""PMFKEY"":""davfe01""}]"			davfe01		
 GTS		Active	CSCRE/Endevor	GTS		"[{""PMFKEY"":""davfe01""}]"			davfe01		
 Hardware Interface Service	v1.0;r2.0	Active	Endevor	NETM	GIS Islandia data center	"[{""PMFKEY"":""joheu02""},{""PMFKEY"":""angth01""},{""PMFKEY"":""norst02""}]"	angth01	norst02	joheu02		
 Hardware Interface Service	v1.0;r2.0	Active	PDS	null	AUDE0.MOT+.;AUDE0.NMV2SMS.**.SOURCE;AUDE0.NMV2SMS.**.LIST;AUDE0.NMDE1.*TST;AUCM0.FIXREG.*	"[{""PMFKEY"":""joheu02""},{""PMFKEY"":""angth01""},{""PMFKEY"":""norst02""}]"	angth01	norst02	joheu02	DSN	
 Harvest SCM Catalyst Connector	1.0.0;trunk	Active	CSCR/Harvest	null	CSCR709/scm-catalyst	"[{""PMFKEY"":""thaka08""},{""PMFKEY"":""kolla01""}]"		thaka08	kolla01		
-Harvest Software Change Manager	r12.1;r12;r12.5;r12.5 SP1;r12.6	Active	CSCR/Harvest	null	CSCR606_R12.5	"[{""PMFKEY"":""puiro01""},{""PMFKEY"":""kolla01""}]"		puiro01	kolla01		
-HIDRO	r2.8; r2.7d; r2.7c; r2.7b; r2.7a; r2.7; r2.6; r2.5; r2.4; r2.3; r2.2	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""jambr01""}]"		jambr01		 VMVSE	"[{""location"":""HIDRO"",""type"":""DIRECTRY""}]"
+Harvest Software Change Manager	r12.1;r12;r12.5;r12.5 SP1;r12.6	Active	CSCR/Harvest	null	CSCR606_R12.5	"[{""PMFKEY"":""thaka08""}]"			thaka08		
+HIDRO	r2.8; r2.7d; r2.7c; r2.7b; r2.7a; r2.7; r2.6; r2.5; r2.4; r2.3; r2.2	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		 VMVSE	"[{""location"":""HIDRO"",""type"":""DIRECTRY""}]"
 High Availability Service		End of Life	CSCR/Harvest	null	CSCR911	"[{""PMFKEY"":""mansa07""}]"			mansa07		
 High Availability Service - Everest2		End of Life	CSCR/Harvest	null	CSCR911-A	"[{""PMFKEY"":""mansa07""}]"			mansa07		
 High Performance Recovery	r14;r15;r16;r18;19.0	Active	SCLM;Endevor	IMS	Source resides on DEV DASD packs.    	"[{""PMFKEY"":""strji02""}]"			strji02		
-Hyperbuf	11;4.3.2;11.5	Active	CSCRE/Endevor	HBUF	Islandia Data Center	"[{""PMFKEY"":""kucka01""}]"			kucka01		
+Hyperbuf	11;4.3.2;11.5	Active	CSCRE/Endevor	HBUF	Islandia Data Center	"[{""PMFKEY"":""hurro01""}]"		minni01	hurro01		
 HYPERBUF/VSE	r3.3; r2.9	Active	CMS	null	CMS;Disks:;DYNBUF;SFS;Directories:;COLSFS.HBUF	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	 VMVSE	"[{""location"":""DYNBUF"",""type"":""VMMDISK""},{""location"":""COLSFS.HBUF"",""type"":""DIRECTRY""}]"
 I18n Toolkit		End of Life	CSCR/Harvest	null	CSCR626	"[{""PMFKEY"":""ganra08""}]"			ganra08		
 IAS		Active	CSCRE/Endevor	IAS		"[{""PMFKEY"":""davfe01""}]"			davfe01		
 Ideal/IPC	2.2; 11.0; 14.0	Active	CSCRE/Endevor	"IDEAL,DATCM"	N/A	"[{""PMFKEY"":""abavi01""},{""PMFKEY"":""shuke01""}]"		shuke01	abavi01		
 IDIPC		Active	CSCRE/Endevor	IDIPC		"[{""PMFKEY"":""abavi01""},{""PMFKEY"":""shuke01""}]"		shuke01	abavi01		
-IDMS	18.0;18.5;19.0	Active	CSCRE/Endevor	IDMS		"[{""PMFKEY"":""brebr01""},{""PMFKEY"":""dowda01""},{""PMFKEY"":""pomda01""}]"		rosda01	brebr01;dowda01;pomda01		
-IDMS - Server	R16.1;R17	Active	CSCR/Harvest	IDMS	CSCR802	"[{""PMFKEY"":""rosda01""},{""PMFKEY"":""dilda02""}]"		rosda01	dilda02		
-IDMS - VDBA	R16;R17;R18	Active	CSCR/Harvest	null	CSCR802	"[{""PMFKEY"":""rosda01""},{""PMFKEY"":""dilda02""}]"		rosda01	dilda02		
-IDMS Quick Bridge 14.1 Support	R14.1	Active	CSCR/Harvest	null	CSCR802	"[{""PMFKEY"":""rosda01""},{""PMFKEY"":""dilda02""}]"		rosda01	dilda02		
+IDMS	18.0;18.5;19.0	Active	CSCRE/Endevor	IDMS		"[{""PMFKEY"":""urqst01""},{""PMFKEY"":""sirjo01""}]"		shuke01	urqst01;sirjo01		
+IDMS - Server	R16.1;R17	Active	CSCR/Harvest	IDMS	CSCR802	"[{""PMFKEY"":""urqst01""},{""PMFKEY"":""sirjo01""}]"		shuke01	urqst01;sirjo01		
+IDMS - VDBA	R16;R17;R18	Active	CSCR/Harvest	null	CSCR802	"[{""PMFKEY"":""urqst01""},{""PMFKEY"":""sirjo01""}]"		shuke01	urqst01;sirjo01		
+IDMS Quick Bridge 14.1 Support	R14.1	Active	CSCR/Harvest	null	CSCR802	"[{""PMFKEY"":""urqst01""},{""PMFKEY"":""sirjo01""}]"		shuke01	urqst01;sirjo01		
 IM On Demand for Verizon		Active	CSCR/Harvest	null	CSCR1304	"[{""PMFKEY"":""jorti01""},{""PMFKEY"":""waral04""}]"			jorti01;waral04		
 Index Expert for DB2	r12; r14; r14.5; r15; 16.0;17.0; 999	End of Life	SCLM	null	POA.PRD+++S.;POA.HLD+++S.;POA.BLD+++S.;POA.INP+++S.;POA.WRK+++S.;POA.WK++++S.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 InfoRefiner	r12; r14; r14.5; r15; 16.0;17.0; 999	End of Life	SCLM	null	PIR.PRD+++S.;PIR.HLD+++S.;PIR.BLD+++S.;PIR.INP+++S.;PIR.WRK+++S.;PIR.WK++++S.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
@@ -347,7 +350,7 @@ Interactive SQL	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	IQL.P
 Interoperability & Stress Lab		Active	CSCR/Harvest	null	CSCR609	"[{""PMFKEY"":""mcawi01""}]"			mcawi01		
 InterTest Batch	8;8.5;9.1;Base	Active	CSCRE/Endevor	INTBT	Mainframe	"[{""PMFKEY"":""svami01""},{""PMFKEY"":""davsc01""}]"		dubmi01	davsc01;svami01		
 InterTest Batch - Librarian	3.1	Active	Librarian	null	CDE.DEVL.IB31*	"[{""PMFKEY"":""svami01""}]"		svami01		DSN	
-InterTest Common GUI		Active	CSCR/Harvest	null	CSCR801/InterTest	"[{""PMFKEY"":""dubmi01""}]"		dubmi01			
+InterTest Common GUI		Inactive	CSCR/Harvest	null	CSCR801/InterTest	"[{""PMFKEY"":""dubmi01""}]"		dubmi01			
 InterTest for CICS	8.5;9.1;Base	Active	CSCRE/Endevor	"INTCI,INTERT"	Mainframe	"[{""PMFKEY"":""svami01""},{""PMFKEY"":""davsc01""}]"		dubmi01	svami01;davsc01		
 InterTest for CICS VSE	4.4;6.0	Active	Librarian	null	AD1DEV.INTERT44.*;AD1DEV.INTERT60.*	"[{""PMFKEY"":""cafjo01""}]"			cafjo01	DSN	
 IPC		Active	CSCRE/Endevor	IPC		"[{""PMFKEY"":""abavi01""},{""PMFKEY"":""shuke01""}]"		shuke01	abavi01		
@@ -355,12 +358,12 @@ iTechnology IGateway		Active	CSCR/Harvest	null	CSCR707	"[{""PMFKEY"":""kumra10""
 JARS		Active	CSCRE/Endevor	JARS		"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01		
 JARS Resource Management for CICS	6.2	Stabilized	CSCRE	null	QCAT.CSCRE.JARSCICS.R62*	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	DSN	
 JARS/VSE and JARS/CICS for VSE	r7; r6.2	Active	CMS	null	SFS;Directories:;VSEDEV.JARSCVSE;VSEDEV.JARSVSE	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	VMVSE	"[{""location"":""VSEDEV.JARSCVSE"",""type"":""DIRECTRY""},{""location"":""VSEDEV.JARSVSE"",""type"":""DIRECTRY""}]"
-JCLCheck	r7.1; r11	Active	CSCRE/Endevor	JCK	N/A	"[{""PMFKEY"":""macco01""},{""PMFKEY"":""davfe01""}]"			macco01;davfe01		
+JCLCheck	r7.1; r11	Active	CSCRE/Endevor	JCK	N/A	"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""macco01""}]"		davfe01	macco01		
 JMO	11.x	Active	CSCR/Harvest	null	CSCR907;CSCR912	"[{""PMFKEY"":""srigi02"",""APPROVEStamp"":""none""}]"			srigi02		
 JMR		Active	CSCRE/Endevor	JMR		"[{""PMFKEY"":""baljo03""},{""PMFKEY"":""madca02""}]"		jambr01	baljo03;madca02		
 JMR	4.6	Active	PDS	null	MFBUMISC.APCMTL.PK46.+;MFBUMISC.OMMTL.SRC.PK46.+;OMMTL.CSCRE.JMR.PK46	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	DSN	
 Job Management for OpenVMS	3.0; 3.0 SP1;3.1	Active		null		"[{""PMFKEY"":""butda07""},{""PMFKEY"":""stoda04""}]"		stoda04	butda07	HARVEST;OTHER	
-Jobtrac	r11	Active	CSCRE/Endevor	JTR	N/A	"[{""PMFKEY"":""macco01""},{""PMFKEY"":""davfe01""}]"			macco01;davfe01		
+Jobtrac	r11	Active	CSCRE/Endevor	JTR	N/A	"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""macco01""}]"		davfe01	macco01		
 Librarian	4.3; 4.4	Stabilized	Librarian;Endevor;PanAPT	LIBR	usildamd.ca.com	"[{""PMFKEY"":""ricar01""},{""PMFKEY"":""mormi08""}]"			ricar01;mormi08		
 Licensing - ETPKI		Inactive	CSCR/Harvest	null	CSCR004	"[{""PMFKEY"":""kammu02""}]"			kammu02		
 Localization		Active	CSCR/Harvest	null	CSCR005	"[{""PMFKEY"":""rajap01""},{""PMFKEY"":""sunto01""}]"			sunto01;rajap01		
@@ -371,26 +374,24 @@ Log Reader	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	PLR.PRD+++
 LogCompress	r12; r14; r14.5; r15; 16.0;17.0; 999	End of Life	SCLM	null	PLC.PRD+++S.;PLC.HLD+++S.;PLC.INP+++S.;PLC.WRK+++S.;PLC.WK++++S.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 LPD (Standalone Product)	r11.0;r11.5;r11.x;r12.0	Active	CSCRE/Endevor	LPD	N/A	"[{""PMFKEY"":""raubr02""},{""PMFKEY"":""mormi08""}]"			raubr02;mormi08		
 LPD (Standalone Product)	r11.0;r11.5;r11.x;r12.0	Active	PDS	null	OMMTL.MOTM.SPOOL	"[{""PMFKEY"":""raubr02""},{""PMFKEY"":""mormi08""}]"			raubr02;mormi08	DSN	
-LPR	r11.5; r12	Active	CSCR/Harvest	null	cscr809/OM LPR	"[{""PMFKEY"":""jambr01""}]"		jambr01			
 LSERV	r3.5; r14.0	Active	Endevor	LSERV	GIS Islandia data center	"[{""PMFKEY"":""slejo01""},{""PMFKEY"":""jenth05""}]"		jenth05	slejo01		
 LSERV	r3.5; r14.0	Active	PDS	null	LSERV.MOT+.LSERV*;LSERV.CORPTECH.LS*	"[{""PMFKEY"":""slejo01""},{""PMFKEY"":""jenth05""}]"		jenth05	slejo01	DSN	
 M2SCM		Active	CSCRE/Endevor	M2SCM		"[{""PMFKEY"":""ricar01""},{""PMFKEY"":""mormi08""}]"			ricar01;mormi08		
-MAA		Inactive	CSCRE/Endevor	MAA		"[{""PMFKEY"":""faudo01""}]"					
-Mainframe Application Tuner	8.5;9.0;10.0;11.0;Base	Active	CSCRE/Endevor	"TTUNE,APCTT,ATDAM"	Mainframe	"[{""PMFKEY"":""dubmi01""},{""PMFKEY"":""davsc01""}]"		dubmi01	davsc01;dubmi01		
-Mainframe Application Tuner Eclipse UI		Active	CSCR/Harvest	null	CSCR801/MF	"[{""PMFKEY"":""dubmi01""}]"		dubmi01			
+MAA		Inactive	CSCRE/Endevor	MAA		"[{""PMFKEY"":""smike11""}]"			unknown		
+Mainframe Application Tuner	8.5;9.0;10.0;11.0;Base	Active	CSCRE/Endevor	"TTUNE,APCTT,ATDAM"	Mainframe	"[{""PMFKEY"":""svami01""}]"		svami01			
+Mainframe Application Tuner Eclipse UI		Active	CSCR/Harvest	null	CSCR801/MF	"[{""PMFKEY"":""svami01""}]"		svami01			
 Mainframe Connector for Linux on System z	v1.0;r2.0	Active	Endevor	NETM	GIS Islandia data center	"[{""PMFKEY"":""joheu02""},{""PMFKEY"":""angth01""},{""PMFKEY"":""norst02""}]"	angth01	norst02	joheu02		
 Mainframe Connector for Linux on System z	v1.0;r2.0	Active	PDS	null	AUPK0.DL72.GL1105.*.VSAM;AUDE0.MOT+.;AUDE0.NMV2SMS.**.SOURCE;AUDE0.NMV2SMS.**.LIST;AUDE0.NMDE1.*TST;AUCM0.FIXREG.*	"[{""PMFKEY"":""joheu02""},{""PMFKEY"":""angth01""},{""PMFKEY"":""norst02""}]"	angth01	norst02	joheu02	DSN	
-Mainframe Software Manager (MSM)	5.1;6.0;6.1;7.0	Active	Endevor(MFSO);RTC	MSM	CSCRRTC003;TSO-Endevor-MFSO	"[{""PMFKEY"":""newja04""},{""PMFKEY"":""yafna01""}]"		gulga01	newja04;yafna01		
-Mainframe Software Manager (MSM)	5.1;6.0;6.1;7.0	Active	GitHub	null	github-isl-01.ca.com/MSM	"[{""PMFKEY"":""uslsu01""}]"			uslsu01		
+Mainframe Software Manager (MSM)	5.1 EOL;6.0;6.1;7.0 Stablized	Active	Endevor(MFSO);RTC	MSM	CSCRRTC003;TSO-Endevor-MFSO	"[{""PMFKEY"":""vlcvi01""}]"		prezi01	vlcvi01		
+Mainframe Software Manager (MSM)	5.1 EOL;6.0;6.1;7.0 Stablized	Active	GitHub	null	github-isl-01.ca.com/MSM	"[{""PMFKEY"":""vlcvi01""}]"		prezi01	vlcvi01		
 Mastercat	4.3	Active	CSCR/Harvest	null	ASMDSK.CSCRE.MCAT.*;ASM.ISML2.R432.MCAT.*;ASM.ISMDV.R430.MCAT.*	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""hurro01""}]"			cafjo01;hurro01	DSN	
-MASTERCAT/VSE	r3.4; r3.3; r2.9	Active	CMS	null	CMS;Disks:;MCATVSE;SFS;Directories:;COLSFS.MCAT;VSEDEV.MCATVSE;ISMQA.SHARED	"[{""PMFKEY"":""stoda04""},{""PMFKEY"":""cafjo01""}]"		stoda04	cafjo01	 VMVSE	"[{""location"":""MCATVSE"",""type"":""VMMDISK""},{""location"":""COLSFS.MCAT"",""type"":""DIRECTRY""},{""location"":""VSEDEV.MCATVSE"",""type"":""DIRECTRY""},{""location"":""ISMQA.SHARED"",""type"":""DIRECTRY""}]"
+MASTERCAT/VSE	r3.4; r3.3; r2.9	Active	CMS	null	CMS;Disks:;MCATVSE;SFS;Directories:;COLSFS.MCAT;VSEDEV.MCATVSE;ISMQA.SHARED	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	 VMVSE	"[{""location"":""MCATVSE"",""type"":""VMMDISK""},{""location"":""COLSFS.MCAT"",""type"":""DIRECTRY""},{""location"":""VSEDEV.MCATVSE"",""type"":""DIRECTRY""},{""location"":""ISMQA.SHARED"",""type"":""DIRECTRY""}]"
 MATUN		Active	CSCRE/Endevor	MATUN		"[{""PMFKEY"":""svami01""},{""PMFKEY"":""mormi08""}]"		minni01	svami01;mormi08		
 "Max/Util (MVS, DB2, IMS) Max/Rexx"	3.4	Stabilized	PDS	null	MAX.SOURCE.MXRXV*	"[{""PMFKEY"":""svami01""}]"		svami01		DSN	
 Merge/Modify	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 Merge/Modify	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	PMM.PRD+++S.;PMM.HLD+++S.;PMM.BLD+++S.;PMM.INP+++S.;PMM.WRK+++S.;PMM.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 MetaCOBOL	1.1	Inactive	PDS	null	MCT.V1R1.DIST.*	"[{""PMFKEY"":""wesjo01""},{""PMFKEY"":""shuke01""}]"			wesjo01;shuke01	DSN	
 METAL		Active	CSCRE/Endevor	METAL		"[{""PMFKEY"":""kazri01""},{""PMFKEY"":""benro02""},{""PMFKEY"":""feese01""},{""PMFKEY"":""natco02""}]"			benro02;feese01;kazri01;natco02		
-MF20.		Active	CSCRE/Endevor	MF20.		"[{""PMFKEY"":""berbe02""},{""PMFKEY"":""fisja01""}]"			berbe02;fisja01		
 MFNE-DIST TND_DEV		Active	CSCR/Harvest	null	CSCR1305	"[{""PMFKEY"":""thaka08""},{""PMFKEY"":""cafjo01""}]"		puiro01	cafjo01;thaka08		
 MFPROD.		Active	CSCRE/Endevor	MFPROD.		"[{""PMFKEY"":""baljo03""},{""PMFKEY"":""madca02""}]"		jambr01	baljo03;madca02		
 MFSO Cloud Storage for System z		Active	CSCR/Harvest	null	CSCR504/CA Cloud Storage for System z	"[{""PMFKEY"":""meaka03""},{""PMFKEY"":""carju01""}]"			meaka03;carju01		
@@ -402,7 +403,7 @@ MIM	r4.1;r4.2 r4.6;r11.5;r11.6;r11.7;r11.8;r11.9;r12.0;r12.1	Active	Endevor	MIM	
 MIM	r4.1;r4.2 r4.6;r11.5;r11.6;r11.7;r11.8;r11.9;r12.0;r12.1	Active	PDS	null	MIM.CSCR+.MIM*;MIM.MOT+.MIM*;MIM.G04*	"[{""PMFKEY"":""slejo01""},{""PMFKEY"":""jenth05""}]"		jenth05	slejo01	DSN	
 MLINK	r6.5	Stabilized	CSCR/Harvest	null	CSCR806/MLINK	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01		
 MSM		Inactive	CSCR/Harvest	null	CSCR1201	"[{""PMFKEY"":""vlcvi01""}]"			vlcvi01		
-MSPS		Active	CSCRE/Endevor	MSPS		"[{""PMFKEY"":""berbe02""},{""PMFKEY"":""fisja01""}]"			berbe02;fisja01		
+MSPS	1	Active	CSCRE/Endevor	"MSPS,ESD,RECUT"		"[{""PMFKEY"":""damda01""}]"			damda01		
 Netman	4.9	Stabilized	PDS	null	DCAUNI.*;NET9505.*	"[{""PMFKEY"":""cafjo01""}]"			cafjo01	DSN	
 NetMaster File Transfer Management	r11.6; r11.7	Active	Endevor	NETM	GIS Islandia data center	"[{""PMFKEY"":""joheu02""},{""PMFKEY"":""hoojo03""},{""PMFKEY"":""tholo01""}]"			joheu02;hoojo03;tholo01		
 NetMaster File Transfer Management	r11.6; r11.7	Active	PDS	null	AUPK0.DL65.GL0905.*.VSAM;AUDE0.MOT+.;AUDE0.NMV2SMS.**.SOURCE;AUDE0.NMV2SMS.**.LIST;AUDE0.NMDE1.*TST;AUCM0.FIXREG.*	"[{""PMFKEY"":""joheu02""},{""PMFKEY"":""hoojo03""},{""PMFKEY"":""tholo01""}]"			joheu02;hoojo03;tholo01	DSN	
@@ -424,6 +425,7 @@ NSM System Monitoring Option for OpenVMS	3.0 (VAX); 3.2	Active		null		"[{""PMFKE
 "NSM, UCM"		Active	CSCR/Harvest	null	CSCR914	"[{""PMFKEY"":""srigi02""}]"			srigi02		
 Oblicore		End of Life	CSCR/Harvest	null	CSCR1301/Oblicore	"[{""PMFKEY"":""kerro06""}]"			kerro06		
 OCTO Grid Composer		End of Life	CSCR/Harvest	null	CSCR701	"[{""PMFKEY"":""abrho01""}]"			abrho01		
+OM LPR	r11.5; r12	Active	CSCR/Harvest	null	cscr809/OM LPR	"[{""PMFKEY"":""raubr02""},{""PMFKEY"":""kenjo07""}]"			raubr02;kenjo07		
 OM RTC 2.0 (common component)	r2.0	Active	CSCR/Harvest	null	cscr809/OM RTC 2.0	"[{""PMFKEY"":""raubr02""},{""PMFKEY"":""kenjo07""}]"			raubr02;kenjo07		
 OM Shared DRASClient 2.2 (common component)	r2.2;r1.0;r2.0;r2.1	Active	CSCR/Harvest	null	cscr809/OM Shared DRASClient	"[{""PMFKEY"":""raubr02""},{""PMFKEY"":""kenjo07""}]"			raubr02;kenjo07		
 OM Shared OmDev 1.0 (common components)	r1.0	Active	CSCR/Harvest	null	cscr809/OM Shared OmDev	"[{""PMFKEY"":""raubr02""},{""PMFKEY"":""kenjo07""}]"			raubr02;kenjo07		
@@ -442,19 +444,17 @@ Online Reorg	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	Endevor	DBT	The GA
 Online Reorg	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	POR.PRD+++S.;POR.HLD+++S.;POR.BLD+++S.;POR.INP+++S.;POR.WRK+++S.;POR.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 Opera	3.1	Active	PDS	null	MFBUMISC.OPERA.DIST31.+;MFBUMISC.OPERA.DEVLR32.MACLIB	"[{""PMFKEY"":""slejo01""},{""PMFKEY"":""jenth05""}]"		jenth05	slejo01	DSN	
 OPS/MVS	r11.6;r11.7;r11.8;r11.9;r12.0;r12.1;r12.2;r12.3	Active	MF20/Endevor;PDS	OPS	GIS Islandia data center	"[{""PMFKEY"":""slejo01""},{""PMFKEY"":""jenth05""}]"		jenth05	slejo01		
-Optimizer	Base	Stabilized	CSCRE/Endevor	SYMBT	Mainframe	"[{""PMFKEY"":""dubmi01""},{""PMFKEY"":""davsc01""}]"		dubmi01	davsc01		
 Optimizer	7	Active	CMS	null	OPTOS;191;192;197;OPTXA;191;192;194	"[{""PMFKEY"":""cafjo01""}]"			cafjo01	 VMVSE	"[{""location"":""OPTOS.0191"",""type"":""VMMDISK""},{""location"":""OPTOS.0192"",""type"":""VMMDISK""},{""location"":""OPTOS.0197"",""type"":""VMMDISK""},{""location"":""OPTXA.0192"",""type"":""VMMDISK""},{""location"":""OPTXA.0191"",""type"":""VMMDISK""},{""location"":""OPTXA.0194"",""type"":""VMMDISK""}]"
 Optimizer VSE	6	Active	CMS	null	OPTDOS;191;192;195;OPTDXA;191;192;OPTDRTL;191;192	"[{""PMFKEY"":""cafjo01""}]"			cafjo01	 VMVSE	"[{""location"":""OPTDOS.0192"",""type"":""VMMDISK""},{""location"":""OPTDOS.0191"",""type"":""VMMDISK""},{""location"":""OPTDOS.0195"",""type"":""VMMDISK""},{""location"":""OPTDXA.0191"",""type"":""VMMDISK""},{""location"":""OPTDXA.0192"",""type"":""VMMDISK""},{""location"":""OPTDRTL.0191"",""type"":""VMMDISK""},{""location"":""OPTDRTL.0192"",""type"":""VMMDISK""}]"
-Optimizer/II	8.5;Base	Active	CSCRE/Endevor	SYMBT	Mainframe	"[{""PMFKEY"":""dubmi01""}]"		dubmi01			
-Optimizer/II	7	Active	CSCRE/Endevor	null	TFM.CSCRE.SYMBAT70.*	"[{""PMFKEY"":""dubmi01""}]"		dubmi01		DSN	
+Optimizer/II	7	Active	CSCRE/Endevor	null	TFM.CSCRE.SYMBAT70.*	"[{""PMFKEY"":""cafjo01""}]"			cafjo01	DSN	
 Optimizer/II VSE	2	Active	CMS	null	OPTDXA;191;192;OPTDRTL;191;192	"[{""PMFKEY"":""cafjo01""}]"			cafjo01	VMVSE	"[{""location"":""OPTDXA.0191"",""type"":""VMMDISK""},{""location"":""OPTDXA.0192"",""type"":""VMMDISK""},{""location"":""OPTDRTL.0191"",""type"":""VMMDISK""},{""location"":""OPTDRTL.0192"",""type"":""VMMDISK""}]"
 Output Management Document Viewer	r2.1;r2.2	Stabilized	CSCR/Harvest	null	cscr809/OM Document Viewer	"[{""PMFKEY"":""raubr02""},{""PMFKEY"":""kokja01""}]"		kokja01	raubr02		
 Pan/Audit & Toolkit	2.0; 3.0	Active	Panvalet	null	RETSYS.PAPL30AS.PANLIB;RETSYS.EPTK20AS.PANLIB	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""abbwi01""}]"			abbwi01;cafjo01	DSN	
 Pan/SQL	2.3; 2.4C; 2.5	Active	CMS	null	Disks;444;445;446;447;448;450	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""abbwi01""}]"			abbwi01;cafjo01	DSN	
-PanAPT	3.1; 3.2	Stabilized	Panvalet	null	LIBSYS.APT.R031ABS.*;LIBSYS.APT.R031AVR.*;LIBSYS.APT.R032AVR.*;LIBSYS.APT.R032ABS.*	"[{""PMFKEY"":""faudo01""}]"				DSN	
+PanAPT	3.1; 3.2	Stabilized	Panvalet	null	LIBSYS.APT.R031ABS.*;LIBSYS.APT.R031AVR.*;LIBSYS.APT.R032AVR.*;LIBSYS.APT.R032ABS.*	"[{""PMFKEY"":""smike11""}]"			unknown	DSN	
 PANEX		Active	CSCRE/Endevor	PANEX		"[{""PMFKEY"":""ricar01""},{""PMFKEY"":""mormi08""}]"			ricar01;mormi08		
-Panexec	5.3	Stabilized	Panvalet	null	LIBSYS.PEXI.R053CBS.*;LIBSYS.PEXI.R053CVR.*	"[{""PMFKEY"":""faudo01""}]"				DSN	
-PANS		Inactive	CSCRE/Endevor	PANS		"[{""PMFKEY"":""faudo01""}]"					
+Panexec	5.3	Stabilized	Panvalet	null	LIBSYS.PEXI.R053CBS.*;LIBSYS.PEXI.R053CVR.*	"[{""PMFKEY"":""smike11""}]"			unknown	DSN	
+PANS		Inactive	CSCRE/Endevor	PANS		"[{""PMFKEY"":""smike11""}]"			unknown		
 PANV		Active	CSCRE/Endevor	PANV		"[{""PMFKEY"":""ricar01""},{""PMFKEY"":""mormi08""}]"			ricar01;mormi08		
 Partition Expert	r12; r14; r14.5; r15; 16.0;17.0; 999	End of Life	SCLM	null	PPX.PRD+++S.;PPX.HLD+++S.;PPX.BLD+++S.;PPX.INP+++S.;PPX.WRK+++S.;PPX.WK++++S.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 PAZ		Active	CSCRE/Endevor	PAZ		"[{""PMFKEY"":""berbe02""},{""PMFKEY"":""mormi08""}]"			berbe02;mormi08		
@@ -468,16 +468,16 @@ Plan Analyzer Common for DB2	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	
 Plan Analyzer Common for DB2	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	SCLM	null	PAS.PRD+++S.;PAS.HLD+++S.;PAS.BLD+++S.;PAS.INP+++S.;PAS.WRK+++S.;PAS.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 Plex	5.1;5.5;6.0;6.1;7.0;7.1;7.2	Active	CSCR/Harvest	null	CSCR808	"[{""PMFKEY"":""chera14""},{""PMFKEY"":""paiar01""}]"		dalal01	paiar01		
 PMA Chargeback	12.5-12.7	Active	CSCRE	null	PMSREST.MOTM.PMACB;PMAREST.MOTM.PMACB125;PMAREST.MOTM.PMACB126;PMAREST.MOTM.PMACB127	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	DSN	
-PMACB		Active	CSCRE/Endevor	PMACB		"[{""PMFKEY"":""damda01""}]"			damda01		
+PMACB		Active	CSCRE/Endevor	PMACB		"[{""PMFKEY"":""wasch01""},{""PMFKEY"":""jambr01""}]"		wasch01; jambr01			
 PMO	4.3;4.4	Active	Endevor	PMO	MFBUMISC.ASX.PMO.+;MFBUMISC.MFPROD.PMO.+;MFBUMISC.ASX.NESAS01.PMO.+;MFPROD.MOTM.PMO.	"[{""PMFKEY"":""baljo03""},{""PMFKEY"":""madca02""}]"		stoda04	baljo03;madca02		
 PMO	4.3;4.4	Active	PDS	null	MFBUMISC.ASX.PMO.+;MFBUMISC.MFPROD.PMO.+;MFBUMISC.ASX.NESAS01.PMO.+;MFPROD.MOTM.PMO.	"[{""PMFKEY"":""baljo03""},{""PMFKEY"":""madca02""}]"		stoda04	baljo03;madca02	DSN	
 Post Install for DB2	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 Post Install for DB2	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	SCLM	null	INS.PRD+++S.;INS.HLD+++S.;INS.BLD+++S.;INS.INP+++S.;INS.WRK+++S.;INS.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 PRFCH		End of Life	CSCRE/Endevor	PRFCH		"[{""PMFKEY"":""robja07""}]"			robja07		
-PRIME Clarity		Active	CSCR/Harvest	null	CSCR622	"[{""PMFKEY"":""bremi05""}]"			bremi05		
+PRIME Clarity		Inactive	CSCR/Harvest	null	CSCR622	"[{""PMFKEY"":""bremi05""}]"			bremi05		
 Program Restart Manager for IMS	r14;r15;r16;r18;19.0	Active	Endevor	IMS	Source resides on DEV DASD packs.    	"[{""PMFKEY"":""strji02""}]"			strji02		
 Program Restart Manager for IMS	r14;r15;r16;r18;19.0	Active	SCLM	null	IPM.PRD+++S.;ENIMS.MOTM.IMS*;IPM.HLD+++S.;IPM.BLD+++S.;IPM.INP+++S.;IPM.WRK+++S.;IPM.WK++++S.	"[{""PMFKEY"":""strji02""}]"			strji02	DSN	
-PTE		Active	CSCRE/Endevor	PTE		"[{""PMFKEY"":""dubmi01""},{""PMFKEY"":""davsc01""}]"		minni01	davsc01;dubmi01		
+PTE		Active	CSCRE/Endevor	PTE		"[{""PMFKEY"":""smike11""}]"			unknown		
 PTST		Active	CSCRE/Endevor	PTST		"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 QA Version Control		Active	CSCR/Harvest	null	CSCR616/QA Version Control	"[{""PMFKEY"":""vakmo01""},{""PMFKEY"":""vensu02""}]"		vensu02	vakmo01		
 QFS		Active	CSCRE/Endevor	QFS		"[{""PMFKEY"":""baljo03""},{""PMFKEY"":""madca02""}]"		jambr01	madca02		
@@ -505,7 +505,6 @@ RCM		Active	CSCRE/Endevor	RCM		"[{""PMFKEY"":""tucjo02""}]"			tucjo02
 Realia	r3.3	End of Life	CSCR/Harvest	null	CSCR801/Realia	"[{""PMFKEY"":""abbwi01""}]"		dubmi01	abbwi01		
 Recovery Analyzer	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 Recovery Analyzer	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	PRA.PRD+++S.;PRA.HLD+++S.;PRA.BLD+++S.;PRA.INP+++S.;PRA.WRK+++S.;PRA.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
-RECUT		Active	CSCRE/Endevor	RECUT		"[{""PMFKEY"":""gooma04""}]"			gooma04		
 Remote Console	2.3	Active	Endevor	RCS	N/A	"[{""PMFKEY"":""baljo03""},{""PMFKEY"":""madca02""}]"		stoda04	baljo03;madca02		
 Remote Console	2.3	Active	PDS	null	MFBUMISC.OPSDEV.RCS+;MFPROD.RCS23.;MFPROD.MOTM.RCS*;RCS*	"[{""PMFKEY"":""baljo03""},{""PMFKEY"":""madca02""}]"		stoda04	baljo03;madca02	DSN	
 Report Facility	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
@@ -518,13 +517,14 @@ Repository for z/OS	r7; r7.1; r7.2	Active	PDS	null	MFBUMISC.PRM+;PRM.CSCRE+;QARZ
 RI Manager	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 RI Manager	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	PRI.PRD+++S.;PRI.HLD+++S.;PRI.BLD+++S.;PRI.WRK+++S.;PRI.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 ROS		Active	CSCRE/Endevor	ROS		"[{""PMFKEY"":""baljo03""},{""PMFKEY"":""madca02""}]"		jambr01	baljo03;madca02		
+Roscoe	6	Active	Librarian;PDS	null	MFBUMISC.ROSCOE.BASE57+;MFBUMISC.ROSCOE.CAI+;MFBUMISC.ROSCOE.CHIWA01+;MFBUMISC.ROSCOE.HAL+;MFBUMISC.ROSCOE.PROD+;MFBUMISC.ROSCOE.RELEASE+;MFBUMISC.ROSCOE.SUPPORT+;MFBUMISC.ROSCOE.TE+;MFBUMISC.ROSCOE.V+;LIBR.;ROSCOE;IM1QA.RO60SP9B.;RELEASE.;MCT.	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	DSN	
 RSLTS		Active	CSCRE/Endevor	RSLTS		"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01		
 RSVP	1	Active	CSCRE/Endevor	null	ASMDSK.S70211.*;ASMDSK.CSCRE.RSVP.*;ASM.RSVPL1.*;ASM.CSCRE.ASM2R.*	"[{""PMFKEY"":""cafjo01""}]"			cafjo01	 DSN;VMVSE	"[{""location"":""ASM2ms"",""type"":""DIRECTRY""}]"
 SA	r6	Active	CSCR/Harvest	null	CSCR927/SA_	"[{""PMFKEY"":""vakmo01""},{""PMFKEY"":""vensu02""}]"		vensu02	vakmo01		
 SANTEFE		Active	CSCR/Harvest	null	CSCR927/SANTAFE	"[{""PMFKEY"":""vakmo01""},{""PMFKEY"":""vensu02""}]"		vensu02	vakmo01		
 SAS/C Common	r12	Retired	SCLM	null	CGN.PRD+++S.;CGN.HLD+++S.;CGN.BLD+++S.;CGN.INP+++S.;CGN.WRK+++S.;CGN.WK++++S.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
-Scheduler	r11	Active	CSCRE/Endevor	SCH	N/A	"[{""PMFKEY"":""macco01""},{""PMFKEY"":""davfe01""}]"			macco01;davfe01		
-Scheduler Smart Console	1.1	Active	PDS	null	MFBUMISC.OPERA.DIST31.+;MFBUMISC.OPERA.DEVLR32.MACLIB	"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""slejo01""}]"			davfe01;slejo01	DSN	
+Scheduler	r11	Active	CSCRE/Endevor	SCH	N/A	"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""macco01""}]"		davfe01	macco01		
+Scheduler Smart Console	1.1	Stabilized	PDS	null	MFBUMISC.OPERA.DIST31.+;MFBUMISC.OPERA.DEVLR32.MACLIB	"[{""PMFKEY"":""kiemi01""}]"			kiemi01	DSN	
 SCHEDULER/VSE		Active	CSCR/Harvest	null	CSCR801/CA_Scheduler_for_VSE	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01		
 SCHEDULER/VSE	7.3	Active	CMS	null	HARDCOPY;in;Columbus;also;images;on;CD-ROM;and;on;CSCR;at;/CSCR801/CA_Scheduler_for_VSE/Development/Packages/Scheduler;Listings/;EPCMS:COLSFS.SCHDVS.R73.LISTING;incomplete;Type:;Hardcopy	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	VMVSE	"[{""location"":""SCHDVSE"",""type"":""VMMDISK""},{""location"":""COLSFS.SCHDVS"",""type"":""DIRECTRY""},{""location"":""ISMQA.VSE.SCHD"",""type"":""DIRECTRY""}]"
 Secondary Index	r14;r15;r16;r18;19.0	Active	Endevor	IMS	Source resides on DEV DASD packs.    	"[{""PMFKEY"":""strji02""}]"			strji02		
@@ -536,13 +536,14 @@ Service Desk Manager		Active	CSCR/Harvest	null	CSCR616/SDMAF;CSCR927/SDM	"[{""PM
 Service Desk Manager	R12;12.1;12.5;12.6;12.7;12.9;14.1;14.1.01;14.1.02;14.1.03;17	Active	CSCR/Harvest	null	CSCR927/SDr	"[{""PMFKEY"":""vakmo01""},{""PMFKEY"":""vensu02""}]"		vensu02	vakmo01		
 Service Desk Manager - Catalyst Connector		Active	CSCR/Harvest	null	CSCR709/cmdb	"[{""PMFKEY"":""vakmo01""},{""PMFKEY"":""vensu02""}]"		vensu02	vakmo01		
 Smartphone Challenge		Active	CSCR/Harvest	null	CSCR1400	"[{""PMFKEY"":""kabni01""}]"			kabni01		
-SMF Director	12.0;12.6;12.7	Active	CSCRE	null	PMAREST.MOTM.SMFD120.*	"[{""PMFKEY"":""jambr01""}]"		jambr01		DSN	
-SMFD		Active	CSCRE/Endevor	SMFD		"[{""PMFKEY"":""damda01""}]"			damda01		
+SMF Director	12.0;12.6;12.7	Inactive	CSCRE	null	PMAREST.MOTM.SMFD120.*	"[{""PMFKEY"":""wasch01""},{""PMFKEY"":""jambr01""}]"		wasch01; jambr01		DSN	
+SMF Director		Active	CSCRE/Endevor	SMFD		"[{""PMFKEY"":""wasch01""},{""PMFKEY"":""jambr01""}]"		wasch01; jambr01			
 SMR		Active	CSCRE/Endevor	SMR		"[{""PMFKEY"":""baljo03""},{""PMFKEY"":""madca02""}]"			baljo03;madca02		
 SMR	3.4	Active	PDS	null	MFBUMISC.APCMTL.PL34.+;MFBUMISC.OMMTL.SRC.PL34.+;OMMTL.CSCRE.SMR.PL34.+	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	DSN	
 Snapshot General Services	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 Snapshot General Services	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	SCLM	null	TGR.PRD+++S.;TGR.HLD+++S.;TGR.BLD+++S.;TGR.INP+++S.;TGR.WRK+++S.;TGR.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 Solution Integrations		Active	CSCR/Harvest	null	"CSCR709/bmc,ciscoworks,cloudstack,emc,hp-operationsmanager,hp-bsm,hp-paw,hp-ucmdb,hp-service-manager,hp-system-insight,ibm-netcool,ibm-systems-director,ibm-tec,ibm-tsrm,itm-teps,ibm-tivoli,netapp-sanscreen,nim-common,normalized-service-manager,odbc-jdbc-catalyst,oracle-gridcontrol,sap-hcm-fi,scom-catalyst,servicenow-connector,snmp-generic,vmware-vcloud"	"[{""PMFKEY"":""chaso05""}]"			chaso05		
+Solutions Engineering		Active	GitHub	null	github-isl-01.ca.com/SolutionsEng	"[{""PMFKEY"":""dwyst01""},{""PMFKEY"":""baini01"",""TYPE"":""Repository"",""NAME"":""CSDP""},{""PMFKEY"":""baini01"",""TYPE"":""Repository"",""NAME"":""CSDP1.1""},{""PMFKEY"":""baini01"",""TYPE"":""Repository"",""NAME"":""CSDP-1.2""},{""PMFKEY"":""baini01"",""TYPE"":""Repository"",""NAME"":""MaaS""}]"		mrobi01	dwyst01;baini01		
 Solve CPT	6.1	Stabilized	CSCRE/Endevor;CMS	null	MFBUMISC.NTWRKIT.TAPE+	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	DSN;VMVSE	"[{""location"":""ACCMAINT"",""type"":""DIRECTRY""},{""location"":""ACCMAINT.CPT.CPT520"",""type"":""DIRECTRY""},{""location"":""ACCMAINT.CPT.CPT600"",""type"":""DIRECTRY""},{""location"":""ACCMAINT.CPT.CPT601"",""type"":""DIRECTRY""},{""location"":""ACCMAINT.CPT.CPT610"",""type"":""DIRECTRY""},{""location"":""ACCMAINT.CPT"",""type"":""DIRECTRY""}]"
 Solve:Access	r5.0	Active	Endevor	NETM	GIS Islandia data center	"[{""PMFKEY"":""joheu02""},{""PMFKEY"":""angth01""},{""PMFKEY"":""norst02""}]"	angth01	norst02	joheu02		
 Solve:Access	r5.0	Active	PDS	null	AUPK0.DL67.GL1007.*.VSAM;AUDE0.MOT+.;AUDE0.NMV2SMS.**.SOURCE;AUDE0.NMV2SMS.**.LIST;AUDE0.NMDE1.*TST;AUCM0.FIXREG.*	"[{""PMFKEY"":""joheu02""},{""PMFKEY"":""angth01""},{""PMFKEY"":""norst02""}]"	angth01	norst02	joheu02	DSN	
@@ -564,21 +565,18 @@ SPOOL	r11.5;r11.6;r11.7;r12.0	Active	MSPS	null	OMMTL.CSCRE.SPOOL**;OMMTL.MOTM.SP
 SQL-Ease	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 SQL-Ease	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	SQE.PRD+++S.;SQE.HLD+++S.;SQE.BLD+++S.;SQE.INP+++S.;SQE.WRK+++S.;SQE.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 SRAM (ZOS)	7	Stabilized	PDS	null	MFBUMISC.MFPROD.CASORT.*	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	DSN	
-STAR		Inactive	CSCRE/Endevor	STAR		"[{""PMFKEY"":""abavi01""},{""PMFKEY"":""shuke01""}]"		shuke01	abavi01		
 Star Issue Reports & Auto Assign		End of Life	CSCR/Harvest	null	CSCR623	"[{""PMFKEY"":""ganra08""}]"			ganra08		
 Statistics Manager	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 Statistics Manager	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	PSM.PRD+++S.;PSM.HLD+++S.;PSM.BLD+++S.;PSM.INP+++S.;PSM.WRK+++S.;PSM.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 Storage Resource Manager		Active	CSCR/Harvest	null	"CSCR504/SRM,Assentor,BSM,BrightStor,CAMM,CCIM,Compliance,L2-,Field Integration,Discovery,iLumin,MDY,MM-,StorageMonitor,WebAccess,CA Hcc"	"[{""PMFKEY"":""zacra01""},{""PMFKEY"":""samda02""}]"		samda02	zacra01		
 Subsystem Analyzer	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 Subsystem Analyzer	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	PSA.PRD+++S.;PSA.HLD+++S.;PSA.BLD+++S.;PSA.INP+++S.;PSA.WRK+++S.;PSA.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
-SVTS125.		Active	CSCRE/Endevor	SVTS125.		"[{""PMFKEY"":""kucka01""}]"	angth01	giero01	kucka01		
-SymDump Batch	7.0;8.0	Active	CSCRE/Endevor	SYMBT	Mainframe	"[{""PMFKEY"":""svami01""},{""PMFKEY"":""davsc01""}]"			svami01;davsc01		
-SymDump Batch	8.5;9.0;9.1;Base	Active	CSCRE/Endevor	SYMBT	Mainframe	"[{""PMFKEY"":""svami01""},{""PMFKEY"":""davsc01""}]"			svami01;davsc01		
+SymDump Batch	7.0;8.0;8.5;9.0;9.1;Base	Active	CSCRE/Endevor	SYMBT	Mainframe	"[{""PMFKEY"":""svami01""},{""PMFKEY"":""davsc01""}]"			svami01;davsc01		
 SymDump for CICS	8.5;9.0;9.1;Base	Active	CSCRE/Endevor	SYMBT	Mainframe	"[{""PMFKEY"":""svami01""},{""PMFKEY"":""davsc01""}]"			svami01;davsc01		
 SymDump for CICS	7.0;8.0	Active	Librarian	null	AD1DEV.INTERT70.*;AD1DEV.INTERT80.*	"[{""PMFKEY"":""svami01""}]"			svami01	DSN	
 SymDump System	7;8.5;9.0;9.1;Base	Active	CSCRE/Endevor	SYMSY	Mainframe	"[{""PMFKEY"":""svami01""},{""PMFKEY"":""davsc01""}]"			svami01;davsc01		
 SymDump System	1	Active	PDS	null	CDE.DUMPVIEW.*	"[{""PMFKEY"":""svami01""}]"			svami01	DSN	
-SymDump System Web Interface		Active	CSCR/Harvest	null	CSCR801/SymDump	"[{""PMFKEY"":""dubmi01""}]"		dubmi01			
+SymDump System Web Interface		Inactive	CSCR/Harvest	null	CSCR801/SymDump	"[{""PMFKEY"":""dubmi01""}]"		dubmi01			
 SysEdge 	4.*;5.*	Active	CSCR/Harvest	null	CSCR913	"[{""PMFKEY"":""bhara20""}]"		gunmi02	bhara20		
 SYSPROG		Active	CSCRE/Endevor	SYSPROG		"[{""PMFKEY"":""ricar01""},{""PMFKEY"":""mormi08""}]"			ricar01;mormi08		
 System Watchdog for OpenVMS	2.4 SP3 and 2.4.04 (VAX/Alpha); 2.5 (I64)	Active		null		"[{""PMFKEY"":""butda07""},{""PMFKEY"":""stoda04""}]"		stoda04	butda07	OTHER;HARVEST	
@@ -600,20 +598,20 @@ Testing Tools Common Eclipse UI		Active	CSCR/Harvest	null	CSCR801/TestingTools	"
 Testing Tools Common Symbolic Component	8.5;9.0;9.1;Base	Active	CSCRE/Endevor	SYMCC	Mainframe	"[{""PMFKEY"":""svami01""},{""PMFKEY"":""davsc01""}]"			svami01;davsc01		
 Thread Terminator	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 Thread Terminator	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	PTT.PRD+++S.;PTT.HLD+++S.;PTT.BLD+++S.;PTT.INP+++S.;PTT.WRK+++S.;PTT.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
-TLMS	11.5;12.0;12.6	Active	CSCRE/Endevor	TLMS	N/A;Islandia Data Center;Lisle DR location - replicated	"[{""PMFKEY"":""samda02""},{""PMFKEY"":""mccvi01""}]"			samda02;mccvi01		
+TLMS	11.5;12.0;12.6	Active	CSCRE/Endevor	TLMS	N/A;Islandia Data Center;Lisle DR location - replicated	"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""shuke01""}]"		shuke01	davfe01		
 TLMS Copycat Utility	11	Active	Source Code Control System (SCCS);PDS	null	CATC000.*	"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""shuke01""}]"		shuke01	davfe01	DSN	
-TLNTS999		Active	CSCRE/Endevor	TLNTS999		"[{""PMFKEY"":""dubmi01""},{""PMFKEY"":""davsc01""}]"		minni01	davsc01;dubmi01		
-TOP SECRET VSE	r3; 3.1	Active	CMS	null	CMS;Disks:;INFOVSE;ESIVSE;SFS;Directories:;VSEDEV.ESI;VSEDEV.ESIVSE;VSEDEV.TSS;VSEDEV.TSSDUMP	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	VMVSE	"[{""location"":""INFOVSE"",""type"":""VMMDISK""},{""location"":""ESIVSE"",""type"":""VMMDISK""},{""location"":""VSEDEV.ESI"",""type"":""DIRECTRY""},{""location"":""VSEDEV.ESIVSE"",""type"":""DIRECTRY""},{""location"":""VSEDEV.TSS"",""type"":""DIRECTRY""},{""location"":""VSEDEV.TSSDUMP"",""type"":""DIRECTRY""}]"
-TOPST		Active	CSCRE/Endevor	TOPST		"[{""PMFKEY"":""kemra01""}]"		wasch01	kemra01		
+TLNTS999		Active	CSCRE/Endevor	TLNTS999		"[{""PMFKEY"":""smike11""}]"			unknown		
+Top Secret		Active	CSCRE/Endevor	TSS		"[{""PMFKEY"":""wasch01""}]"		wasch01			
+Top Secret for DB2		Active	CSCRE/Endevor	TSSDB		"[{""PMFKEY"":""wasch01""}]"		wasch01			
+Top Secret for MVS		Active	CSCRE/Endevor	TOPST		"[{""PMFKEY"":""wasch01""}]"		wasch01			
+Top Secret for z/VM	12.0;12.1	Active	VMDISK	null	Type:;SFS	"[{""PMFKEY"":""wasch01""}]"		wasch01		VMVSE	"[{""location"":""TSSVM"",""type"":""DIRECTRY""},{""location"":""CAKV*"",""type"":""VMMDISK""}]"
+TOP SECRET for z/VSE	r3; 3.1	Active	CMS	null	CMS;Disks:;INFOVSE;ESIVSE;SFS;Directories:;VSEDEV.ESI;VSEDEV.ESIVSE;VSEDEV.TSS;VSEDEV.TSSDUMP	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	VMVSE	"[{""location"":""INFOVSE"",""type"":""VMMDISK""},{""location"":""ESIVSE"",""type"":""VMMDISK""},{""location"":""VSEDEV.ESI"",""type"":""DIRECTRY""},{""location"":""VSEDEV.ESIVSE"",""type"":""DIRECTRY""},{""location"":""VSEDEV.TSS"",""type"":""DIRECTRY""},{""location"":""VSEDEV.TSSDUMP"",""type"":""DIRECTRY""}]"
 TPX	5.2; 5.3; 5.4	Active	CSCRE/Endevor	"TPX,CATPX"	N/A	"[{""PMFKEY"":""baljo03""},{""PMFKEY"":""madca02""}]"		jambr01	baljo03;madca02		
 TPX	5.2; 5.3; 5.4	Active	PDS	null	TPX.CSCRE.CATPX.R53+;TPX.MOTM.*;TPX.CSCRE.CATPX.R52+	"[{""PMFKEY"":""baljo03""},{""PMFKEY"":""madca02""}]"		jambr01	baljo03;madca02	DSN	
-TPX VM	4	Active	PDS	null	MFBUMISC.NVI.NVI40+;MFBUMISC.NVI.TPX+	"[{""PMFKEY"":""jambr01""}]"		jambr01		DSN	
+TPX VM	4	Active	PDS	null	MFBUMISC.NVI.NVI40+;MFBUMISC.NVI.TPX+	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		DSN	
 Transit	3.1	Active	CSCRE/Endevor	null	ASM.TRANS*	"[{""PMFKEY"":""cafjo01""}]"			cafjo01	DSN	
 TRILOGexpert Performance Desktop		Active	CSCR/Harvest	null	CSCR801/Trilog	"[{""PMFKEY"":""dubmi01""}]"		dubmi01			
 TSO/MON	6.2	End of Life	PDS	null	MFBUMISC.MFPROD.TSOMON.*;MFBUMISC.TSOMON.*;MFPROD.TMON.;MFPROD.TSOMON.;TSOMON.	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	DSN	
-TSS		Active	CSCRE/Endevor	TSS		"[{""PMFKEY"":""kemra01""}]"		wasch01	kemra01		
-TSSDB		Active	CSCRE/Endevor	TSSDB		"[{""PMFKEY"":""kemra01""}]"		wasch01	kemra01		
-TTDSS		Active	CSCRE/Endevor	TTDSS		"[{""PMFKEY"":""dubmi01""},{""PMFKEY"":""davsc01""}]"		minni01	davsc01;dubmi01		
 UCANDU	3.3	Active	CSCRE/Endevor	null	ASMDSK.CSCRE.UCAN.*;ASM.UCANDUL2.*	"[{""PMFKEY"":""cafjo01""}]"			cafjo01	DSN	
 UEX		Active	CSCRE/Endevor	UEX		"[{""PMFKEY"":""ricar01""},{""PMFKEY"":""mormi08""}]"			ricar01;mormi08		
 UFO	3.2	Active	CPM;PDS	null	MFBUMISC.IM1SUP.UFO+;MFPROD.INTERT*;IM1QA.UFO.;MFPROD.UFO	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	 DSN;VMVSE	"[{""location"":""UFOSRC.UFO.NEXT.UPDATES"",""type"":""DIRECTRY""},{""location"":""UFOSRC.UFO.R320.ZAPS"",""type"":""DIRECTRY""},{""location"":""UFOSRC.UFO.R320.BASE"",""type"":""DIRECTRY""},{""location"":""MACLIB.ALL"",""type"":""VMMDISK""},{""location"":""UFOSRC.TOOLS"",""type"":""DIRECTRY""},{""location"":""UFOSRC.LLOSP.NEXT.UPDATES"",""type"":""DIRECTRY""},{""location"":""UFOSRC.LLOSP.R320.ZAPS"",""type"":""DIRECTRY""},{""location"":""UFOSRC.LLOSP.R320.BASE"",""type"":""DIRECTRY""},{""location"":""UFOSRC.CAT.NEXT.UPDATES"",""type"":""DIRECTRY""},{""location"":""UFOSRC.CAT.R320.ZAPS"",""type"":""DIRECTRY""},{""location"":""UFOSRC.CAT.R320.BASE"",""type"":""DIRECTRY""},{""location"":""UFOSRC.PAINT.NEXT.UPDATES"",""type"":""DIRECTRY""},{""location"":""UFOSRC.PAINT.R320.ZAPS"",""type"":""DIRECTRY""},{""location"":""UFOSRC.PAINT.R320.BASE"",""type"":""DIRECTRY""}]"
@@ -638,8 +636,8 @@ Utilities Online	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	Endevor	DBT	So
 Utilities Online	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	PUO.PRD+++S.;PUO.HLD+++S.;PUO.BLD+++S.;PUO.INP+++S.;PUO.WRK+++S.;PUO.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 Utility General Recovery	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	Endevor	DBT	Source resides on DEV DASD packs.;The GA releases of the datasets are stored on DEVR volumes which are tier-1 backed up DASD volumes.   For the pre-beta and BETA releases;the datasets are allocated on DEV volumes which are not part of DR.    When the products are moved into GA;the datasets are moved to the DEVR volumes.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02		
 Utility General Recovery	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	SCLM	null	UGR.PRD+++S.;UGR.HLD+++S.;UGR.BLD+++S.;UGR.INP+++S.;UGR.WRK+++S.;UGR.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
-V/SEG	r1.5a;1.6;1.7	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""jambr01""}]"		jambr01		VMVSE	"[{""location"":""VSEG"",""type"":""DIRECTRY""}]"
-Vantage SRM	12;12.5;12.6;14.0	Active	CSCRE/Endevor;Harvest	VANT	Islandia	"[{""PMFKEY"":""kucka01""}]"			kucka01		
+V/SEG	r1.5a;1.6;1.7	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		VMVSE	"[{""location"":""VSEG"",""type"":""DIRECTRY""}]"
+Vantage SRM	12;12.5;12.6;14.0	Active	CSCRE/Endevor;Harvest	VANT	Islandia	"[{""PMFKEY"":""kucka01""},{""PMFKEY"":""samda02""}]"		samda02	kucka01;ficmi01;seqiv01		
 Vantage SRM/CA GMI Windows Client UI	12;Development	Active	CSCR/Harvest	null	CSCR504/CA Vantage SRM Windows Client	"[{""PMFKEY"":""djoma01""},{""PMFKEY"":""mccvi01""}]"		mccvi01	djoma01		
 Vantage SRM/CA GMI Web User Interface	12;12.5;14.0;Development	Active	CSCR/Harvest	null	CSCR504/CA Vantage SRM Web Client	"[{""PMFKEY"":""djoma01""},{""PMFKEY"":""mccvi01""}]"		mccvi01	djoma01		
 Vantage SRM/Other		Active	CSCR/Harvest	null	"CSCR504/MF-CAVantage,CA-Vantage,CA Vantage,Vantage Sysview"	"[{""PMFKEY"":""zacra01""},{""PMFKEY"":""samda02""}]"		samda02	zacra01		
@@ -660,34 +658,35 @@ Vision:Subroutines	1.5	Stabilized	PDS	null	MFBUMISC.ISPD82.SUBRTNS.SOURCE;MFBUMI
 Vision:Tables	R2.0	Stabilized	PDS	null	MFBUMISC.CN040950.DYL.PUB.PAN25LIB;MFBUMISC.ISPDYL2.DYLTABLE.;MFBUMISC.CN040950.;MFBUMISC.ISPDYL2.	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	DSN	
 VISION:Transact (IMS & CICS)	r7.8	Active	PDS	null	MFBUMISC.MARKV.TR0+;MFBUMISC.MCONFIG.CL04+;MFBUMISC.MCONFIG.TR0+;MFBUMISC.MARKV.;MFBUMISC.MCONFIG.	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	DSN	
 Visual Express	r1.5	Active	CSCR/Harvest	null	CSCR108	"[{""PMFKEY"":""grake02""},{""PMFKEY"":""urqst01""}]"		urqst01	grake02		
-VM:Account	R1.0A; R1.0B; R1.0C; R1.0D; r1.1; r1.2; r1.3; r1.4; r1.5A; r1.5B; r1.5C; r1.6; r1.7	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""jambr01""}]"		jambr01		VMVSE	"[{""location"":""ACCOUNT"",""type"":""DIRECTRY""}]"
-VM:Archiver	r2.4; r2.3; r2.2; r2.1; r2.0	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""jambr01""}]"		jambr01		VMVSE	"[{""location"":""ARCHIVER"",""type"":""DIRECTRY""}]"
-VM:Backup	r3.5;r3.4;r3.3;r3.2;r3.1;r3.0;r2.1;r2.0;r1.1;r1.0;r3.6	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""jambr01""}]"		jambr01		VMVSE	"[{""location"":""BACKUP"",""type"":""DIRECTRY""}]"
-VM:Batch	r1.4; r1.3b; r1.3a; r1.3; r1.2; r1.1; r1.0	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""jambr01""}]"		jambr01		VMVSE	"[{""location"":""BATCH"",""type"":""DIRECTRY""}]"
-VM:Director/Secure	r2.9;r2.8;r2.7;r2.6;r2.5;r2.4;r2.3;r2.2;r2.1;r2.0;r1.1;r1.0;r3.0;r3.1	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""jambr01""}]"		jambr01		VMVSE	"[{""location"":""SECURE"",""type"":""DIRECTRY""}]"
-"VM:Manager Common Components (VMAN, VMAIM, VMAIC, VMGRW)"	VMAN- V1.0; AIM-r7.2a; r7.2; r7.1; r7.0; r6.9; r6.8; r6.7; r6.3; r6.2; r6.1; r6.0; r5.6;AIC-r3.6c; r3.6b; r3.6a; r3.6; r3.5; r3.4; r3.3; r3.2;GRW-r4.7d; r4.7c; r4.7b; r4.7a; r4.7; r4.6; r4.5; r4.4	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""jambr01""}]"		jambr01		VMVSE	"[{""location"":""MANAGER"",""type"":""DIRECTRY""}]"
-VM:Operator	r3.1; r3.0; r2.5b; r2.5a; r2.5; r2.4; r2.3; r2.2; r2.1; r2.0; r1.2; r1.1; r1.0	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""jambr01""}]"		jambr01		VMVSE	"[{""location"":""VMYCPM"",""type"":""DIRECTRY""}]"
-VM:ProREXX	r1.2; r1.1b; r1.1a; r1.0	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""jambr01""}]"		jambr01		VMVSE	"[{""location"":""PROREXX"",""type"":""DIRECTRY""}]"
-VM:Schedule	r1.4;r1.3a;r1.3;r1.2;r1.1;r1.0;v2.0	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""jambr01""}]"		jambr01		VMVSE	"[{""location"":""SCHEDULE"",""type"":""DIRECTRY""}]"
-VM:Sort	r1.4; r1.3a; r1.3; r1.2; r1.1; r1.0	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""jambr01""}]"		jambr01		VMVSE	"[{""location"":""SORT"",""type"":""DIRECTRY""}]"
-VM:Spool	r1.7;r1.6;r1.5;r1.4;r1.3;r1.2;r1.1;r1.0;r1.8	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""jambr01""}]"		jambr01		VMVSE	"[{""location"":""SPOOL"",""type"":""DIRECTRY""}]"
-VM:Tape	V2.0; r1.8; r1.7c; r1.7b; r1.7a; r1.7; r1.6; r1.5; r1.4; r1.3; r1.1; r1.0	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""jambr01""}]"		jambr01		VMVSE	"[{""location"":""TAPE"",""type"":""DIRECTRY""}]"
-VM:Tape Linux Agent		Active	CSCR/Harvest	null	CSCR801/VMTools	"[{""PMFKEY"":""jambr01""}]"		jambr01			
+VM:Account	R1.0A; R1.0B; R1.0C; R1.0D; r1.1; r1.2; r1.3; r1.4; r1.5A; r1.5B; r1.5C; r1.6; r1.7	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		VMVSE	"[{""location"":""ACCOUNT"",""type"":""DIRECTRY""}]"
+VM:Archiver	r2.4; r2.3; r2.2; r2.1; r2.0	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		VMVSE	"[{""location"":""ARCHIVER"",""type"":""DIRECTRY""}]"
+VM:Backup	r3.5;r3.4;r3.3;r3.2;r3.1;r3.0;r2.1;r2.0;r1.1;r1.0;r3.6	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		VMVSE	"[{""location"":""BACKUP"",""type"":""DIRECTRY""}]"
+VM:Batch	r1.4; r1.3b; r1.3a; r1.3; r1.2; r1.1; r1.0	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		VMVSE	"[{""location"":""BATCH"",""type"":""DIRECTRY""}]"
+VM:Director/Secure	r2.9;r2.8;r2.7;r2.6;r2.5;r2.4;r2.3;r2.2;r2.1;r2.0;r1.1;r1.0;r3.0;r3.1	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		VMVSE	"[{""location"":""SECURE"",""type"":""DIRECTRY""}]"
+"VM:Manager Common Components (VMAN, VMAIM, VMAIC, VMGRW)"	VMAN- V1.0; AIM-r7.2a; r7.2; r7.1; r7.0; r6.9; r6.8; r6.7; r6.3; r6.2; r6.1; r6.0; r5.6;AIC-r3.6c; r3.6b; r3.6a; r3.6; r3.5; r3.4; r3.3; r3.2;GRW-r4.7d; r4.7c; r4.7b; r4.7a; r4.7; r4.6; r4.5; r4.4	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		VMVSE	"[{""location"":""MANAGER"",""type"":""DIRECTRY""}]"
+VM:Operator	r3.1; r3.0; r2.5b; r2.5a; r2.5; r2.4; r2.3; r2.2; r2.1; r2.0; r1.2; r1.1; r1.0	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		VMVSE	"[{""location"":""VMYCPM"",""type"":""DIRECTRY""}]"
+VM:ProREXX	r1.2; r1.1b; r1.1a; r1.0	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		VMVSE	"[{""location"":""PROREXX"",""type"":""DIRECTRY""}]"
+VM:Schedule	r1.4;r1.3a;r1.3;r1.2;r1.1;r1.0;v2.0	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		VMVSE	"[{""location"":""SCHEDULE"",""type"":""DIRECTRY""}]"
+VM:Sort	r1.4; r1.3a; r1.3; r1.2; r1.1; r1.0	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		VMVSE	"[{""location"":""SORT"",""type"":""DIRECTRY""}]"
+VM:Spool	r1.7;r1.6;r1.5;r1.4;r1.3;r1.2;r1.1;r1.0;r1.8	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		VMVSE	"[{""location"":""SPOOL"",""type"":""DIRECTRY""}]"
+VM:Tape	V2.0; r1.8; r1.7c; r1.7b; r1.7a; r1.7; r1.6; r1.5; r1.4; r1.3; r1.1; r1.0	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		VMVSE	"[{""location"":""TAPE"",""type"":""DIRECTRY""}]"
+VM:Tape Linux Agent		Active	CSCR/Harvest	null	CSCR801/VMTools	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01			
 VM:Webgateway	r3.1a; r3.0; r1.3; r1.2; r1.1; r1.0	End of Life	CPM	null	Type:;SFS	"[{""PMFKEY"":""jambr01""}]"		jambr01		VMVSE	"[{""location"":""GATEWAY"",""type"":""DIRECTRY""},{""location"":""WEBSERVE"",""type"":""DIRECTRY""}]"
 VMAN	r3.1	End of Life	PDS	null	MFBUMISC.NVI.VMAN+;MFBUMISC.NVI.VP+;MFBUMISC.VMAN+;MFBUMISC.NVI.	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	DSN	
-VMLIB	3.1; 3.2	Stabilized	Panvalet	null	LIBSYS.VMLIB.*	"[{""PMFKEY"":""faudo01""}]"				DSN	
-VMXMENU	r2.52; r2.51; r2.50	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""jambr01""}]"		jambr01		 VMVSE	"[{""location"":""XMENU"",""type"":""DIRECTRY""}]"
+VMLIB	3.1; 3.2	Stabilized	Panvalet	null	LIBSYS.VMLIB.*	"[{""PMFKEY"":""smike11""}]"			unknown	DSN	
+VMXMENU	r2.52; r2.51; r2.50	Active	CPM	null	Type:;SFS	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		 VMVSE	"[{""location"":""XMENU"",""type"":""DIRECTRY""}]"
 VOLLIE	r5	Active	CMS	null	CMS;Disks:;VOLSOURC;VOLLIE;SFS;Directories:;VSEDEV.VOLLIE;COLSFS.VOLLIE	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	 VMVSE	"[{""location"":""VOLSOURC"",""type"":""VMMDISK""},{""location"":""VOLLIE"",""type"":""VMMDISK""},{""location"":""VSEDEV.VOLLIE"",""type"":""DIRECTRY""},{""location"":""COLSFS.VOLLIE"",""type"":""DIRECTRY""}]"
 VsamAid	4.3.1	Active	CSCRE/Endevor	null	ASMDSK.CSCRE.VAID.R432.*;ASM.ISM*.R4*.VAID.*	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	DSN	
 VSAMAID/VSE	r3.4; r3.3; r2.9	Active	CMS	null	CMS;Disks:;VSAMAID;SFS;Directories:;COLSFS.VAID;ISMQA.VSE.VAID	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	 VMVSE	"[{""location"":""VSAMAID"",""type"":""VMMDISK""},{""location"":""COLSFS.VAID"",""type"":""DIRECTRY""},{""location"":""ISMQA.VSE.VAID"",""type"":""DIRECTRY""}]"
-VTAPE		Active	CSCRE/Endevor	VTAPE		"[{""PMFKEY"":""stoda04""}]"	angth01	giero01	stoda04		
-VTERM	3.3	Active	CMS	null	Type:;CMS;DISK;Directories:;CAVTERM	"[{""PMFKEY"":""jambr01""}]"		jambr01		VMVSE	"[{""location"":""CAVTERM"",""type"":""VMMDISK""}]"
+VTAPE	12;12.5;12.6	Active	CSCRE/Endevor	"VTAPE,SVTS125."		"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""shuke01""}]"		shuke01	davfe01		
+VTAPE	12;12.5;12.6	Active	SCCS	null	SVTS120.UPDT.*;SVTS120.BASE.*;SVTS125.MOTM	"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""shuke01""}]"		shuke01	davfe01	DSN	
+VTERM	3.3	Active	CMS	null	Type:;CMS;DISK;Directories:;CAVTERM	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		VMVSE	"[{""location"":""CAVTERM"",""type"":""VMMDISK""}]"
 Web Viewer CCI Client	r12;12.1	Internal	CSCR/Harvest	null	cscr809/WebView CCI Client	"[{""PMFKEY"":""raubr02""},{""PMFKEY"":""kokja01""}]"		kokja01	raubr02		
-WIZ		Active	CSCRE/Endevor	WIZ		"[{""PMFKEY"":""damda01""}]"			damda01		
+WIZ		Active	CSCRE/Endevor	WIZ		"[{""PMFKEY"":""wasch01""}]"		wasch01			
 Workload Automation Test Scripts		Active	CSCR/Harvest	null	CSCR111	"[{""PMFKEY"":""veeka01""}]"			veeka01		
 Workload Control Center		Active	CSCR/Harvest	null	CSCR113	"[{""PMFKEY"":""china08""}]"			chinna08		
 Workstation Common - XGN	r12;r14;r14.5;r15;16.0;17.0;999	Internal	SCLM	null	XGN.PRD+++S.;XGN.HLD+++S.;XGN.BLD+++S.;XGN.INP+++S.;XGN.WRK+++S.;XGN.WK++++S.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
-XCOM - Distributed	r2.1;r3.0;r11;r11.5;r11.6;r12.0	Active	CSCR/Harvest	null	CSCR806	"[{""PMFKEY"":""shuke01""},{""PMFKEY"":""sonra03""}]"		shuke01	sonra03		
+XCOM - Distributed	r2.1;r3.0;r11;r11.5;r11.6;r12.0	Active	CSCR/Harvest	null	CSCR806	"[{""PMFKEY"":""chash17""},{""PMFKEY"":""shuke01""}]"		shuke01	chash17		
 XCOM - Mainframe z/OS	11;11.5;11.6;12.0	Active	CSCRE/Endevor	XCOM	N/A	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""schbr09""}]"			cafjo01;schbr09		
 XCOM - Mainframe z/OS	11;11.5;11.6;12.0	Active	PDS	null	XCOM.CSCRE.EA+;XCOM.CSCRE.P11.+;XCOM.CSCRE.R11.+;XCOM.CSCRE.XCOM.P11.+;XCOM.CSCRE.XCOM.R11.+;XCOM.CSCRL.R11.+;XCOM.CSCRL.BK+;XCOM.CSCRE.B+;XCOM.CSCRE.G+;XCOM.CSCRE.M+;XCOM.CSCRE.R115+;MFBUMISC.XCOM.R1+;XCOM.CSCRE.XCOM.B115;XCOM.CSCRE.XCOM.G115;XCOM.CSCRE.XCOM.M115+;XCOM.CSCRE.XCOM.R115+;XCOM.CSCRL.R115.+;XCOM.MOTM.+;XCOM.CSCRE	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""schbr09""}]"			cafjo01;schbr09	DSN	
 XCOM - Mainframe z/VM	2.4	Active	PDS	null	MFBUMISC.XCOM.VM241.ASSEMBLY.LISTING	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""schbr09""}]"			cafjo01;schbr09	DSN	
@@ -697,7 +696,9 @@ XNET Communications Server	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	En
 XNET Communications Server	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Internal	SCLM	null	PXN.PRD+++S.;PXN.HLD+++S.;PXN.BLD+++S.;PXN.INP+++S.;PXN.WRK+++S.;PXN.WK++++S.;ENDB2.MOTM.DBT*	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 XPRINT (Express Print)	r3.3	Active	CMS	null	SFS;Directories:;EPRAPVTM	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""stoda04""}]"		stoda04	cafjo01	VMVSE	"[{""location"":""EPRAPVTM"",""type"":""DIRECTRY""}]"
 XPS		Active	CSCRE/Endevor	XPS		"[{""PMFKEY"":""davfe01""}]"			davfe01		
-Z2L		Active	CSCRE/Endevor	Z2L		"[{""PMFKEY"":""kucka01""}]"			kucka01		
 zIIP Enablement BlackBox	v1.0	Internal	PDS	null	AUPK0.ZIIP.GL1502.*	"[{""PMFKEY"":""joheu02""},{""PMFKEY"":""angth01""},{""PMFKEY"":""wooky01""}]"	angth01		joheu02;wooky01	DSN	
-ZZCSCR809 Other		Active	CSCR/Harvest	null	CSCR809	"[{""PMFKEY"":""raubr02""},{""PMFKEY"":""kokja01""}]"		kokja01	raubr02		
-ZZHarvest Graveyard		Inactive	CSCR/Harvest	null	CSCR801	"[{""PMFKEY"":""faudo01""}]"			faudo01		
+"zz 7 Distributed Components (Job Flow Illustrator, CPS)"	r11.1;r11.3;r12.0	Active	CSCR/Harvest	null	CSCR102	"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""macco01""}]"		davfe01	macco01		
+zz Catalyst Connector Other		Inactive	CSCR/Harvest	null	CSCR709	"[{""PMFKEY"":""chaso05""}]"			chaso05		
+zz CSCR702 Other	1	Inactive	CSCR/Harvest		CSCR702	"[{""PMFKEY"":""smike11""}]"			unknown		
+zz CSCR801 Other		Inactive	CSCR/Harvest	null	CSCR801	"[{""PMFKEY"":""smike11""}]"			unknown		
+zz CSCR809 Other		Active	CSCR/Harvest	null	CSCR809	"[{""PMFKEY"":""raubr02""},{""PMFKEY"":""kokja01""}]"		kokja01	raubr02		
