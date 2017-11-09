@@ -691,21 +691,7 @@ public class HarvestLdap {
 				sTicket = "Application:UserAssistance Harvest CSCR";
 				
 		        //create a service desk ticket from ticketProblem
-		        String prblms = "";
-		        for(String prbm: ticketProblems){
-		            prblms += prbm + "\n";
-		        }
-		        
-		        if(!prblms.isEmpty()) {
-		        	String ticket = "";
-		            SDTicket sd = new SDTicket("production");
-		            ticket = sd.serviceTicket(sTicket, prblms, "", "", frame);
-		        	if (!ticket.isEmpty()) {	
-		        		if (sProblems.isEmpty()) 
-		        			sProblems += tagUL;
-		        		sProblems += "<li>CSM ticket, <b>SRQ#"+ticket+"</b> created.</li>";
-		        	}	
-		        }
+				frame.createServiceTicket(sProblems, sTicket, ticketProblems, "", "");
 				
 				sProblems+="</ul>\n";				
 		        String bodyText = frame.readTextResource("Notification_of_Noncompliant_Harvest_Contacts.txt", sScope, sProblems, "", "");								        								          
