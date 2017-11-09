@@ -81,7 +81,7 @@ public class HarvestLdap {
 		ResultSet rSet;
 		boolean byState = false;
 		
-		String sqlError = "DB2. Unable to execute query.";
+		String sqlError = "MSSQLServer. Unable to execute query.";
 		
 		try {			
 			int nIndex, lIndex;
