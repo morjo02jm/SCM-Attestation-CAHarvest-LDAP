@@ -1,5 +1,0 @@
-Dear Source Code Access Administrators for CA Harvest SCM:<br><br> 
-During the processing of %1 attestation reports, some anomalies have been detected that need your attention:
-%2
-Regards,<br>
-Tools Services
