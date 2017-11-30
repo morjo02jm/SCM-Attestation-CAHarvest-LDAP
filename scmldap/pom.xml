@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>scmldap</groupId>
+	<artifactId>scmldap</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>scmldap</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20171018</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<!-- http://isl-dsdc.ca.com/artifactory/maven-third-party-local -->
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc4</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- http://isl-dsdc.ca.com/artifactory/p2-local -->
+		<dependency>
+			<groupId>commonldap.shared</groupId>
+			<artifactId>commonldap</artifactId>
+			<version>latest</version>
+		</dependency>
+	</dependencies>
+	<repositories>
+		<repository>
+			<id>sqljdbc4</id>
+			<url>http://isl-dsdc.ca.com/artifactory/maven-third-party-local/</url>
+		</repository>
+		<repository>
+			<id>commonldap</id>
+			<url>http://isl-dsdc.ca.com/artifactory/p2-local/</url>
+		</repository>
+	</repositories>
+</project>

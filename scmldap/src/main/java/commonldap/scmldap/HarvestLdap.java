@@ -1,15 +1,15 @@
-package scmldap;
+package commonldap.scmldap;
 
 
-import commonldap.CommonLdap;
-import commonldap.JCaContainer;
-import commonldap.SDTicket;
+import commonldap.commonldap.CommonLdap;
+import commonldap.commonldap.JCaContainer;
+import commonldap.commonldap.SDTicket;
 
 import java.sql.*;
 import java.util.*;
 
 
-import gvjava.org.json.*;
+import org.json.*;
 
 
 // Main Class
