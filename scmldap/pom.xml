@@ -27,17 +27,16 @@
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
 		</dependency>
-		<!-- http://isl-dsdc.ca.com/artifactory/maven-third-party-local -->
-		<dependency>
-			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>sqljdbc4</artifactId>
-			<version>1.0</version>
-		</dependency>
 		<!-- http://isl-dsdc.ca.com/artifactory/p2-local -->
 		<dependency>
 			<groupId>commonldap.shared</groupId>
 			<artifactId>commonldap</artifactId>
 			<version>latest</version>
+		</dependency>
+		<dependency>
+			<groupId>commonldap.library</groupId>
+			<artifactId>sqljdbc4</artifactId>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 	<repositories>
