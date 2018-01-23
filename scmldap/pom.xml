@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>commonldap.shared</groupId>
 			<artifactId>commonldap</artifactId>
-			<version>latest</version>
+			<version>latest-stable</version>
 		</dependency>
 		<dependency>
 			<groupId>commonldap.library</groupId>
