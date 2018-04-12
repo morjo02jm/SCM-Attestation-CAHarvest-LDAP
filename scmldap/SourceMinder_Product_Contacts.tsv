@@ -353,7 +353,7 @@ Interactive SQL	r12;r14;r14.5;r15;16.0;17.0;999;18.0;19.0	Active	SCLM	null	IQL.P
 Interoperability & Stress Lab		Active	CSCR/Harvest	null	CSCR609	"[{""PMFKEY"":""mcawi01""}]"			mcawi01		
 InterTest Batch	8;8.5;9.1;Base	Active	CSCRE/Endevor	INTBT	Mainframe	"[{""PMFKEY"":""svami01""},{""PMFKEY"":""davsc01""}]"		dubmi01	davsc01;svami01		
 InterTest Batch - Librarian	3.1	Active	Librarian	null	CDE.DEVL.IB31*	"[{""PMFKEY"":""svami01""}]"		svami01		DSN	
-InterTest Common GUI		Inactive	CSCR/Harvest	null	CSCR801/InterTest	"[{""PMFKEY"":""dubmi01""}]"		dubmi01			
+InterTest Common GUI		Inactive	CSCR/Harvest	null	CSCR801/InterTest	"[{""PMFKEY"":""dvoin01""}]"		svami01	dvoin01;morma37		
 InterTest for CICS	8.5;9.1;Base	Active	CSCRE/Endevor	"INTCI,INTERT"	Mainframe	"[{""PMFKEY"":""svami01""},{""PMFKEY"":""davsc01""}]"		dubmi01	svami01;davsc01		
 InterTest for CICS VSE	4.4;6.0	Active	Librarian	null	AD1DEV.INTERT44.*;AD1DEV.INTERT60.*	"[{""PMFKEY"":""cafjo01""}]"			cafjo01	DSN	
 IPC		Active	CSCRE/Endevor	IPC		"[{""PMFKEY"":""abavi01""},{""PMFKEY"":""shuke01""}]"		shuke01	abavi01		
@@ -402,7 +402,7 @@ MFPROD.		Active	CSCRE/Endevor	MFPROD.		"[{""PMFKEY"":""baljo03""},{""PMFKEY"":""
 MFSO Cloud Storage for System z		End of Life	CSCR/Harvest	null	CSCR504/CA Cloud Storage for System z	"[{""PMFKEY"":""carju01""},{""PMFKEY"":""meaka03""}]"		meaka03	carju01		
 MFSO QA		End of Life	CSCR/Harvest	null	CSCR1306	"[{""PMFKEY"":""abavi01""}]"			abavi01		
 MICS	1;12.0;12.5 - 12.9	Active	PDS	null	CDLIB.M06*;QCAT.*;MDI.*;QCAP.*	"[{""PMFKEY"":""bedva01""},{""PMFKEY"":""prezi01""}]"		prezi01	bedva01	DSN	
-MICS Q&R	12.5-12.9	Inactive	CSCR/Harvest	null	CSCR810	"[{""PMFKEY"":""bedva01""},{""PMFKEY"":""prezi01""}]"		prezi01	bedva01		
+MICS Q&R		Active	CSCR/Harvest	null	CSCR810	"[{""PMFKEY"":""bedva01""},{""PMFKEY"":""prezi01""}]"		prezi01	bedva01		
 MIGRATE-COBOL	2	Active	CSCRE/Endevor	null	ASM.CMO*;ASM.CTF*	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""hurro01""}]"			cafjo01;hurro01	DSN	
 MIM	r4.1;r4.2 r4.6;r11.5;r11.6;r11.7;r11.8;r11.9;r12.0;r12.1	Active	Endevor	MIM	GIS Islandia data center	"[{""PMFKEY"":""slejo01""},{""PMFKEY"":""jenth05""}]"		jenth05	slejo01		
 MIM	r4.1;r4.2 r4.6;r11.5;r11.6;r11.7;r11.8;r11.9;r12.0;r12.1	Active	PDS	null	MIM.CSCR+.MIM*;MIM.MOT+.MIM*;MIM.G04*	"[{""PMFKEY"":""slejo01""},{""PMFKEY"":""jenth05""}]"		jenth05	slejo01	DSN	
@@ -429,6 +429,7 @@ NIA		Active	CSCRE/Endevor	NIA		"[{""PMFKEY"":""joheu02""},{""PMFKEY"":""hoojo03"
 NSM Database Option	r12; r14; r14.5; r15; 16.0;17.0; 999	End of Life	SCLM	null	DAGT.PRD+++S.;DAGT.HLD+++S.;DAGT.BLD+++S.;DAGT.INP+++S.;DAGT.WRK+++S.;DAGT.WK++++S.	"[{""PMFKEY"":""tucjo02""}]"			tucjo02	DSN	
 NSM System Monitoring Option for OpenVMS	3.0 (VAX); 3.2	Active		null		"[{""PMFKEY"":""butda07""},{""PMFKEY"":""stoda04""}]"		stoda04	butda07	HARVEST;OTHER	
 "NSM, UCM"		End of Life	CSCR/Harvest	null	CSCR914	"[{""PMFKEY"":""srigi02""}]"			srigi02		
+NSM R11.2_HAS		Active	CSCR/Harvest	null	CSCR905/NSM R11.2	"[{""PMFKEY"":""parkr02""}]"			parkr02		
 Oblicore		End of Life	CSCR/Harvest	null	CSCR1301/Oblicore	"[{""PMFKEY"":""kerro06""}]"			kerro06		
 OCTO Grid Composer		End of Life	CSCR/Harvest	null	CSCR701	"[{""PMFKEY"":""abrho01""}]"			abrho01		
 OM LPR	r11.5; r12	Active	CSCR/Harvest	null	cscr809/OM LPR	"[{""PMFKEY"":""raubr02""},{""PMFKEY"":""kenjo07""}]"			raubr02;kenjo07		
@@ -689,6 +690,7 @@ VSAMAID/VSE	r3.4; r3.3; r2.9	Active	CMS	null	CMS;Disks:;VSAMAID;SFS;Directories:
 VTAPE	12;12.5;12.6	Active	CSCRE/Endevor	"VTAPE,SVTS125."		"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""shuke01""}]"		shuke01	davfe01		
 VTAPE	12;12.5;12.6	Active	SCCS	null	SVTS120.UPDT.*;SVTS120.BASE.*;SVTS125.MOTM	"[{""PMFKEY"":""davfe01""},{""PMFKEY"":""shuke01""}]"		shuke01	davfe01	DSN	
 VTERM	3.3	Active	CMS	null	Type:;CMS;DISK;Directories:;CAVTERM	"[{""PMFKEY"":""cafjo01""},{""PMFKEY"":""jambr01""}]"		cafjo01;jambr01		VMVSE	"[{""location"":""CAVTERM"",""type"":""VMMDISK""}]"
+Web Components		Active	CSCR/Harvest	null	CSCR702/WebComponents	"[{""PMFKEY"":""vansr06""}]"			vansr06		
 Web Viewer CCI Client	r12;12.1	Internal	CSCR/Harvest	null	cscr809/WebView CCI Client	"[{""PMFKEY"":""raubr02""},{""PMFKEY"":""kokja01""}]"		kokja01	raubr02		
 WIZ		Active	CSCRE/Endevor	WIZ		"[{""PMFKEY"":""wasch01""}]"		wasch01			
 Workload Automation Test Scripts		Active	CSCR/Harvest	null	CSCR111	"[{""PMFKEY"":""ragdi01""}]"		ragdi01	donve01		

@@ -168,48 +168,6 @@ public class HarvestLdap {
 
 		return iIndex;
 	}  
-
-	private static boolean deactivateEndOfLifeProject(String sJDBC, String sProject, String sHarvestDBPassword) {
-		boolean bSuccess = false;
-		String sqlError = "DB2. Unable to execute query.";
-		
-		try {			
-			PreparedStatement pstmt = null; 
-			String sqlStmt;
-
-			int nIndex, lIndex;
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			String sURL = sJDBC + "password=" + sHarvestDBPassword+";";
-			nIndex = sJDBC.indexOf("jdbc:sqlserver://")+17;
-			lIndex = sJDBC.indexOf(";databaseName=");
-			String sAppInstance = sJDBC.substring(nIndex, lIndex);
-			nIndex = lIndex+14;
-			lIndex = sJDBC.indexOf(";integratedSecurity");
-			String sBroker = sJDBC.substring(nIndex, lIndex);
-			
-			Connection conn = DriverManager.getConnection(sURL);
-			
-			sqlError = "SQLServer. Error updating active status for project, "+sProject+", in broker, "+ sBroker + ".";
-			sqlStmt = "update harenvironment set ENVISACTIVE=\'N\' where ENVIRONMENTNAME=\'"+sProject+"\' and ENVISACTIVE=\'Y\'";			
-
-			pstmt=conn.prepareStatement(sqlStmt);  
-			int iResult = pstmt.executeUpdate();
-			if (iResult > 0) 
-				bSuccess = true;
-			
-		} catch (ClassNotFoundException e) {
-			iReturnCode = 101;
-			frame.printErr(sqlError);
-			frame.printErr(e.getLocalizedMessage());			
-			System.exit(iReturnCode);
-		} catch (SQLException e) {     
-			iReturnCode = 102;
-			frame.printErr(sqlError);
-			frame.printErr(e.getLocalizedMessage());			
-			System.exit(iReturnCode);
-		}			
-		return bSuccess;
-	}
 	
 	private static void writeDBFromRepoContainer(JCaContainer cRepoInfo, String sImagDBPassword, String sBroker, String sFilter) {
 		PreparedStatement pstmt = null; 
@@ -636,7 +594,7 @@ public class HarvestLdap {
 								String sProject = cRepoInfo.getString(sTagProject, k);
 								if (cRepoInfo.getString(sTagContact, k).equalsIgnoreCase("inactive") &&
 									!cRepoInfo.getString(sTagApp, k).isEmpty()) {
-									if (deactivateEndOfLifeProject(cscrBrokers[i], sProject, sHarvestDBPassword)) {
+									if (frame.deactivateEndOfLifeProject(sBroker, sProject, sHarvestDBPassword)) {
 							    		if (sProblems.isEmpty()) sProblems = tagUL;
 							    		sProblems+= "<li>The source project, <b>"+sProject+"</b>, in broker, <b>"+sBroker+"</b>, has been deactived because the project is now End of Life.</li>\n";
 							    		
