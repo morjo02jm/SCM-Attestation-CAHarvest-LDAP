@@ -545,8 +545,11 @@ public class HarvestLdap {
 								if (sProjects.length > 0) {
 									String sApprover = "";
 									for (int jIndex=0; jIndex<sApprovers.length; jIndex++) {
+										/*
 										int[] iUser = cLDAP.find(sTagPmfkey, sApprovers[jIndex]);
-										if (iUser.length>0) {
+										if (iUser.length>0)
+										*/ 
+										{
 											if (!sApprover.isEmpty()) sApprover += ";";
 											sApprover += sApprovers[jIndex];
 										}
