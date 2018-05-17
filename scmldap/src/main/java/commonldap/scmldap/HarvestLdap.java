@@ -641,8 +641,10 @@ public class HarvestLdap {
 			} // loop over brokers
 			
 			if (!sProblems.isEmpty()) {
-				String email = "faudo01@ca.com";
-				String sSubject, sScope, sTicket;
+				String email = frame.expandDistributionListforEmail("cn=Team - GIS - githubcom - Tools Services - Contacts,ou=self service groups,ou=groups", cLDAP);
+				String sSubject, sTicket, sScope;
+				if (email.startsWith(";"))
+					email = email.substring(1);
 				
 				sSubject = "Notification of CA Harvest SCM Governance Problems and Changes";
 				sScope = "Harvest SQLServer Database";
