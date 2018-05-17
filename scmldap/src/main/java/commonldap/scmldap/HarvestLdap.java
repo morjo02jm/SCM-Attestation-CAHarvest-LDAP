@@ -534,6 +534,7 @@ public class HarvestLdap {
 							// Apply contact information for records
 							// a. from SourceMinder Contacts
 							for (int iIndex=0; iIndex<cHarvestContacts.getKeyElementCount("Approver"); iIndex++) {
+								String noApprover = "inactive";
 								String sProduct = cHarvestContacts.getString("Product", iIndex);
 								String sLocation = cHarvestContacts.getString("Location", iIndex).toLowerCase();
 								String[] sProjects = frame.readAssignedBrokerProjects(sLocation, sBroker);
@@ -545,17 +546,12 @@ public class HarvestLdap {
 								if (sProjects.length > 0) {
 									String sApprover = "";
 									for (int jIndex=0; jIndex<sApprovers.length; jIndex++) {
-										/*
-										int[] iUser = cLDAP.find(sTagPmfkey, sApprovers[jIndex]);
-										if (iUser.length>0)
-										*/ 
-										{
-											if (!sApprover.isEmpty()) sApprover += ";";
-											sApprover += sApprovers[jIndex];
-										}
+										if (!sApprover.isEmpty()) sApprover += ";";
+										sApprover += sApprovers[jIndex];
 									}
 									
 									if (sApprover.isEmpty() && bActive) {
+										noApprover = "toolsadmin";
 							    		if (sProblems.isEmpty()) 
 							    			sProblems = tagUL;			    		
 							    		sProblems+= "<li>The active Harvest product, <b>"+sProduct+"</b>, has no valid contact.</li>\n";									
@@ -566,7 +562,7 @@ public class HarvestLdap {
 											// process all the unassigned approvers in the project
 											for (int kIndex=0; kIndex<cRepoInfo.getKeyElementCount(sTagProject); kIndex++) {
 												if (cRepoInfo.getString(sTagContact, kIndex).isEmpty()) {
-													cRepoInfo.setString(sTagContact, bActive? (bExempt?"exempt":sApprover):"inactive", kIndex);
+													cRepoInfo.setString(sTagContact, bActive? (bExempt?"exempt":sApprover):noApprover, kIndex);
 													cRepoInfo.setString(sTagProduct, sProduct, kIndex);
 													bFound = true;
 												}
@@ -579,7 +575,7 @@ public class HarvestLdap {
 												String sProject = cRepoInfo.getString(sTagProject, kIndex).toLowerCase();
 												if (sProject.startsWith(sPrefix)) {
 													boolean bIsActive = frame.processProjectReleases(sProject, sReleases, bActive);
-													cRepoInfo.setString(sTagContact, bIsActive?(bExempt?"exempt":sApprover):"inactive", kIndex);
+													cRepoInfo.setString(sTagContact, bIsActive?(bExempt?"exempt":sApprover):noApprover, kIndex);
 													cRepoInfo.setString(sTagProduct, sProduct, kIndex);
 													bFound = true;
 												}
