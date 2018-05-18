@@ -427,6 +427,7 @@ public class HarvestLdap {
 		String sBCC = "";
 		String sLogPath = "scmldap.log";
 		String sOutputFile = "";
+		String sContactFile = "";
 		String sImagDBPassword  = "";
 		String sHarvestDBPassword = "";
 		boolean bReport = false;
@@ -458,6 +459,10 @@ public class HarvestLdap {
 			else if (args[i].compareToIgnoreCase("-outputfile") == 0 )
 			{
 				sOutputFile = args[++i];
+			}			
+			else if (args[i].compareToIgnoreCase("-contactfile") == 0 )
+			{
+				sContactFile = args[++i];
 			}			
 			else {
 					frame.printLog("Usage: scmldap [-attest | -del | -report [ -outputfile fullpathname ]] [-log pathname] [-h]");
@@ -495,6 +500,8 @@ public class HarvestLdap {
 			
 			JCaContainer cHarvestContacts = new JCaContainer();
 			if (bReport) {
+				if (!sContactFile.isEmpty())
+					frame.sContactFile = sContactFile;
 				frame.readSourceMinderContacts(cHarvestContacts, "Harvest", cLDAP);
 			} // GovernanceMinder report
 
