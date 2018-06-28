@@ -350,6 +350,10 @@ public class HarvestLdap {
 					{
 						String sID = cUsers.getString(sTagUsername, i);
 						
+						if (sID.equalsIgnoreCase("harvestcscr")) {
+							sID="Harvestcscr";
+						}
+						
 						int iLDAP[] = cLDAP.find(sTagPmfkey, sID);
 						
 						if (iLDAP.length == 0)
@@ -375,6 +379,12 @@ public class HarvestLdap {
 						if (iResult > 0) 
 							frame.printLog(">>>:Update Succeeded");
 					}
+					
+					/* temp
+					sqlStmt = "update haruserdata set accountdisabled='N' where usrobjid in (select usrobjid from haruser where username in ('harvestcscr') )";
+					pstmt=conn.prepareStatement(sqlStmt);  
+					iResult = pstmt.executeUpdate();
+					*/						
 					
 					if (deleteDisabledUsers)
 					{
